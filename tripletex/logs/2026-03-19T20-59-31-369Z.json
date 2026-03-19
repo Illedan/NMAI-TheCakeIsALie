@@ -1,0 +1,176 @@
+{
+  "timestamp": "2026-03-19T20:59:31.369Z",
+  "request": {
+    "prompt": "Opprett en ansatt med fornavn Erik, etternavn Testesen, og e-post erik.testesen@example.com",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "agent": {
+    "callCount": 4,
+    "errorCount": 2,
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "Opprett en ansatt med fornavn Erik, etternavn Testesen, og e-post erik.testesen@example.com"
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "I'll create an employee with the provided information: first name Erik, last name Testesen, and email erik.testesen@example.com."
+          },
+          {
+            "type": "tool_use",
+            "id": "toolu_01AampsJeMw63Jyk2CGejtEa",
+            "name": "tripletex_api",
+            "input": {
+              "method": "POST",
+              "path": "/employee",
+              "body": {
+                "firstName": "Erik",
+                "lastName": "Testesen",
+                "email": "erik.testesen@example.com"
+              }
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "toolu_01AampsJeMw63Jyk2CGejtEa",
+            "content": "{\"error\":true,\"status\":422,\"message\":\"Validering feilet.\",\"developerMessage\":\"VALIDATION_ERROR\",\"validationMessages\":[{\"field\":null,\"message\":\"Brukertype kan ikke være \\\"0\\\" eller tom.\",\"path\":null,\"rootId\":null}]}",
+            "is_error": true
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "I need to specify a user type for the employee. Let me check what user types are available and create the employee with a proper user type."
+          },
+          {
+            "type": "tool_use",
+            "id": "toolu_014WWyZbhANvpJaekKCBHXaq",
+            "name": "tripletex_api",
+            "input": {
+              "method": "POST",
+              "path": "/employee",
+              "body": {
+                "firstName": "Erik",
+                "lastName": "Testesen",
+                "email": "erik.testesen@example.com",
+                "userType": "STANDARD"
+              }
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "toolu_014WWyZbhANvpJaekKCBHXaq",
+            "content": "{\"error\":true,\"status\":422,\"message\":\"Validering feilet.\",\"developerMessage\":\"VALIDATION_ERROR\",\"validationMessages\":[{\"field\":\"department.id\",\"message\":\"Feltet må fylles ut.\",\"path\":null,\"rootId\":null}]}",
+            "is_error": true
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "I need to specify a department. Let me get the list of departments first and then create the employee."
+          },
+          {
+            "type": "tool_use",
+            "id": "toolu_01KxUQzmK48gmer8b9GvEJQV",
+            "name": "tripletex_api",
+            "input": {
+              "method": "GET",
+              "path": "/department",
+              "params": {
+                "fields": "id,name"
+              }
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "toolu_01KxUQzmK48gmer8b9GvEJQV",
+            "content": "{\"fullResultSize\":1,\"from\":0,\"count\":1,\"versionDigest\":\"'If-None-Match' header not specified\",\"values\":[{\"id\":839940,\"name\":\"Avdeling\"}]}",
+            "is_error": false
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "Now I'll create the employee with the required department information:"
+          },
+          {
+            "type": "tool_use",
+            "id": "toolu_015Yk7WqX69vfixNLqNrELJR",
+            "name": "tripletex_api",
+            "input": {
+              "method": "POST",
+              "path": "/employee",
+              "body": {
+                "firstName": "Erik",
+                "lastName": "Testesen",
+                "email": "erik.testesen@example.com",
+                "userType": "STANDARD",
+                "department": {
+                  "id": 839940
+                }
+              }
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "toolu_015Yk7WqX69vfixNLqNrELJR",
+            "content": "{\"value\":{\"id\":18466346,\"version\":1,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/employee/18466346\",\"firstName\":\"Erik\",\"lastName\":\"Testesen\",\"displayName\":\"Erik Testesen\",\"employeeNumber\":\"\",\"dateOfBirth\":null,\"email\":\"erik.testesen@example.com\",\"phoneNumberMobileCountry\":{\"id\":161,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/country/161\"},\"phoneNumberMobile\":\"\",\"phoneNumberHome\":\"\",\"phoneNumberWork\":\"\",\"nationalIdentityNumber\":\"\",\"dnumber\":\"\",\"internationalId\":{\"intAmeldingType\":null,\"country\":null,\"number\":\"\"},\"bankAccountNumber\":\"\",\"iban\":\"\",\"bic\":\"\",\"creditorBankCountryId\":0,\"usesAbroadPayment\":false,\"userType\":null,\"allowInformationRegistration\":true,\"isContact\":false,\"isProxy\":false,\"comments\":\"\",\"address\":null,\"department\":{\"id\":839940,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/department/839940\"},\"employments\":[],\"holidayAllowanceEarned\":{\"year\":0,\"amount\":0,\"basis\":0,\"amountExtraHolidayWeek\":0},\"employeeCategory\":null,\"isAuthProjectOverviewURL\":true,\"pictureId\":0,\"companyId\":108118447,\"vismaConnect2FAactive\":false}}",
+            "is_error": false
+          }
+        ]
+      }
+    ]
+  }
+}

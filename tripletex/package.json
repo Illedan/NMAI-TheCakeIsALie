@@ -7,7 +7,11 @@
     "dev": "tsx watch src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js",
-    "tunnel": "npx cloudflared tunnel --url http://localhost:3000"
+    "tunnel": "npx cloudflared tunnel --url http://localhost:3000",
+    "test": "tsx src/test-client.ts",
+    "test:list": "tsx src/test-client.ts --list",
+    "test:tier1": "tsx src/test-client.ts --tier=1",
+    "test:tier2": "tsx src/test-client.ts --tier=2"
   },
   "keywords": [],
   "author": "",
@@ -15,6 +19,7 @@
   "description": "",
   "dependencies": {
     "@anthropic-ai/sdk": "^0.80.0",
+    "dotenv": "^17.3.1",
     "express": "^5.2.1"
   },
   "devDependencies": {

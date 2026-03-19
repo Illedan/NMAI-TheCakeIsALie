@@ -1,0 +1,140 @@
+{
+  "timestamp": "2026-03-19T21:47:22.549Z",
+  "request": {
+    "prompt": "Opprett et prosjekt med navn 'Prosjekt680664', prosjektnummer 680664. Bruk den første ansatte som prosjektleder.",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "agent": {
+    "callCount": 3,
+    "errorCount": 1,
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "Opprett et prosjekt med navn 'Prosjekt680664', prosjektnummer 680664. Bruk den første ansatte som prosjektleder."
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "Jeg skal opprette et prosjekt med navn 'Prosjekt680664' og prosjektnummer '680664'. Først må jeg hente den første ansatte for å bruke som prosjektleder."
+          },
+          {
+            "type": "tool_use",
+            "id": "toolu_01MMnPkskJ6p5ZMsXe6C1EnU",
+            "name": "tripletex_api",
+            "input": {
+              "method": "GET",
+              "path": "/employee",
+              "params": {
+                "from": 0,
+                "count": 1
+              }
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "toolu_01MMnPkskJ6p5ZMsXe6C1EnU",
+            "content": "{\"fullResultSize\":2,\"from\":0,\"count\":1,\"versionDigest\":\"Checksum not yet supported for this endpoint\",\"values\":[{\"id\":18445891,\"version\":1,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/employee/18445891\",\"firstName\":\"Johansokrates\",\"lastName\":\"c695ab54\",\"displayName\":\"Johansokrates c695ab54\",\"employeeNumber\":\"\",\"dateOfBirth\":null,\"email\":\"johansokrates@hotmail.com\",\"phoneNumberMobileCountry\":{\"id\":161,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/country/161\"},\"phoneNumberMobile\":\"\",\"phoneNumberHome\":\"\",\"phoneNumberWork\":\"\",\"nationalIdentityNumber\":\"\",\"dnumber\":\"\",\"internationalId\":{\"intAmeldingType\":null,\"country\":null,\"number\":\"\"},\"bankAccountNumber\":\"\",\"iban\":\"\",\"bic\":\"\",\"creditorBankCountryId\":0,\"usesAbroadPayment\":false,\"userType\":null,\"allowInformationRegistration\":true,\"isContact\":false,\"isProxy\":false,\"comments\":\"\",\"address\":null,\"department\":{\"id\":839940,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/department/839940\"},\"employments\":[{\"id\":2739116,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/employee/employment/2739116\"}],\"holidayAllowanceEarned\":{\"year\":0,\"amount\":0,\"basis\":0,\"amountExtraHolidayWeek\":0},\"employeeCategory\":null,\"isAuthProjectOverviewURL\":true,\"pictureId\":0,\"companyId\":108118447,\"vismaConnect2FAactive\":false}]}",
+            "is_error": false
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "Nå oppretter jeg prosjektet med den første ansattes ID (18445891) som prosjektleder:"
+          },
+          {
+            "type": "tool_use",
+            "id": "toolu_01WHfDNMgdknWbWbjKA6MLMS",
+            "name": "tripletex_api",
+            "input": {
+              "method": "POST",
+              "path": "/project",
+              "body": {
+                "name": "Prosjekt680664",
+                "number": "680664",
+                "projectManager": {
+                  "id": 18445891
+                }
+              }
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "toolu_01WHfDNMgdknWbWbjKA6MLMS",
+            "content": "{\"error\":true,\"status\":422,\"message\":\"Validering feilet.\",\"developerMessage\":\"VALIDATION_ERROR\",\"validationMessages\":[{\"field\":\"startDate\",\"message\":\"Feltet må fylles ut.\",\"path\":null,\"rootId\":null}]}",
+            "is_error": true
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "Jeg må inkludere startDate. Jeg bruker dagens dato:"
+          },
+          {
+            "type": "tool_use",
+            "id": "toolu_011sEMvh2X9e9JFnWz4YBcMc",
+            "name": "tripletex_api",
+            "input": {
+              "method": "POST",
+              "path": "/project",
+              "body": {
+                "name": "Prosjekt680664",
+                "number": "680664",
+                "projectManager": {
+                  "id": 18445891
+                },
+                "startDate": "2024-12-28"
+              }
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "toolu_011sEMvh2X9e9JFnWz4YBcMc",
+            "content": "{\"value\":{\"id\":401949660,\"version\":0,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/project/401949660\",\"name\":\"Prosjekt680664\",\"number\":\"680664\",\"displayName\":\"680664 Prosjekt680664\",\"description\":\"\",\"projectManager\":{\"id\":18445891,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/employee/18445891\"},\"department\":null,\"mainProject\":null,\"startDate\":\"2024-12-28\",\"endDate\":null,\"customer\":null,\"isClosed\":false,\"isReadyForInvoicing\":false,\"isInternal\":false,\"isOffer\":false,\"isFixedPrice\":false,\"projectCategory\":null,\"deliveryAddress\":null,\"boligmappaAddress\":null,\"displayNameFormat\":\"NAME_STANDARD\",\"reference\":\"\",\"externalAccountsNumber\":\"\",\"discountPercentage\":0,\"vatType\":{\"id\":6,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/6\"},\"fixedprice\":0,\"contributionMarginPercent\":0,\"numberOfSubProjects\":0,\"numberOfProjectParticipants\":1,\"orderLines\":[],\"currency\":{\"id\":1,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/currency/1\"},\"markUpOrderLines\":0,\"markUpFeesEarned\":0,\"isPriceCeiling\":false,\"priceCeilingAmount\":0,\"projectHourlyRates\":[{\"id\":11066832,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/project/hourlyRates/11066832\"}],\"forParticipantsOnly\":false,\"participants\":[{\"id\":15621309,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/project/participant/15621309\"}],\"contact\":null,\"attention\":null,\"invoiceComment\":\"\",\"invoicingPlan\":[],\"preliminaryInvoice\":null,\"generalProjectActivitiesPerProjectOnly\":false,\"projectActivities\":[],\"hierarchyNameAndNumber\":\"680664 Prosjekt680664\",\"invoiceDueDate\":0,\"invoiceDueDateType\":\"DAYS\",\"invoiceReceiverEmail\":\"\",\"overdueNoticeEmail\":\"\",\"accessType\":\"WRITE\",\"useProductNetPrice\":false,\"ignoreCompanyProductDiscountAgreement\":false,\"customerName\":\"\",\"hierarchyLevel\":0,\"projectManagerNameAndNumber\":\"Johansokrates c695ab54\",\"totalInvoicedOnAccountAmountAbsoluteCurrency\":0,\"invoiceOnAccountVatHigh\":false,\"invoiceReserveTotalAmountCurrency\":0,\"accountingDimensionValues\":[]}}",
+            "is_error": false
+          }
+        ]
+      }
+    ]
+  }
+}

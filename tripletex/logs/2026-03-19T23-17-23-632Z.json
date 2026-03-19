@@ -1,0 +1,192 @@
+{
+  "timestamp": "2026-03-19T23:17:23.632Z",
+  "request": {
+    "prompt": "Erstellen Sie einen Kunden mit dem Namen 'Firma222261 GmbH' und der E-Mail kontakt222261@firma.de",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "agent": {
+    "callCount": 1,
+    "errorCount": 0,
+    "messages": [
+      {
+        "role": "user",
+        "parts": [
+          {
+            "text": "Erstellen Sie einen Kunden mit dem Namen 'Firma222261 GmbH' und der E-Mail kontakt222261@firma.de"
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "body": "{\"name\": \"Firma222261 GmbH\", \"email\": \"kontakt222261@firma.de\", \"isCustomer\": true}",
+                "path": "/customer",
+                "method": "POST"
+              }
+            },
+            "thoughtSignature": "Co8CAb4+9vvqrbyvPaM86+jQI/0YU7drSVkXLy80iGR9Ww/1F6JlEjp1m9WdWTi5xv0e17aviCa8BmcFMtBLq/no9lZnxScHEI7bVaVfYBpiWpeh4+4uNW0PutnBOpdTfcpdlMH0FyyBNDBdye93CiTTxpmZBozdPE6crhTzW0eo4Fc3YCcazwsQifiHICFsIVvkB28YRqvEyIkhk6zqwIBmy6jzBKiXXBDcLbP1m7acico8mAEroQn8QtdkHBVAJyJyPn/iov80GC1D+1r8+2tMYoBL6iytLWL5KSON9maq8TuqTSWrgVQLSwy07tTuOPv66YB3Nfr4hGXIREnV6MA/y46YSySzauNQuLYT6YYNbA=="
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "value": {
+                  "id": 108166754,
+                  "version": 1,
+                  "url": "kkpqfuj-amager.tripletex.dev/v2/customer/108166754",
+                  "name": "Firma222261 GmbH",
+                  "organizationNumber": "",
+                  "globalLocationNumber": 0,
+                  "supplierNumber": 0,
+                  "customerNumber": 10030,
+                  "isSupplier": false,
+                  "isCustomer": true,
+                  "isInactive": false,
+                  "accountManager": null,
+                  "department": null,
+                  "email": "kontakt222261@firma.de",
+                  "invoiceEmail": "",
+                  "overdueNoticeEmail": "",
+                  "phoneNumber": "",
+                  "phoneNumberMobile": "",
+                  "description": "",
+                  "language": "NO",
+                  "displayName": "Firma222261 GmbH (10030)",
+                  "isPrivateIndividual": false,
+                  "singleCustomerInvoice": false,
+                  "invoiceSendMethod": "EMAIL",
+                  "emailAttachmentType": "ATTACHMENT",
+                  "postalAddress": {
+                    "id": 405184988,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/address/405184988"
+                  },
+                  "physicalAddress": {
+                    "id": 405184987,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/address/405184987"
+                  },
+                  "deliveryAddress": null,
+                  "category1": null,
+                  "category2": null,
+                  "category3": null,
+                  "invoicesDueIn": 14,
+                  "invoicesDueInType": "DAYS",
+                  "currency": {
+                    "id": 1,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/currency/1"
+                  },
+                  "bankAccountPresentation": [],
+                  "ledgerAccount": {
+                    "id": 425217066,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/account/425217066"
+                  },
+                  "isFactoring": false,
+                  "invoiceSendSMSNotification": false,
+                  "invoiceSMSNotificationNumber": "",
+                  "isAutomaticSoftReminderEnabled": false,
+                  "isAutomaticReminderEnabled": false,
+                  "isAutomaticNoticeOfDebtCollectionEnabled": false,
+                  "discountPercentage": 0,
+                  "website": ""
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "text": "DONE\n"
+          }
+        ]
+      }
+    ]
+  },
+  "apiCalls": [
+    {
+      "timestamp": "2026-03-19T23:17:25.043Z",
+      "method": "POST",
+      "path": "/customer",
+      "body": {
+        "name": "Firma222261 GmbH",
+        "email": "kontakt222261@firma.de",
+        "isCustomer": true
+      },
+      "status": 201,
+      "durationMs": 132,
+      "response": {
+        "value": {
+          "id": 108166754,
+          "version": 1,
+          "url": "kkpqfuj-amager.tripletex.dev/v2/customer/108166754",
+          "name": "Firma222261 GmbH",
+          "organizationNumber": "",
+          "globalLocationNumber": 0,
+          "supplierNumber": 0,
+          "customerNumber": 10030,
+          "isSupplier": false,
+          "isCustomer": true,
+          "isInactive": false,
+          "accountManager": null,
+          "department": null,
+          "email": "kontakt222261@firma.de",
+          "invoiceEmail": "",
+          "overdueNoticeEmail": "",
+          "phoneNumber": "",
+          "phoneNumberMobile": "",
+          "description": "",
+          "language": "NO",
+          "displayName": "Firma222261 GmbH (10030)",
+          "isPrivateIndividual": false,
+          "singleCustomerInvoice": false,
+          "invoiceSendMethod": "EMAIL",
+          "emailAttachmentType": "ATTACHMENT",
+          "postalAddress": {
+            "id": 405184988,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/address/405184988"
+          },
+          "physicalAddress": {
+            "id": 405184987,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/address/405184987"
+          },
+          "deliveryAddress": null,
+          "category1": null,
+          "category2": null,
+          "category3": null,
+          "invoicesDueIn": 14,
+          "invoicesDueInType": "DAYS",
+          "currency": {
+            "id": 1,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/currency/1"
+          },
+          "bankAccountPresentation": [],
+          "ledgerAccount": {
+            "id": 425217066,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/account/425217066"
+          },
+          "isFactoring": false,
+          "invoiceSendSMSNotification": false,
+          "invoiceSMSNotificationNumber": "",
+          "isAutomaticSoftReminderEnabled": false,
+          "isAutomaticReminderEnabled": false,
+          "isAutomaticNoticeOfDebtCollectionEnabled": false,
+          "discountPercentage": 0,
+          "website": ""
+        }
+      }
+    }
+  ]
+}

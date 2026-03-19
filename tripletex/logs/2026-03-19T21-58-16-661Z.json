@@ -1,0 +1,61 @@
+{
+  "timestamp": "2026-03-19T21:58:16.661Z",
+  "request": {
+    "prompt": "Opprett en avdeling med navn 'Avdeling442253' og avdelingsnummer 442253",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "agent": {
+    "callCount": 1,
+    "errorCount": 0,
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "Opprett en avdeling med navn 'Avdeling442253' og avdelingsnummer 442253"
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "I'll create a department with name 'Avdeling442253' and department number '442253'."
+          },
+          {
+            "type": "tool_use",
+            "id": "toolu_01Rirmd1bja1qh5jToWNrTt5",
+            "name": "tripletex_api",
+            "input": {
+              "method": "POST",
+              "path": "/department",
+              "body": {
+                "name": "Avdeling442253",
+                "departmentNumber": "442253"
+              }
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "toolu_01Rirmd1bja1qh5jToWNrTt5",
+            "content": "{\"value\":{\"id\":857068,\"version\":0,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/department/857068\",\"name\":\"Avdeling442253\",\"departmentNumber\":\"442253\",\"departmentManager\":null,\"displayName\":\"442253 Avdeling442253\",\"isInactive\":false,\"businessActivityTypeId\":0}}",
+            "is_error": false
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -5,10 +5,11 @@ const AGENT_URL = process.env.AGENT_URL || "http://localhost:3000";
 const AGENT_API_KEY = process.env.API_KEY || "";
 
 const SANDBOX_CREDENTIALS = {
-  base_url: "https://kkpqfuj-amager.tripletex.dev/v2",
-  session_token:
-    "eyJ0b2tlbklkIjoyMTQ3NjMwNDAyLCJ0b2tlbiI6IjI2MWFhNjk4LTUzZDctNGMxMS04ZjEzLTBlYjNkYmNmZjBhNiJ9",
+  base_url: process.env.TRIPLETEX_BASE_URL || "https://kkpqfuj-amager.tripletex.dev/v2",
+  session_token: process.env.TRIPLETEX_SESSION_TOKEN || "eyJ0b2tlbklkIjoyMTQ3NjMwNDAyLCJ0b2tlbiI6IjI2MWFhNjk4LTUzZDctNGMxMS04ZjEzLTBlYjNkYmNmZjBhNiJ9",
 };
+
+const TS = Date.now().toString().slice(-6);
 
 interface TestCase {
   name: string;
@@ -46,26 +47,25 @@ const TEST_CASES: TestCase[] = [
   {
     name: "Create Employee (Tier 1)",
     tier: 1,
-    prompt:
-      "Opprett en ansatt med fornavn Erik, etternavn Testesen, og e-post erik.testesen@example.com",
+    prompt: `Opprett en ansatt med fornavn Test${TS}, etternavnAnsen, og e-post test${TS}@example.com`,
     verify: async (baseUrl, auth) => {
       const data = (await tripletexGet(baseUrl, auth, "/employee", {
-        firstName: "Erik",
-        lastName: "Testesen",
+        firstName: `Test${TS}`,
+        lastName: "Ansen",
         fields: "id,firstName,lastName,email",
       })) as { values: { id: number; firstName: string; lastName: string; email: string }[] };
       const emp = data.values?.find(
-        (e) => e.firstName === "Erik" && e.lastName === "Testesen"
+        (e) => e.firstName === `Test${TS}` && e.lastName === "Ansen"
       );
       return {
         passed: !!emp,
         checks: [
           { name: "Employee found", passed: !!emp, detail: emp ? `id=${emp.id}` : "not found" },
-          { name: "Correct firstName", passed: emp?.firstName === "Erik" },
-          { name: "Correct lastName", passed: emp?.lastName === "Testesen" },
+          { name: "Correct firstName", passed: emp?.firstName === `Test${TS}` },
+          { name: "Correct lastName", passed: emp?.lastName === "Ansen" },
           {
             name: "Correct email",
-            passed: emp?.email === "erik.testesen@example.com",
+            passed: emp?.email === `test${TS}@example.com`,
             detail: emp?.email,
           },
         ],
@@ -75,22 +75,21 @@ const TEST_CASES: TestCase[] = [
   {
     name: "Create Customer (Tier 1)",
     tier: 1,
-    prompt:
-      "Opprett en kunde med navn 'Testbedrift AS' og e-post kontakt@testbedrift.no",
+    prompt: `Opprett en kunde med navn 'Bedrift${TS} AS' og e-post post${TS}@bedrift.no`,
     verify: async (baseUrl, auth) => {
       const data = (await tripletexGet(baseUrl, auth, "/customer", {
-        name: "Testbedrift AS",
+        name: `Bedrift${TS} AS`,
         fields: "id,name,email,isCustomer",
       })) as { values: { id: number; name: string; email: string; isCustomer: boolean }[] };
-      const cust = data.values?.find((c) => c.name === "Testbedrift AS");
+      const cust = data.values?.find((c) => c.name === `Bedrift${TS} AS`);
       return {
         passed: !!cust,
         checks: [
           { name: "Customer found", passed: !!cust, detail: cust ? `id=${cust.id}` : "not found" },
-          { name: "Correct name", passed: cust?.name === "Testbedrift AS" },
+          { name: "Correct name", passed: cust?.name === `Bedrift${TS} AS` },
           {
             name: "Correct email",
-            passed: cust?.email === "kontakt@testbedrift.no",
+            passed: cust?.email === `post${TS}@bedrift.no`,
             detail: cust?.email,
           },
           { name: "isCustomer flag", passed: cust?.isCustomer === true },
@@ -101,21 +100,21 @@ const TEST_CASES: TestCase[] = [
   {
     name: "Create Department (Tier 1)",
     tier: 1,
-    prompt: "Opprett en avdeling med navn 'Salgsavdelingen' og avdelingsnummer 3",
+    prompt: `Opprett en avdeling med navn 'Avdeling${TS}' og avdelingsnummer ${parseInt(TS)}`,
     verify: async (baseUrl, auth) => {
       const data = (await tripletexGet(baseUrl, auth, "/department", {
-        name: "Salgsavdelingen",
+        name: `Avdeling${TS}`,
         fields: "id,name,departmentNumber",
       })) as { values: { id: number; name: string; departmentNumber: number }[] };
-      const dept = data.values?.find((d) => d.name === "Salgsavdelingen");
+      const dept = data.values?.find((d) => d.name === `Avdeling${TS}`);
       return {
         passed: !!dept,
         checks: [
           { name: "Department found", passed: !!dept, detail: dept ? `id=${dept.id}` : "not found" },
-          { name: "Correct name", passed: dept?.name === "Salgsavdelingen" },
+          { name: "Correct name", passed: dept?.name === `Avdeling${TS}` },
           {
             name: "Correct number",
-            passed: dept?.departmentNumber === 3,
+            passed: dept?.departmentNumber === parseInt(TS),
             detail: String(dept?.departmentNumber),
           },
         ],
@@ -125,20 +124,19 @@ const TEST_CASES: TestCase[] = [
   {
     name: "Create Product (Tier 1)",
     tier: 1,
-    prompt:
-      "Opprett et produkt med navn 'Konsulenttime', produktnummer 1001, og pris 1200 kr eks. mva.",
+    prompt: `Opprett et produkt med navn 'Produkt${TS}', produktnummer ${TS}, og pris 1200 kr eks. mva.`,
     verify: async (baseUrl, auth) => {
       const data = (await tripletexGet(baseUrl, auth, "/product", {
-        number: "1001",
+        number: TS,
         fields: "id,name,number,priceExcludingVat",
       })) as { values: { id: number; name: string; number: string; priceExcludingVat: number }[] };
-      const prod = data.values?.find((p) => p.number === "1001");
+      const prod = data.values?.find((p) => p.number === TS);
       return {
         passed: !!prod,
         checks: [
           { name: "Product found", passed: !!prod, detail: prod ? `id=${prod.id}` : "not found" },
-          { name: "Correct name", passed: prod?.name === "Konsulenttime" },
-          { name: "Correct number", passed: prod?.number === "1001" },
+          { name: "Correct name", passed: prod?.name === `Produkt${TS}` },
+          { name: "Correct number", passed: prod?.number === TS },
           {
             name: "Correct price",
             passed: prod?.priceExcludingVat === 1200,
@@ -151,22 +149,21 @@ const TEST_CASES: TestCase[] = [
   {
     name: "Create Employee with Admin Role (Tier 1)",
     tier: 1,
-    prompt:
-      "Opprett en ansatt med navn Ola Nordmann, ola@example.org. Han skal være kontoadministrator.",
+    prompt: `Opprett en ansatt med navn Admin${TS} Nordmann, admin${TS}@example.org. Han skal være kontoadministrator.`,
     verify: async (baseUrl, auth) => {
       const data = (await tripletexGet(baseUrl, auth, "/employee", {
-        firstName: "Ola",
+        firstName: `Admin${TS}`,
         lastName: "Nordmann",
         fields: "id,firstName,lastName,email",
       })) as { values: { id: number; firstName: string; lastName: string; email: string }[] };
       const emp = data.values?.find(
-        (e) => e.firstName === "Ola" && e.lastName === "Nordmann"
+        (e) => e.firstName === `Admin${TS}` && e.lastName === "Nordmann"
       );
       return {
         passed: !!emp,
         checks: [
           { name: "Employee found", passed: !!emp, detail: emp ? `id=${emp.id}` : "not found" },
-          { name: "Correct email", passed: emp?.email === "ola@example.org" },
+          { name: "Correct email", passed: emp?.email === `admin${TS}@example.org` },
         ],
       };
     },
@@ -174,21 +171,21 @@ const TEST_CASES: TestCase[] = [
   {
     name: "Create Customer and Invoice (Tier 2)",
     tier: 2,
-    prompt:
-      "Opprett en kunde 'Faktura Test AS' med e-post faktura@test.no. Opprett deretter en ordre med en ordrelinje for 'Rådgivning' til 5000 kr eks. mva, og lag en faktura basert på ordren.",
+    prompt: `Opprett en kunde 'Faktura${TS} AS' med e-post faktura${TS}@test.no. Opprett deretter en ordre med en ordrelinje for 'Rådgivning' til 5000 kr eks. mva, og lag en faktura basert på ordren.`,
     verify: async (baseUrl, auth) => {
+      const custName = `Faktura${TS} AS`;
       const custData = (await tripletexGet(baseUrl, auth, "/customer", {
-        name: "Faktura Test AS",
+        name: custName,
         fields: "id,name,email",
       })) as { values: { id: number; name: string; email: string }[] };
-      const cust = custData.values?.find((c) => c.name === "Faktura Test AS");
+      const cust = custData.values?.find((c) => c.name === custName);
 
       const invoiceData = (await tripletexGet(baseUrl, auth, "/invoice", {
         fields: "id,customer(id,name),amount",
         count: "100",
       })) as { values: { id: number; customer: { id: number; name: string }; amount: number }[] };
       const invoice = invoiceData.values?.find(
-        (i) => i.customer?.name === "Faktura Test AS"
+        (i) => i.customer?.name === custName
       );
 
       return {
@@ -207,11 +204,10 @@ const TEST_CASES: TestCase[] = [
   {
     name: "Create Project (Tier 2)",
     tier: 2,
-    prompt:
-      "Opprett et prosjekt med navn 'Nettside Redesign', prosjektnummer 100. Bruk den første ansatte som prosjektleder.",
+    prompt: `Opprett et prosjekt med navn 'Prosjekt${TS}', prosjektnummer ${TS}. Bruk den første ansatte som prosjektleder.`,
     verify: async (baseUrl, auth) => {
       const data = (await tripletexGet(baseUrl, auth, "/project", {
-        number: "100",
+        number: TS,
         fields: "id,name,number,projectManager(id,firstName,lastName)",
       })) as {
         values: {
@@ -221,12 +217,12 @@ const TEST_CASES: TestCase[] = [
           projectManager: { id: number; firstName: string; lastName: string };
         }[];
       };
-      const proj = data.values?.find((p) => p.number === "100");
+      const proj = data.values?.find((p) => p.number === TS);
       return {
         passed: !!proj,
         checks: [
           { name: "Project found", passed: !!proj, detail: proj ? `id=${proj.id}` : "not found" },
-          { name: "Correct name", passed: proj?.name === "Nettside Redesign" },
+          { name: "Correct name", passed: proj?.name === `Prosjekt${TS}` },
           { name: "Has project manager", passed: !!proj?.projectManager?.id },
         ],
       };
@@ -262,6 +258,7 @@ async function runTest(testCase: TestCase) {
   console.log(`\n${"=".repeat(60)}`);
   console.log(`TEST: ${testCase.name} (Tier ${testCase.tier})`);
   console.log(`Prompt: ${testCase.prompt}`);
+  console.log(`Unique suffix: ${TS}`);
   console.log("=".repeat(60));
 
   console.log("\nCalling /solve...");
@@ -310,6 +307,7 @@ async function main() {
 
   console.log(`Running ${tests.length} test(s) against ${AGENT_URL}`);
   console.log(`Sandbox: ${SANDBOX_CREDENTIALS.base_url}`);
+  console.log(`Unique suffix: ${TS}`);
 
   const results: { name: string; passed: boolean }[] = [];
   for (const test of tests) {

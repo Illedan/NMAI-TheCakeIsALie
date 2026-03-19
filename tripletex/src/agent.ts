@@ -67,8 +67,9 @@ POST /invoice — Create invoice
 === BANK ACCOUNT SETUP (required before creating invoices) ===
   New sandbox companies have no bank account. You MUST set one up before creating invoices.
   ALWAYS do this proactively at the start of any invoice workflow — do NOT wait for an error.
-  Steps: GET /ledger/account?isBankAccount=true -> PUT /ledger/account/{id} with bankAccountNumber "15032080001" (valid 11-digit Norwegian number).
-  Include the account's current version number in the PUT body.
+  Steps: GET /ledger/account?isBankAccount=true -> PUT /ledger/account/{id} with bankAccountNumber set to a valid 11-digit Norwegian bank account.
+  Valid test numbers: "28002222222" or "63450618820". Use "28002222222" as first choice.
+  Include the account's current version number in the PUT body. Only set bankAccountNumber — keep other fields from the GET response.
 
 PUT /invoice/{id}/:payment — Register payment on invoice
   Query params: paymentDate (required, "YYYY-MM-DD"), paymentTypeId (required, integer), paidAmount (required, number — the FULL amount including VAT), paidAmountCurrency (optional)

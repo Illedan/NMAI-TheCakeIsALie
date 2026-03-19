@@ -1,5 +1,6 @@
 from prepare import score_fun
 import numpy as np
+import random
 import json
 import os
 
@@ -39,14 +40,17 @@ def load_replay(ifile):
 
 
 class State:
-    # Stochastic transition parameters
-    p_collapse = 0.08         # settlement -> ruin (winter/raids)
-    p_port_collapse = 0.06    # port -> ruin
-    p_expand = 0.03           # empty land -> settlement (per adjacent alive settlement)
-    p_port_form = 0.05        # settlement -> port (if adjacent to ocean)
-    p_ruin_rebuild = 0.04     # ruin -> settlement (per adjacent alive settlement)
-    p_ruin_to_forest = 0.05   # ruin -> forest (environment reclaims)
-    p_forest_clear = 0.01     # forest -> settlement (per adjacent alive settlement)
+    # Stochastic transition parameters (calibrated from replay data)
+    p_collapse = 0.055        # settlement -> ruin
+    p_port_collapse = 0.025   # port -> ruin
+    p_expand = 0.005          # empty land -> settlement (per adjacent alive settlement)
+    p_port_form = 0.005       # settlement -> port (if adjacent to ocean)
+    p_ruin_rebuild = 0.48     # ruin -> settlement
+    p_ruin_to_empty = 0.33    # ruin -> empty/plains
+    p_ruin_to_forest = 0.18   # ruin -> forest
+    p_ruin_to_port = 0.01     # ruin -> port (coastal)
+    p_forest_clear = 0.007    # forest -> settlement (per adjacent alive settlement)
+    p_forest_ruin = 0.0005    # forest -> ruin (rare)
 
     #Based on the first state in replay 0 set the initial state.
     def __init__(self, initial_state, ocean_mask):
@@ -71,7 +75,7 @@ class State:
     #and that given 200 runs produce the distributions seen in the /analysis folder for the five different seeds that dictate some of the hidden, but stationary process parameters.
     def evolve(self):
         new_state = self.state.copy()
-        rand = np.random.random((self.H, self.W))
+        rand = np.array([[random.random() for _ in range(self.W)] for _ in range(self.H)])
 
         n_alive = self._count_neighbors((self.state == 1) | (self.state == 2))
         has_ocean_neighbor = self._count_neighbors(self.ocean_mask) > 0
@@ -96,14 +100,21 @@ class State:
         expand = is_land & (rand < np.minimum(self.p_expand * n_alive, 1.0))
         new_state[expand] = 1
 
-        # Ruin (3) -> Settlement (1): rebuild by nearby settlements
+        # Ruin (3) transitions: ruins always transition immediately (categorical draw)
         is_ruin = (self.state == 3)
-        rebuild = is_ruin & (rand < np.minimum(self.p_ruin_rebuild * n_alive, 1.0))
-        new_state[rebuild] = 1
-
-        # Ruin (3) -> Forest (4): environment reclaims abandoned land
-        reforest = is_ruin & ~rebuild & (rand < self.p_ruin_to_forest)
-        new_state[reforest] = 4
+        rand2 = np.array([[random.random() for _ in range(self.W)] for _ in range(self.H)])
+        # Ruin -> Settlement (most likely, ~48%)
+        ruin_to_settlement = is_ruin & (rand2 < self.p_ruin_rebuild)
+        new_state[ruin_to_settlement] = 1
+        # Ruin -> Empty (~33%)
+        ruin_to_empty = is_ruin & ~ruin_to_settlement & (rand2 < self.p_ruin_rebuild + self.p_ruin_to_empty)
+        new_state[ruin_to_empty] = 0
+        # Ruin -> Forest (~18%)
+        ruin_to_forest = is_ruin & ~ruin_to_settlement & ~ruin_to_empty & (rand2 < self.p_ruin_rebuild + self.p_ruin_to_empty + self.p_ruin_to_forest)
+        new_state[ruin_to_forest] = 4
+        # Ruin -> Port (~1%, if coastal)
+        ruin_to_port = is_ruin & ~ruin_to_settlement & ~ruin_to_empty & ~ruin_to_forest & has_ocean_neighbor
+        new_state[ruin_to_port] = 2
 
         # Forest (4) -> Settlement (1): cleared for expansion
         is_forest = (self.state == 4)

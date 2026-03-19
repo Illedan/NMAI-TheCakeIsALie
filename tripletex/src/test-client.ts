@@ -359,6 +359,7 @@ async function main() {
   const args = process.argv.slice(2);
   const filterTier = args.find((a) => a.startsWith("--tier="));
   const filterName = args.find((a) => a.startsWith("--name="));
+  const filterCount = args.find((a) => a.startsWith("--count="));
   const listOnly = args.includes("--list");
 
   let tests = TEST_CASES;
@@ -369,6 +370,10 @@ async function main() {
   if (filterName) {
     const name = filterName.split("=")[1].toLowerCase();
     tests = tests.filter((t) => t.name.toLowerCase().includes(name));
+  }
+  if (filterCount) {
+    const count = parseInt(filterCount.split("=")[1]);
+    tests = tests.slice(0, count);
   }
 
   if (listOnly) {

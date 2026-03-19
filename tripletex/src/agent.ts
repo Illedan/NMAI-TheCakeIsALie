@@ -39,7 +39,149 @@ When creating invoices: first create an order with orderLines, then create invoi
 When creating departments: name, departmentNumber.
 When creating projects: name, number, projectManager (employee ref), customer (optional).
 
+When files are attached (CSV, text, etc.), use the "query_file" tool to inspect them:
+- Start with action "info" to see headers, row count, and a preview.
+- Use "read_rows" to read CSV data as objects (paginated with from/count).
+- Use "search" to find specific rows by value, optionally filtering by column.
+- Extract the data you need from the file, then make the appropriate Tripletex API calls.
+
 After completing all API calls, respond with DONE.`;
+
+interface ParsedFile {
+  filename: string;
+  mime_type: string;
+  raw: string;
+  lines: string[];
+  headers: string[] | null;
+  rows: string[][] | null;
+}
+
+function parseFiles(files: FileAttachment[]): Map<string, ParsedFile> {
+  const map = new Map<string, ParsedFile>();
+  for (const file of files) {
+    if (file.mime_type === "application/pdf" || file.mime_type.startsWith("image/")) continue;
+    const raw = Buffer.from(file.content_base64, "base64").toString("utf-8");
+    const lines = raw.split(/\r?\n/).filter((l) => l.trim() !== "");
+    const isCSV =
+      file.filename.endsWith(".csv") ||
+      file.mime_type === "text/csv" ||
+      (lines.length > 1 && lines[0].includes(";") || lines[0].includes(","));
+    let headers: string[] | null = null;
+    let rows: string[][] | null = null;
+    if (isCSV && lines.length > 0) {
+      const sep = lines[0].includes(";") ? ";" : ",";
+      headers = lines[0].split(sep).map((h) => h.trim().replace(/^"|"$/g, ""));
+      rows = lines.slice(1).map((l) => l.split(sep).map((c) => c.trim().replace(/^"|"$/g, "")));
+    }
+    map.set(file.filename, { filename: file.filename, mime_type: file.mime_type, raw, lines, headers, rows });
+  }
+  return map;
+}
+
+function handleFileQuery(
+  fileMap: Map<string, ParsedFile>,
+  input: { filename: string; action: string; from?: number; count?: number; search?: string; column?: string }
+): unknown {
+  const file = fileMap.get(input.filename);
+  if (!file) {
+    return {
+      error: true,
+      message: `File not found: ${input.filename}`,
+      available: Array.from(fileMap.keys()),
+    };
+  }
+
+  switch (input.action) {
+    case "info": {
+      return {
+        filename: file.filename,
+        mime_type: file.mime_type,
+        totalLines: file.lines.length,
+        isCSV: !!file.headers,
+        headers: file.headers,
+        totalRows: file.rows?.length ?? null,
+        preview: file.lines.slice(0, 5),
+      };
+    }
+    case "read_rows": {
+      if (!file.rows || !file.headers) {
+        return { error: true, message: "File is not CSV. Use read_lines instead." };
+      }
+      const from = input.from ?? 0;
+      const count = input.count ?? 50;
+      const slice = file.rows.slice(from, from + count);
+      const asObjects = slice.map((row) =>
+        Object.fromEntries(file.headers!.map((h, i) => [h, row[i] ?? ""]))
+      );
+      return { headers: file.headers, from, count: slice.length, totalRows: file.rows.length, rows: asObjects };
+    }
+    case "read_lines": {
+      const from = input.from ?? 0;
+      const count = input.count ?? 50;
+      const slice = file.lines.slice(from, from + count);
+      return { from, count: slice.length, totalLines: file.lines.length, lines: slice };
+    }
+    case "search": {
+      if (!input.search) return { error: true, message: "search parameter required" };
+      const query = input.search.toLowerCase();
+      if (file.rows && file.headers) {
+        const matches = file.rows
+          .map((row, i) => ({ index: i, row: Object.fromEntries(file.headers!.map((h, j) => [h, row[j] ?? ""])) }))
+          .filter(({ row }) => {
+            const values = input.column ? [row[input.column] ?? ""] : Object.values(row);
+            return values.some((v) => v.toLowerCase().includes(query));
+          })
+          .slice(0, 50);
+        return { headers: file.headers, matchCount: matches.length, matches };
+      } else {
+        const matches = file.lines
+          .map((line, i) => ({ index: i, line }))
+          .filter(({ line }) => line.toLowerCase().includes(query))
+          .slice(0, 50);
+        return { matchCount: matches.length, matches };
+      }
+    }
+    default:
+      return { error: true, message: `Unknown action: ${input.action}. Use: info, read_rows, read_lines, search` };
+  }
+}
+
+const QUERY_FILE_TOOL: Anthropic.Messages.Tool = {
+  name: "query_file",
+  description:
+    "Query an attached file (CSV, text, etc). Use 'info' to see headers/row count, 'read_rows' to read CSV rows, 'read_lines' for raw lines, 'search' to find matching rows/lines.",
+  input_schema: {
+    type: "object" as const,
+    properties: {
+      filename: {
+        type: "string",
+        description: "The filename to query",
+      },
+      action: {
+        type: "string",
+        enum: ["info", "read_rows", "read_lines", "search"],
+        description: "info: get file metadata and headers. read_rows: read CSV rows as objects. read_lines: read raw lines. search: find rows/lines matching a query.",
+      },
+      from: {
+        type: "number",
+        description: "Start index for read_rows/read_lines (default 0)",
+      },
+      count: {
+        type: "number",
+        description: "Number of rows/lines to return (default 50)",
+      },
+      search: {
+        type: "string",
+        description: "Search query string (for action=search)",
+      },
+      column: {
+        type: "string",
+        description: "Limit search to a specific column (for action=search on CSV files)",
+      },
+    },
+    required: ["filename", "action"],
+  },
+};
 
 const TRIPLETEX_TOOL: Anthropic.Messages.Tool = {
   name: "tripletex_api",
@@ -103,6 +245,11 @@ function buildUserContent(
           data: file.content_base64,
         },
       });
+    } else {
+      content.push({
+        type: "text",
+        text: `Attached file: "${file.filename}" (${file.mime_type}) — use the query_file tool to read its contents.`,
+      });
     }
   }
 
@@ -116,6 +263,9 @@ export async function runAgent(
   files: FileAttachment[]
 ): Promise<{ callCount: number; errorCount: number; messages: Anthropic.Messages.MessageParam[] }> {
   const anthropic = new Anthropic();
+  const fileMap = parseFiles(files);
+  const hasQueryableFiles = fileMap.size > 0;
+  const tools = hasQueryableFiles ? [TRIPLETEX_TOOL, QUERY_FILE_TOOL] : [TRIPLETEX_TOOL];
 
   const messages: Anthropic.Messages.MessageParam[] = [
     { role: "user", content: buildUserContent(prompt, files) },
@@ -131,7 +281,7 @@ export async function runAgent(
       model: "claude-sonnet-4-20250514",
       max_tokens: 4096,
       system: SYSTEM_PROMPT,
-      tools: [TRIPLETEX_TOOL],
+      tools,
       messages,
     });
 
@@ -148,24 +298,29 @@ export async function runAgent(
     const toolResults: Anthropic.Messages.ToolResultBlockParam[] = [];
 
     for (const toolUse of toolUseBlocks) {
-      const call = toolUse.input as ToolCall;
       let result: unknown;
       let isError = false;
 
-      try {
-        result = await client.execute(call);
-      } catch (e) {
-        isError = true;
-        if (e instanceof TripletexApiError) {
-          result = {
-            error: true,
-            status: e.status,
-            message: e.details.message || e.message,
-            developerMessage: e.details.developerMessage,
-            validationMessages: e.details.validationMessages,
-          };
-        } else {
-          result = { error: true, message: String(e) };
+      if (toolUse.name === "query_file") {
+        result = handleFileQuery(fileMap, toolUse.input as Parameters<typeof handleFileQuery>[1]);
+        isError = !!(result as Record<string, unknown>).error;
+      } else {
+        const call = toolUse.input as ToolCall;
+        try {
+          result = await client.execute(call);
+        } catch (e) {
+          isError = true;
+          if (e instanceof TripletexApiError) {
+            result = {
+              error: true,
+              status: e.status,
+              message: e.details.message || e.message,
+              developerMessage: e.details.developerMessage,
+              validationMessages: e.details.validationMessages,
+            };
+          } else {
+            result = { error: true, message: String(e) };
+          }
         }
       }
 

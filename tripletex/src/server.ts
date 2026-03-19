@@ -59,6 +59,7 @@ app.post("/solve", async (req, res) => {
         filename: f.filename,
         mime_type: f.mime_type,
         size: f.content_base64.length,
+        content_base64: f.content_base64,
       })),
     },
   };

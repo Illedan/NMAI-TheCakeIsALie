@@ -9,17 +9,7 @@ from ultralytics import YOLO
 
 
 IMAGE_SUFFIXES = {".jpg", ".jpeg", ".png"}
-DEFAULT_WEIGHTS = Path(__file__).resolve().parent / "weights" / "best.pt"
-
-
-def enable_trusted_checkpoint_loading() -> None:
-    original_load = torch.load
-
-    def patched_load(*args, **kwargs):
-        kwargs.setdefault("weights_only", False)
-        return original_load(*args, **kwargs)
-
-    torch.load = patched_load
+DEFAULT_WEIGHTS = Path(__file__).resolve().parent / "weights" / "best.onnx"
 
 
 def parse_args() -> argparse.Namespace:
@@ -63,9 +53,8 @@ def main() -> None:
     if not args.weights.exists():
         raise FileNotFoundError(f"Could not find weights at {args.weights}")
 
-    enable_trusted_checkpoint_loading()
     device = pick_device()
-    model = YOLO(str(args.weights))
+    model = YOLO(str(args.weights), task="detect")
     predictions: list[dict] = []
 
     for image_path in iter_images(args.input):

@@ -1,0 +1,192 @@
+{
+  "timestamp": "2026-03-19T23:03:01.815Z",
+  "request": {
+    "prompt": "Erstellen Sie einen Kunden mit dem Namen 'Firma365227 GmbH' und der E-Mail kontakt365227@firma.de",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "agent": {
+    "callCount": 1,
+    "errorCount": 0,
+    "messages": [
+      {
+        "role": "user",
+        "parts": [
+          {
+            "text": "Erstellen Sie einen Kunden mit dem Namen 'Firma365227 GmbH' und der E-Mail kontakt365227@firma.de"
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "method": "POST",
+                "body": "{\"name\": \"Firma365227 GmbH\", \"email\": \"kontakt365227@firma.de\", \"isCustomer\": true}",
+                "path": "/customer"
+              }
+            },
+            "thoughtSignature": "CoMCAb4+9vv6VwiJsq6YYDG+bXbQWz6vDtkBK2zIrYerMzUeXkSlbzhM/6rLHD3J5VIp4QdIRA3OXFjmu+LkVtyGOXCGCX5CB0qhQZKbckKxDY1Xtz6mnNgVYRb4w02jCeNZcjrmUOeRyUscssxMWLBMvcgL1xFoU/ffM7NgEw8cVN7VeahFRM7A9g71YXo6QmwsINOgtLXvM2isIMTAwD7zSYSF4hBBpbVHz6q8q+80ZJhyYuhPb6V39+SBolm00mybYIKuXqqMq0RHis20RubnsxFD9NnPx7wPjdZ4VHYe0vNbR8ofkH1bYFoN3tLw0K5vWKFFXiEW4dkQyyLQ/VqkZ9KNJw=="
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "value": {
+                  "id": 108164152,
+                  "version": 1,
+                  "url": "kkpqfuj-amager.tripletex.dev/v2/customer/108164152",
+                  "name": "Firma365227 GmbH",
+                  "organizationNumber": "",
+                  "globalLocationNumber": 0,
+                  "supplierNumber": 0,
+                  "customerNumber": 10019,
+                  "isSupplier": false,
+                  "isCustomer": true,
+                  "isInactive": false,
+                  "accountManager": null,
+                  "department": null,
+                  "email": "kontakt365227@firma.de",
+                  "invoiceEmail": "",
+                  "overdueNoticeEmail": "",
+                  "phoneNumber": "",
+                  "phoneNumberMobile": "",
+                  "description": "",
+                  "language": "NO",
+                  "displayName": "Firma365227 GmbH (10019)",
+                  "isPrivateIndividual": false,
+                  "singleCustomerInvoice": false,
+                  "invoiceSendMethod": "EMAIL",
+                  "emailAttachmentType": "ATTACHMENT",
+                  "postalAddress": {
+                    "id": 405179779,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/address/405179779"
+                  },
+                  "physicalAddress": {
+                    "id": 405179778,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/address/405179778"
+                  },
+                  "deliveryAddress": null,
+                  "category1": null,
+                  "category2": null,
+                  "category3": null,
+                  "invoicesDueIn": 14,
+                  "invoicesDueInType": "DAYS",
+                  "currency": {
+                    "id": 1,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/currency/1"
+                  },
+                  "bankAccountPresentation": [],
+                  "ledgerAccount": {
+                    "id": 425217066,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/account/425217066"
+                  },
+                  "isFactoring": false,
+                  "invoiceSendSMSNotification": false,
+                  "invoiceSMSNotificationNumber": "",
+                  "isAutomaticSoftReminderEnabled": false,
+                  "isAutomaticReminderEnabled": false,
+                  "isAutomaticNoticeOfDebtCollectionEnabled": false,
+                  "discountPercentage": 0,
+                  "website": ""
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "text": "The customer 'Firma365227 GmbH' with email 'kontakt365227@firma.de' has been successfully created with ID 108164152.\nDONE"
+          }
+        ]
+      }
+    ]
+  },
+  "apiCalls": [
+    {
+      "timestamp": "2026-03-19T23:03:02.830Z",
+      "method": "POST",
+      "path": "/customer",
+      "body": {
+        "name": "Firma365227 GmbH",
+        "email": "kontakt365227@firma.de",
+        "isCustomer": true
+      },
+      "status": 201,
+      "durationMs": 134,
+      "response": {
+        "value": {
+          "id": 108164152,
+          "version": 1,
+          "url": "kkpqfuj-amager.tripletex.dev/v2/customer/108164152",
+          "name": "Firma365227 GmbH",
+          "organizationNumber": "",
+          "globalLocationNumber": 0,
+          "supplierNumber": 0,
+          "customerNumber": 10019,
+          "isSupplier": false,
+          "isCustomer": true,
+          "isInactive": false,
+          "accountManager": null,
+          "department": null,
+          "email": "kontakt365227@firma.de",
+          "invoiceEmail": "",
+          "overdueNoticeEmail": "",
+          "phoneNumber": "",
+          "phoneNumberMobile": "",
+          "description": "",
+          "language": "NO",
+          "displayName": "Firma365227 GmbH (10019)",
+          "isPrivateIndividual": false,
+          "singleCustomerInvoice": false,
+          "invoiceSendMethod": "EMAIL",
+          "emailAttachmentType": "ATTACHMENT",
+          "postalAddress": {
+            "id": 405179779,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/address/405179779"
+          },
+          "physicalAddress": {
+            "id": 405179778,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/address/405179778"
+          },
+          "deliveryAddress": null,
+          "category1": null,
+          "category2": null,
+          "category3": null,
+          "invoicesDueIn": 14,
+          "invoicesDueInType": "DAYS",
+          "currency": {
+            "id": 1,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/currency/1"
+          },
+          "bankAccountPresentation": [],
+          "ledgerAccount": {
+            "id": 425217066,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/account/425217066"
+          },
+          "isFactoring": false,
+          "invoiceSendSMSNotification": false,
+          "invoiceSMSNotificationNumber": "",
+          "isAutomaticSoftReminderEnabled": false,
+          "isAutomaticReminderEnabled": false,
+          "isAutomaticNoticeOfDebtCollectionEnabled": false,
+          "discountPercentage": 0,
+          "website": ""
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,487 @@
+{
+  "timestamp": "2026-03-19T23:10:01.830Z",
+  "request": {
+    "prompt": "Opprett et prosjekt med navn 'Prosjekt666541', prosjektnummer 666541. Bruk den første ansatte som prosjektleder.",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "agent": {
+    "callCount": 3,
+    "errorCount": 1,
+    "messages": [
+      {
+        "role": "user",
+        "parts": [
+          {
+            "text": "Opprett et prosjekt med navn 'Prosjekt666541', prosjektnummer 666541. Bruk den første ansatte som prosjektleder."
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "method": "GET",
+                "params": "{\"from\": 0, \"count\": 1}",
+                "path": "/employee"
+              }
+            },
+            "thoughtSignature": "CtMHAb4+9vscAob6aYREzRZnPltyF2WIw5eVU52SAcly3dQiqLazfU/orLGW/VEgvhJqz9xLTP+AJnhihfaLi8HjMvuIZ1fR9c0EFsa7u4926KOEiI78/+wR1c8mEtA6aVjjJrz/6kWrO8lhGuLwwPIDDKmIyH+Wrv/KTCphLFH0dPIvoQgt359KepnGmsryqYu6ZD3XZbJdiigp9uS9fwxqB9sBrckIibf9MpQ1Y88BZSdLKWiAULXeLcEQJHxj9sxF15pJjPxb/NiBuMVgb9vEVwzcshK4RupbLDd1LT3IPWYmlplOooFToyocbBtjiiI3PHJWXDPGVivmWwGXu03opxRW+CRWqMtTXkLh67yU1xsdDbJUpHG6Sbc29tHbKm5iWCa7174EthnY59adeHevXLPQlpJOW+JVdMgVzuO/CugKwifnlBT8DuomhXFUonKF3+y+csoGuVDzGzE+E0o76TtcPjMguLY7i1aAeW/Pa/I5hkr062nhKeiZ3POdhS0Aa733L0AulFkBNqm23z9B80U4+GFERzzgu8oswJcgUUF6zXJvO+MLdlRrZfKhdYDNlDFIDDPOAzw55v+A4cAD+grL/F0yEm5FeWsN+8mDfTh57seBAOL1c55SqJZkCaAWSKnKyS8Y7X1eCJ8m2cziBo4oent5MzXXXNBWwSL/mfbDkQoNFhOqbmrxq+YK0G6tfTB2YYEQVJv5YkaaaR5q1WsSdY99xCQm6TUSzQcwbHhMd5ow0i8ncUplnMOx3BqM8O2sQo1ZfbkHeUyHew5ZQQtHAv3vKYMm6jCnGXbC6FCqYmXN3h0Z48qPVgA3WhKI/9KJsxHWdxhnOf7lBXm4M0BPj+QphNoSf2Gsj43J1k6ITSk6OzjvLFQxth9KCXuy2fmcZNxbs1Vxfl7ETur63aZEDdwjWJPUgDfqCaD1S66cLBcSaRzMIpqR6Un7VMZNofNv/omt0wepepadUKffTmrlKALZIOWXbzv4oJjo/T1/LoFXF67FZ4sNjg90VONvLRO/vldFX013u2Vs7smkUy+M/23Jseox96rDoviHheqFS1ecYyMVL6w6ibXfXy8FM4Ezpj+XHuwxjFvjYBcLQdjEsJr95a2Mf4Cd/pvaDpgyz3z5Yxc8Zz6IgPMEiSIB/hulx3p7sQj/iGhYxv2ymdQzL8/NlOPKb0qCLuCrTS1FM2JZYNJuX/OXGOYMeu56e0cmYhGZFFGRe+jw/CmsdNXpY0EbY2IXIUqbhtGUOmUoyi5XouCNLHpdiPzdKlBQ5H/KG0ZcO7/2y9LPezNr2V+alg=="
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "fullResultSize": 2,
+                "from": 0,
+                "count": 1,
+                "versionDigest": "Checksum not yet supported for this endpoint",
+                "values": [
+                  {
+                    "id": 18445891,
+                    "version": 1,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/employee/18445891",
+                    "firstName": "Johansokrates",
+                    "lastName": "c695ab54",
+                    "displayName": "Johansokrates c695ab54",
+                    "employeeNumber": "",
+                    "dateOfBirth": null,
+                    "email": "johansokrates@hotmail.com",
+                    "phoneNumberMobileCountry": {
+                      "id": 161,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/country/161"
+                    },
+                    "phoneNumberMobile": "",
+                    "phoneNumberHome": "",
+                    "phoneNumberWork": "",
+                    "nationalIdentityNumber": "",
+                    "dnumber": "",
+                    "internationalId": {
+                      "intAmeldingType": null,
+                      "country": null,
+                      "number": ""
+                    },
+                    "bankAccountNumber": "",
+                    "iban": "",
+                    "bic": "",
+                    "creditorBankCountryId": 0,
+                    "usesAbroadPayment": false,
+                    "userType": null,
+                    "allowInformationRegistration": true,
+                    "isContact": false,
+                    "isProxy": false,
+                    "comments": "",
+                    "address": null,
+                    "department": {
+                      "id": 839940,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/department/839940"
+                    },
+                    "employments": [
+                      {
+                        "id": 2739116,
+                        "url": "kkpqfuj-amager.tripletex.dev/v2/employee/employment/2739116"
+                      }
+                    ],
+                    "holidayAllowanceEarned": {
+                      "year": 0,
+                      "amount": 0,
+                      "basis": 0,
+                      "amountExtraHolidayWeek": 0
+                    },
+                    "employeeCategory": null,
+                    "isAuthProjectOverviewURL": true,
+                    "pictureId": 0,
+                    "companyId": 108118447,
+                    "vismaConnect2FAactive": false
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "text": "I have successfully retrieved the first employee, whose ID is 18445891. Now, I will proceed to create the project as requested.",
+            "thoughtSignature": "Cr0BAb4+9vs8MBkOL6KPQ9PEz8IKPEPNmN64UP6AjID3vkUI8dDM6wfmF0OOoodIJUznvNuu1csgWrWqhKXc5BHAnhmy61EZLJZhpSEoDEmPWhbNRiIjl4bma30S5CG3AQ4IFFKOzC3hnounMjkYJ1ZELQMV/tMVS0M6qzwqmiyX1xHAAedcn2mtfKMP/WJqZwmQIcZ5h6iwJ3pGyaEU/SvnITfRqo/2CtXClF9ZQBC12EG3oK5jIr004i4mXt/6Co8BAb4+9vsDrK5mZyp2nu/88vg4Sq+2SwHjmd/q8SBE/8YbzyEHmhXsrjPZwk0PbJKgltkqGhog4X30ouMW/hIkQTbXGqn8nS2OD/Ya1Gif7lbM+YIodT8paEb3f2YlTULBMFmSi91qpUziINTXNZJ3BTDlJQXYk4Q8W0EJZ6HTTdiqay+i2yX3DoVrD0XwwA4="
+          },
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "path": "/project",
+                "method": "POST",
+                "body": "{\"name\": \"Prosjekt666541\", \"number\": \"666541\", \"projectManager\": {\"id\": 18445891}}"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "error": true,
+                "status": 422,
+                "message": "Validering feilet.",
+                "developerMessage": "VALIDATION_ERROR",
+                "validationMessages": [
+                  {
+                    "field": "startDate",
+                    "message": "Feltet må fylles ut.",
+                    "path": null,
+                    "rootId": null
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "text": "It seems I missed a required field. The API requires a `startDate` for project creation. I will now retry the request, adding today's date as the start date.",
+            "thoughtSignature": "CvcDAb4+9vubMSDQnrtoozIcXZKFaYe15J8IerfNThYrxPOlrsm/rBc2i6IE/7voKZmgPp9UfJeGkJQyOFN/EOo5mbCN9oyhGA95K4apbdQYrAPWPMDSQwSC1TL1oz+BWzoBk+IVsEAK/3NM8FhHQi9z5n7BxDPY1Q/7MWB+Nd5G/LwTmMi8A1KwkT+s9NAbHBMlGGt3fWM4hlPk2Nz+EsVGVTtaarIOvHGJ2tA9HvsWEnd211kWmDsJfcCBHQP0GdgCtKo3ymJ7kMaoP1Z+CD3XnO/NVHR/N1QuarU1V6PRp6SepRQprb8O75yeFFAVHQNfdf3vTC+svA3jV41P/GTmptwC8wwpSIPKe3knbfQ4xxEGXahXHpGzzpU0603XZgJKfd7U+rgKr6v0FsJ7dhArHHc2fFCX9Mt8t6NIHaqRH09tscf41FnUS9dNnWX5kfXaBajh1r3PLe68X3bE/7YHI9bzPurxHijzIeXJvTC81PTWmT0rG3MkcZqPWozGG6KRKiTGrbHOufK4eDCygWXWOb2p+m1Gt8jqvwkr/1LLqcicj1H9vXRKvIZxwELUzc6hrAn6trMXnkUVTsXUHAlltEAZTwGUXsBfyD7/TtCDh8tohdk4+e33okXviYGHWKM3Vu3qlq2StCcjhcoNYF/ZSIqlZ0kKp0IKrAEBvj72+2812m4D2Sm/3xfAQgL5ViLlp4DgbRGDSLH7UTE3vC1ffiQk5/E2Orvq++XzOL2hhgO/V8tiTNWqZ8RcJdEKJWaujrr0+e7UKN0kr/lmHSLGE79V+LkS0eDstqQIiTgepyaJdgwXHGNZwgZgCHWVCpji3WSUdJkF1eZlYWq3UA0qcjpKLme9MC4vRcJULfH1DIV7eTq/dhonZWnEOKFvA4H6Q4CYzXhH"
+          },
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "path": "/project",
+                "body": "{\"name\": \"Prosjekt666541\", \"number\": \"666541\", \"projectManager\": {\"id\": 18445891}, \"startDate\": \"2024-05-23\"}",
+                "method": "POST"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "value": {
+                  "id": 401950500,
+                  "version": 0,
+                  "url": "kkpqfuj-amager.tripletex.dev/v2/project/401950500",
+                  "name": "Prosjekt666541",
+                  "number": "666541",
+                  "displayName": "666541 Prosjekt666541",
+                  "description": "",
+                  "projectManager": {
+                    "id": 18445891,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/employee/18445891"
+                  },
+                  "department": null,
+                  "mainProject": null,
+                  "startDate": "2024-05-23",
+                  "endDate": null,
+                  "customer": null,
+                  "isClosed": false,
+                  "isReadyForInvoicing": false,
+                  "isInternal": false,
+                  "isOffer": false,
+                  "isFixedPrice": false,
+                  "projectCategory": null,
+                  "deliveryAddress": null,
+                  "boligmappaAddress": null,
+                  "displayNameFormat": "NAME_STANDARD",
+                  "reference": "",
+                  "externalAccountsNumber": "",
+                  "discountPercentage": 0,
+                  "vatType": {
+                    "id": 6,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/6"
+                  },
+                  "fixedprice": 0,
+                  "contributionMarginPercent": 0,
+                  "numberOfSubProjects": 0,
+                  "numberOfProjectParticipants": 1,
+                  "orderLines": [],
+                  "currency": {
+                    "id": 1,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/currency/1"
+                  },
+                  "markUpOrderLines": 0,
+                  "markUpFeesEarned": 0,
+                  "isPriceCeiling": false,
+                  "priceCeilingAmount": 0,
+                  "projectHourlyRates": [
+                    {
+                      "id": 11067013,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/project/hourlyRates/11067013"
+                    }
+                  ],
+                  "forParticipantsOnly": false,
+                  "participants": [
+                    {
+                      "id": 15621492,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/project/participant/15621492"
+                    }
+                  ],
+                  "contact": null,
+                  "attention": null,
+                  "invoiceComment": "",
+                  "invoicingPlan": [],
+                  "preliminaryInvoice": null,
+                  "generalProjectActivitiesPerProjectOnly": false,
+                  "projectActivities": [],
+                  "hierarchyNameAndNumber": "666541 Prosjekt666541",
+                  "invoiceDueDate": 0,
+                  "invoiceDueDateType": "DAYS",
+                  "invoiceReceiverEmail": "",
+                  "overdueNoticeEmail": "",
+                  "accessType": "WRITE",
+                  "useProductNetPrice": false,
+                  "ignoreCompanyProductDiscountAgreement": false,
+                  "customerName": "",
+                  "hierarchyLevel": 0,
+                  "projectManagerNameAndNumber": "Johansokrates c695ab54",
+                  "totalInvoicedOnAccountAmountAbsoluteCurrency": 0,
+                  "invoiceOnAccountVatHigh": false,
+                  "invoiceReserveTotalAmountCurrency": 0,
+                  "accountingDimensionValues": []
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "text": "DONE",
+            "thoughtSignature": "Cv0BAb4+9vuK70Bkje3N15buf7g8H7GvNtpOwr+4i8MtGz4Q1KKUjrSk1nam8G+hqiyWcLNmcHli4gwCkKXZ3LIaJOGGg07KbEPekwG+LGXA84t9XSsvyCoUrd2Fb8jNwmZKEKZ+Pfc9bns/re79wmXQvF1fQY54f1ihoI1mQhO2evR/907c4jJJj5j09Ku7H3Ms5fGzsdjytvHjbygBq8SXIFrXoczy1YBIEg7bTY3sma5oGlXwwb5EQaUFCkGbg/rXr0V8g9oEJqPzHr6lB4EPpGNiVG3TGzDTQMGXcyAnrMEsks3zGgZqJQfBhz54MGmWYx/CNz+RbDnm5qTFdA=="
+          }
+        ]
+      }
+    ]
+  },
+  "apiCalls": [
+    {
+      "timestamp": "2026-03-19T23:10:05.613Z",
+      "method": "GET",
+      "path": "/employee",
+      "params": {
+        "from": 0,
+        "count": 1
+      },
+      "status": 200,
+      "durationMs": 188,
+      "response": {
+        "fullResultSize": 2,
+        "from": 0,
+        "count": 1,
+        "versionDigest": "Checksum not yet supported for this endpoint",
+        "values": [
+          {
+            "id": 18445891,
+            "version": 1,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/employee/18445891",
+            "firstName": "Johansokrates",
+            "lastName": "c695ab54",
+            "displayName": "Johansokrates c695ab54",
+            "employeeNumber": "",
+            "dateOfBirth": null,
+            "email": "johansokrates@hotmail.com",
+            "phoneNumberMobileCountry": {
+              "id": 161,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/country/161"
+            },
+            "phoneNumberMobile": "",
+            "phoneNumberHome": "",
+            "phoneNumberWork": "",
+            "nationalIdentityNumber": "",
+            "dnumber": "",
+            "internationalId": {
+              "intAmeldingType": null,
+              "country": null,
+              "number": ""
+            },
+            "bankAccountNumber": "",
+            "iban": "",
+            "bic": "",
+            "creditorBankCountryId": 0,
+            "usesAbroadPayment": false,
+            "userType": null,
+            "allowInformationRegistration": true,
+            "isContact": false,
+            "isProxy": false,
+            "comments": "",
+            "address": null,
+            "department": {
+              "id": 839940,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/department/839940"
+            },
+            "employments": [
+              {
+                "id": 2739116,
+                "url": "kkpqfuj-amager.tripletex.dev/v2/employee/employment/2739116"
+              }
+            ],
+            "holidayAllowanceEarned": {
+              "year": 0,
+              "amount": 0,
+              "basis": 0,
+              "amountExtraHolidayWeek": 0
+            },
+            "employeeCategory": null,
+            "isAuthProjectOverviewURL": true,
+            "pictureId": 0,
+            "companyId": 108118447,
+            "vismaConnect2FAactive": false
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-03-19T23:10:08.474Z",
+      "method": "POST",
+      "path": "/project",
+      "body": {
+        "name": "Prosjekt666541",
+        "number": "666541",
+        "projectManager": {
+          "id": 18445891
+        }
+      },
+      "status": 422,
+      "durationMs": 102,
+      "error": {
+        "status": 422,
+        "code": 18000,
+        "message": "Validering feilet.",
+        "link": "https://tripletex.no/v2-docs/",
+        "developerMessage": "VALIDATION_ERROR",
+        "validationMessages": [
+          {
+            "field": "startDate",
+            "message": "Feltet må fylles ut.",
+            "path": null,
+            "rootId": null
+          }
+        ],
+        "requestId": "d4706944-7e5c-49b6-96a6-24a2e9d9d7ed"
+      }
+    },
+    {
+      "timestamp": "2026-03-19T23:10:13.033Z",
+      "method": "POST",
+      "path": "/project",
+      "body": {
+        "name": "Prosjekt666541",
+        "number": "666541",
+        "projectManager": {
+          "id": 18445891
+        },
+        "startDate": "2024-05-23"
+      },
+      "status": 201,
+      "durationMs": 274,
+      "response": {
+        "value": {
+          "id": 401950500,
+          "version": 0,
+          "url": "kkpqfuj-amager.tripletex.dev/v2/project/401950500",
+          "name": "Prosjekt666541",
+          "number": "666541",
+          "displayName": "666541 Prosjekt666541",
+          "description": "",
+          "projectManager": {
+            "id": 18445891,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/employee/18445891"
+          },
+          "department": null,
+          "mainProject": null,
+          "startDate": "2024-05-23",
+          "endDate": null,
+          "customer": null,
+          "isClosed": false,
+          "isReadyForInvoicing": false,
+          "isInternal": false,
+          "isOffer": false,
+          "isFixedPrice": false,
+          "projectCategory": null,
+          "deliveryAddress": null,
+          "boligmappaAddress": null,
+          "displayNameFormat": "NAME_STANDARD",
+          "reference": "",
+          "externalAccountsNumber": "",
+          "discountPercentage": 0,
+          "vatType": {
+            "id": 6,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/6"
+          },
+          "fixedprice": 0,
+          "contributionMarginPercent": 0,
+          "numberOfSubProjects": 0,
+          "numberOfProjectParticipants": 1,
+          "orderLines": [],
+          "currency": {
+            "id": 1,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/currency/1"
+          },
+          "markUpOrderLines": 0,
+          "markUpFeesEarned": 0,
+          "isPriceCeiling": false,
+          "priceCeilingAmount": 0,
+          "projectHourlyRates": [
+            {
+              "id": 11067013,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/project/hourlyRates/11067013"
+            }
+          ],
+          "forParticipantsOnly": false,
+          "participants": [
+            {
+              "id": 15621492,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/project/participant/15621492"
+            }
+          ],
+          "contact": null,
+          "attention": null,
+          "invoiceComment": "",
+          "invoicingPlan": [],
+          "preliminaryInvoice": null,
+          "generalProjectActivitiesPerProjectOnly": false,
+          "projectActivities": [],
+          "hierarchyNameAndNumber": "666541 Prosjekt666541",
+          "invoiceDueDate": 0,
+          "invoiceDueDateType": "DAYS",
+          "invoiceReceiverEmail": "",
+          "overdueNoticeEmail": "",
+          "accessType": "WRITE",
+          "useProductNetPrice": false,
+          "ignoreCompanyProductDiscountAgreement": false,
+          "customerName": "",
+          "hierarchyLevel": 0,
+          "projectManagerNameAndNumber": "Johansokrates c695ab54",
+          "totalInvoicedOnAccountAmountAbsoluteCurrency": 0,
+          "invoiceOnAccountVatHigh": false,
+          "invoiceReserveTotalAmountCurrency": 0,
+          "accountingDimensionValues": []
+        }
+      }
+    }
+  ]
+}

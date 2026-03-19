@@ -114,7 +114,7 @@ export async function runAgent(
   client: TripletexClient,
   prompt: string,
   files: FileAttachment[]
-): Promise<{ callCount: number; errorCount: number }> {
+): Promise<{ callCount: number; errorCount: number; messages: Anthropic.Messages.MessageParam[] }> {
   const anthropic = new Anthropic();
 
   const messages: Anthropic.Messages.MessageParam[] = [
@@ -180,5 +180,5 @@ export async function runAgent(
     messages.push({ role: "user", content: toolResults });
   }
 
-  return { callCount: client.callCount, errorCount: client.errorCount };
+  return { callCount: client.callCount, errorCount: client.errorCount, messages };
 }

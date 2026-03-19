@@ -77,6 +77,7 @@ app.post("/solve", async (req, res) => {
       errorCount: result.errorCount,
       messages: result.messages,
     };
+    logData.apiCalls = client.apiCalls;
 
     writeFileSync(logFile, JSON.stringify(logData, null, 2));
     gitPush();
@@ -87,6 +88,7 @@ app.post("/solve", async (req, res) => {
 
     logData.response = { status: "completed" };
     logData.error = String(e);
+    logData.apiCalls = client.apiCalls;
 
     writeFileSync(logFile, JSON.stringify(logData, null, 2));
     gitPush();

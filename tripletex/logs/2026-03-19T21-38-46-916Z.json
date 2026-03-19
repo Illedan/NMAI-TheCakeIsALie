@@ -1,0 +1,62 @@
+{
+  "timestamp": "2026-03-19T21:38:46.916Z",
+  "request": {
+    "prompt": "Opprett en kunde med navn 'Testbedrift AS' og e-post kontakt@testbedrift.no",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "agent": {
+    "callCount": 1,
+    "errorCount": 0,
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "Opprett en kunde med navn 'Testbedrift AS' og e-post kontakt@testbedrift.no"
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "Jeg vil opprette en kunde med navn 'Testbedrift AS' og e-post 'kontakt@testbedrift.no'."
+          },
+          {
+            "type": "tool_use",
+            "id": "toolu_01Lwb4qpYvyxhHUtntM7Cu2E",
+            "name": "tripletex_api",
+            "input": {
+              "method": "POST",
+              "path": "/customer",
+              "body": {
+                "name": "Testbedrift AS",
+                "email": "kontakt@testbedrift.no",
+                "isCustomer": true
+              }
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "toolu_01Lwb4qpYvyxhHUtntM7Cu2E",
+            "content": "{\"value\":{\"id\":108148415,\"version\":1,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/customer/108148415\",\"name\":\"Testbedrift AS\",\"organizationNumber\":\"\",\"globalLocationNumber\":0,\"supplierNumber\":0,\"customerNumber\":10003,\"isSupplier\":false,\"isCustomer\":true,\"isInactive\":false,\"accountManager\":null,\"department\":null,\"email\":\"kontakt@testbedrift.no\",\"invoiceEmail\":\"\",\"overdueNoticeEmail\":\"\",\"phoneNumber\":\"\",\"phoneNumberMobile\":\"\",\"description\":\"\",\"language\":\"NO\",\"displayName\":\"Testbedrift AS (10003)\",\"isPrivateIndividual\":false,\"singleCustomerInvoice\":false,\"invoiceSendMethod\":\"EMAIL\",\"emailAttachmentType\":\"ATTACHMENT\",\"postalAddress\":{\"id\":405148290,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/address/405148290\"},\"physicalAddress\":{\"id\":405148289,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/address/405148289\"},\"deliveryAddress\":null,\"category1\":null,\"category2\":null,\"category3\":null,\"invoicesDueIn\":14,\"invoicesDueInType\":\"DAYS\",\"currency\":{\"id\":1,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/currency/1\"},\"bankAccountPresentation\":[],\"ledgerAccount\":{\"id\":425217066,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/ledger/account/425217066\"},\"isFactoring\":false,\"invoiceSendSMSNotification\":false,\"invoiceSMSNotificationNumber\":\"\",\"isAutomaticSoftReminderEnabled\":false,\"isAutomaticReminderEnabled\":false,\"isAutomaticNoticeOfDebtCollectionEnabled\":false,\"discountPercentage\":0,\"website\":\"\"}}",
+            "is_error": false
+          }
+        ]
+      }
+    ]
+  }
+}

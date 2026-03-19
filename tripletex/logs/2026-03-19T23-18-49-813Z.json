@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-03-19T23:18:49.813Z",
+  "request": {
+    "prompt": "Opprett en ansatt med fornavn Test329753, etternavn Ansen, og e-post test329753@example.com",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "error": "Error: [GoogleGenerativeAI Error]: Error fetching from https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-pro:generateContent: [404 Not Found] models/gemini-3.1-pro is not found for API version v1beta, or is not supported for generateContent. Call ListModels to see the list of available models and their supported methods.",
+  "apiCalls": []
+}

@@ -41,16 +41,17 @@ def load_replay(ifile):
 
 class State:
     # Stochastic transition parameters (calibrated from replay data)
-    p_collapse = 0.055        # settlement -> ruin
+    p_collapse = 0.058        # settlement -> ruin (base rate)
     p_port_collapse = 0.025   # port -> ruin
-    p_expand = 0.005          # empty land -> settlement (per adjacent alive settlement)
+    p_expand_base = 0.003     # empty land -> settlement (spontaneous)
+    p_expand_per_n = 0.005    # empty land -> settlement (per adjacent alive)
     p_port_form = 0.005       # settlement -> port (if adjacent to ocean)
     p_ruin_rebuild = 0.48     # ruin -> settlement
     p_ruin_to_empty = 0.33    # ruin -> empty/plains
     p_ruin_to_forest = 0.18   # ruin -> forest
     p_ruin_to_port = 0.01     # ruin -> port (coastal)
-    p_forest_clear = 0.007    # forest -> settlement (per adjacent alive settlement)
-    p_forest_ruin = 0.0005    # forest -> ruin (rare)
+    p_forest_base = 0.004     # forest -> settlement (spontaneous)
+    p_forest_per_n = 0.005    # forest -> settlement (per adjacent alive)
 
     #Based on the first state in replay 0 set the initial state.
     def __init__(self, initial_state, ocean_mask):
@@ -95,9 +96,10 @@ class State:
         port_collapse = is_port & (rand < self.p_port_collapse)
         new_state[port_collapse] = 3
 
-        # Plains (class 0, not ocean) -> Settlement (1): expansion from nearby settlements
+        # Plains (class 0, not ocean) -> Settlement (1): expansion
         is_land = (self.state == 0) & ~self.ocean_mask
-        expand = is_land & (rand < np.minimum(self.p_expand * n_alive, 1.0))
+        p_expand = np.minimum(self.p_expand_base + self.p_expand_per_n * n_alive, 1.0)
+        expand = is_land & (rand < p_expand)
         new_state[expand] = 1
 
         # Ruin (3) transitions: ruins always transition immediately (categorical draw)
@@ -118,7 +120,8 @@ class State:
 
         # Forest (4) -> Settlement (1): cleared for expansion
         is_forest = (self.state == 4)
-        clear = is_forest & (rand < np.minimum(self.p_forest_clear * n_alive, 1.0))
+        p_forest = np.minimum(self.p_forest_base + self.p_forest_per_n * n_alive, 1.0)
+        clear = is_forest & (rand < p_forest)
         new_state[clear] = 1
 
         # Static cells (ocean, mountain) never change

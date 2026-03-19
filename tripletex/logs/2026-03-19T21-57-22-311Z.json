@@ -1,0 +1,101 @@
+{
+  "timestamp": "2026-03-19T21:57:22.312Z",
+  "request": {
+    "prompt": "Opprett en ansatt med fornavn Test442253, etternavn Ansen, og e-post test442253@example.com",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "agent": {
+    "callCount": 2,
+    "errorCount": 0,
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "Opprett en ansatt med fornavn Test442253, etternavn Ansen, og e-post test442253@example.com"
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "Jeg vil opprette en ansatt med de oppgitte detaljene. Først må jeg hente en avdeling å knytte den ansatte til, og deretter opprette den ansatte."
+          },
+          {
+            "type": "tool_use",
+            "id": "toolu_01Ljef91eidCJM1oX4Y4BDBx",
+            "name": "tripletex_api",
+            "input": {
+              "method": "GET",
+              "path": "/department",
+              "params": {
+                "count": 10
+              }
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "toolu_01Ljef91eidCJM1oX4Y4BDBx",
+            "content": "{\"fullResultSize\":3,\"from\":0,\"count\":3,\"versionDigest\":\"'If-None-Match' header not specified\",\"values\":[{\"id\":839940,\"version\":0,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/department/839940\",\"name\":\"Avdeling\",\"departmentNumber\":\"\",\"departmentManager\":null,\"displayName\":\"Avdeling\",\"isInactive\":false,\"businessActivityTypeId\":0},{\"id\":855102,\"version\":0,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/department/855102\",\"name\":\"Salgsavdelingen\",\"departmentNumber\":\"3\",\"departmentManager\":null,\"displayName\":\"3 Salgsavdelingen\",\"isInactive\":false,\"businessActivityTypeId\":0},{\"id\":855765,\"version\":0,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/department/855765\",\"name\":\"Avdeling680664\",\"departmentNumber\":\"680664\",\"departmentManager\":null,\"displayName\":\"680664 Avdeling680664\",\"isInactive\":false,\"businessActivityTypeId\":0}]}",
+            "is_error": false
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "Nå oppretter jeg den ansatte med fornavn \"Test442253\", etternavn \"Ansen\", e-post \"test442253@example.com\", og knytter til den første avdelingen:"
+          },
+          {
+            "type": "tool_use",
+            "id": "toolu_01TTN6Vgec3XjdUr6xZwKZnw",
+            "name": "tripletex_api",
+            "input": {
+              "method": "POST",
+              "path": "/employee",
+              "body": {
+                "firstName": "Test442253",
+                "lastName": "Ansen",
+                "email": "test442253@example.com",
+                "userType": "STANDARD",
+                "department": {
+                  "id": 839940
+                }
+              }
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "toolu_01TTN6Vgec3XjdUr6xZwKZnw",
+            "content": "{\"value\":{\"id\":18477109,\"version\":1,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/employee/18477109\",\"firstName\":\"Test442253\",\"lastName\":\"Ansen\",\"displayName\":\"Test442253 Ansen\",\"employeeNumber\":\"\",\"dateOfBirth\":null,\"email\":\"test442253@example.com\",\"phoneNumberMobileCountry\":{\"id\":161,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/country/161\"},\"phoneNumberMobile\":\"\",\"phoneNumberHome\":\"\",\"phoneNumberWork\":\"\",\"nationalIdentityNumber\":\"\",\"dnumber\":\"\",\"internationalId\":{\"intAmeldingType\":null,\"country\":null,\"number\":\"\"},\"bankAccountNumber\":\"\",\"iban\":\"\",\"bic\":\"\",\"creditorBankCountryId\":0,\"usesAbroadPayment\":false,\"userType\":null,\"allowInformationRegistration\":true,\"isContact\":false,\"isProxy\":false,\"comments\":\"\",\"address\":null,\"department\":{\"id\":839940,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/department/839940\"},\"employments\":[],\"holidayAllowanceEarned\":{\"year\":0,\"amount\":0,\"basis\":0,\"amountExtraHolidayWeek\":0},\"employeeCategory\":null,\"isAuthProjectOverviewURL\":true,\"pictureId\":0,\"companyId\":108118447,\"vismaConnect2FAactive\":false}}",
+            "is_error": false
+          }
+        ]
+      }
+    ]
+  }
+}

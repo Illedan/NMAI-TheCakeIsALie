@@ -14,7 +14,9 @@ Use ?fields=* to see all fields. Linked entities use {"id": number} format.
 
 POST /employee — Create employee
   Required: firstName (string), lastName (string), email (string), userType (enum: "STANDARD"|"EXTENDED"|"NO_ACCESS"), department ({"id": number})
-  Optional: phoneNumberMobile, bankAccountNumber, nationalIdentityNumber, employeeNumber, dateOfBirth, address, comments, isContact
+  Optional: phoneNumberMobile, bankAccountNumber, nationalIdentityNumber, employeeNumber, dateOfBirth, address, comments
+  IMPORTANT: Do NOT set isContact=true — this makes the employee a "contact" which excludes them from normal employee listings.
+  For admin role ("kontoadministrator"): use userType "EXTENDED". Note: admin permissions may also require setting roles via a separate endpoint.
   First GET /department to find a department ID. First GET /employee to check if employee exists.
   Batch: POST /employee/list (Array of Employee)
 

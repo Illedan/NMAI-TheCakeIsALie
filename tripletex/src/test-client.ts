@@ -266,6 +266,8 @@ const TEST_CASES: TestCase[] = [
 
       const orderData = (await tripletexGet(baseUrl, auth, "/order", {
         fields: "id,customer(id,name),orderLines(product(id,name))",
+        orderDateFrom: "2024-01-01",
+        orderDateTo: "2027-12-31",
         count: "100",
       })) as { values: { id: number; customer: { id: number; name: string } }[] };
       const order = orderData.values?.find((o) => o.customer?.name === `Société${TS} SARL`);

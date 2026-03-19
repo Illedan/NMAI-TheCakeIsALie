@@ -1,0 +1,192 @@
+{
+  "timestamp": "2026-03-19T23:02:59.246Z",
+  "request": {
+    "prompt": "Opprett en kunde med navn 'Bedrift365227 AS' og e-post post365227@bedrift.no",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "agent": {
+    "callCount": 1,
+    "errorCount": 0,
+    "messages": [
+      {
+        "role": "user",
+        "parts": [
+          {
+            "text": "Opprett en kunde med navn 'Bedrift365227 AS' og e-post post365227@bedrift.no"
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "path": "/customer",
+                "body": "{\"name\": \"Bedrift365227 AS\", \"email\": \"post365227@bedrift.no\", \"isCustomer\": true}",
+                "method": "POST"
+              }
+            },
+            "thoughtSignature": "Cs0CAb4+9vsXvuukm5VDC/M3xjThB2i8Q/0hzY3aI/KIXas9umnAy8gm6hTW6WiBoT4P5jWgClcl4kUE2tIdvmYqMKUPoCBFj1/NQwepl8cZlvrUPBZZmefOtP92t+7QW0z/0Sa4XzqWb6hw/qJjm0mhnHFc6fAcHVK4MMuGB8gCfWAIZIeIB7cZRxVtqO0kI7vDpNW85fptFGGrvwYBbKTw4CdXWQsyu/cTd+F7LE26PLPrD94g9w0bLcY84K+J79DN82rGmYHtz24AJjJXMHUBkFfSeOv6bLEP5I2WyhPu+PUlUek6nkcBjv22iuyg0Q0k8qAgVoZfFrO6Y3zOZE4j8Gz5IWuVmbLrlLapvL2pwVzSPtwtDk7AlC9dnJ5xfr5Pt8B5/nTZdlYJfEAkUz1BJK5L8f9lR/oKDjEnr82MFSU431poJd33j//P09SZ"
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "value": {
+                  "id": 108164145,
+                  "version": 1,
+                  "url": "kkpqfuj-amager.tripletex.dev/v2/customer/108164145",
+                  "name": "Bedrift365227 AS",
+                  "organizationNumber": "",
+                  "globalLocationNumber": 0,
+                  "supplierNumber": 0,
+                  "customerNumber": 10018,
+                  "isSupplier": false,
+                  "isCustomer": true,
+                  "isInactive": false,
+                  "accountManager": null,
+                  "department": null,
+                  "email": "post365227@bedrift.no",
+                  "invoiceEmail": "",
+                  "overdueNoticeEmail": "",
+                  "phoneNumber": "",
+                  "phoneNumberMobile": "",
+                  "description": "",
+                  "language": "NO",
+                  "displayName": "Bedrift365227 AS (10018)",
+                  "isPrivateIndividual": false,
+                  "singleCustomerInvoice": false,
+                  "invoiceSendMethod": "EMAIL",
+                  "emailAttachmentType": "ATTACHMENT",
+                  "postalAddress": {
+                    "id": 405179765,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/address/405179765"
+                  },
+                  "physicalAddress": {
+                    "id": 405179764,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/address/405179764"
+                  },
+                  "deliveryAddress": null,
+                  "category1": null,
+                  "category2": null,
+                  "category3": null,
+                  "invoicesDueIn": 14,
+                  "invoicesDueInType": "DAYS",
+                  "currency": {
+                    "id": 1,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/currency/1"
+                  },
+                  "bankAccountPresentation": [],
+                  "ledgerAccount": {
+                    "id": 425217066,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/account/425217066"
+                  },
+                  "isFactoring": false,
+                  "invoiceSendSMSNotification": false,
+                  "invoiceSMSNotificationNumber": "",
+                  "isAutomaticSoftReminderEnabled": false,
+                  "isAutomaticReminderEnabled": false,
+                  "isAutomaticNoticeOfDebtCollectionEnabled": false,
+                  "discountPercentage": 0,
+                  "website": ""
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "text": "DONE."
+          }
+        ]
+      }
+    ]
+  },
+  "apiCalls": [
+    {
+      "timestamp": "2026-03-19T23:03:00.378Z",
+      "method": "POST",
+      "path": "/customer",
+      "body": {
+        "name": "Bedrift365227 AS",
+        "email": "post365227@bedrift.no",
+        "isCustomer": true
+      },
+      "status": 201,
+      "durationMs": 139,
+      "response": {
+        "value": {
+          "id": 108164145,
+          "version": 1,
+          "url": "kkpqfuj-amager.tripletex.dev/v2/customer/108164145",
+          "name": "Bedrift365227 AS",
+          "organizationNumber": "",
+          "globalLocationNumber": 0,
+          "supplierNumber": 0,
+          "customerNumber": 10018,
+          "isSupplier": false,
+          "isCustomer": true,
+          "isInactive": false,
+          "accountManager": null,
+          "department": null,
+          "email": "post365227@bedrift.no",
+          "invoiceEmail": "",
+          "overdueNoticeEmail": "",
+          "phoneNumber": "",
+          "phoneNumberMobile": "",
+          "description": "",
+          "language": "NO",
+          "displayName": "Bedrift365227 AS (10018)",
+          "isPrivateIndividual": false,
+          "singleCustomerInvoice": false,
+          "invoiceSendMethod": "EMAIL",
+          "emailAttachmentType": "ATTACHMENT",
+          "postalAddress": {
+            "id": 405179765,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/address/405179765"
+          },
+          "physicalAddress": {
+            "id": 405179764,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/address/405179764"
+          },
+          "deliveryAddress": null,
+          "category1": null,
+          "category2": null,
+          "category3": null,
+          "invoicesDueIn": 14,
+          "invoicesDueInType": "DAYS",
+          "currency": {
+            "id": 1,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/currency/1"
+          },
+          "bankAccountPresentation": [],
+          "ledgerAccount": {
+            "id": 425217066,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/account/425217066"
+          },
+          "isFactoring": false,
+          "invoiceSendSMSNotification": false,
+          "invoiceSMSNotificationNumber": "",
+          "isAutomaticSoftReminderEnabled": false,
+          "isAutomaticReminderEnabled": false,
+          "isAutomaticNoticeOfDebtCollectionEnabled": false,
+          "discountPercentage": 0,
+          "website": ""
+        }
+      }
+    }
+  ]
+}

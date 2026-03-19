@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-03-19T21:23:21.698Z",
+  "request": {
+    "prompt": "test",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "agent": {
+    "callCount": 0,
+    "errorCount": 0,
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "test"
+          }
+        ]
+      }
+    ]
+  }
+}

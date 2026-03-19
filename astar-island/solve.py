@@ -8,11 +8,59 @@ Usage:
 
 import argparse
 import json
+import os
 import time
+from datetime import datetime, timezone
 import numpy as np
 import requests
 
 BASE = "https://api.ainm.no/astar-island"
+
+# ── Run log ──────────────────────────────────────────────────────────────────
+
+class RunLog:
+    """Collects every print and API call into a markdown file."""
+
+    def __init__(self):
+        self.lines: list[str] = []
+        self._start = datetime.now(timezone.utc)
+
+    def header(self, text: str):
+        self.lines.append(f"\n## {text}\n")
+
+    def log(self, text: str):
+        """Capture a print-equivalent line."""
+        self.lines.append(text)
+        print(text)
+
+    def api_call(self, method: str, url: str, payload: dict | None,
+                 response: dict, status: int, elapsed_ms: float):
+        """Capture a full API round-trip."""
+        self.lines.append(f"\n### `{method} {url}`")
+        if payload:
+            self.lines.append(f"**Request body:**\n```json\n{json.dumps(payload, indent=2)}\n```")
+        self.lines.append(f"**Status:** {status}  |  **Time:** {elapsed_ms:.0f} ms")
+        body_str = json.dumps(response, indent=2, default=str)
+        if len(body_str) > 4000:
+            body_str = body_str[:4000] + "\n... (truncated)"
+        self.lines.append(f"**Response:**\n```json\n{body_str}\n```")
+
+    def save(self, round_id: str):
+        """Write the collected log to astar-island/runs/<timestamp>_<round>.md"""
+        runs_dir = os.path.join(os.path.dirname(__file__), "runs")
+        os.makedirs(runs_dir, exist_ok=True)
+        ts = self._start.strftime("%Y%m%d_%H%M%S")
+        short_round = round_id[:8] if round_id else "unknown"
+        path = os.path.join(runs_dir, f"{ts}_{short_round}.md")
+        with open(path, "w") as f:
+            f.write(f"# Astar Island Run — {self._start.isoformat()}\n")
+            f.write(f"Round: `{round_id}`\n\n")
+            f.write("\n".join(self.lines))
+            f.write("\n")
+        print(f"\nRun log saved to {path}")
+        return path
+
+RUN_LOG = RunLog()
 
 # Terrain code → prediction class
 TERRAIN_TO_CLASS = {
@@ -35,12 +83,31 @@ def make_session(token: str) -> requests.Session:
     return s
 
 
+def _logged_get(session: requests.Session, url: str) -> dict:
+    t0 = time.perf_counter()
+    resp = session.get(url)
+    elapsed = (time.perf_counter() - t0) * 1000
+    resp.raise_for_status()
+    data = resp.json()
+    RUN_LOG.api_call("GET", url, None, data, resp.status_code, elapsed)
+    return data
+
+
+def _logged_post(session: requests.Session, url: str, payload: dict) -> dict:
+    t0 = time.perf_counter()
+    resp = session.post(url, json=payload)
+    elapsed = (time.perf_counter() - t0) * 1000
+    resp.raise_for_status()
+    data = resp.json()
+    RUN_LOG.api_call("POST", url, payload, data, resp.status_code, elapsed)
+    return data
+
+
 def get_active_round(session: requests.Session) -> dict | None:
-    rounds = session.get(f"{BASE}/rounds").json()
+    rounds = _logged_get(session, f"{BASE}/rounds")
     active = next((r for r in rounds if r["status"] == "active"), None)
     if active:
         return active
-    # Fall back to most recent non-completed
     for status in ["scoring", "pending", "completed"]:
         found = next((r for r in rounds if r["status"] == status), None)
         if found:
@@ -49,40 +116,34 @@ def get_active_round(session: requests.Session) -> dict | None:
 
 
 def get_round_detail(session: requests.Session, round_id: str) -> dict:
-    resp = session.get(f"{BASE}/rounds/{round_id}")
-    resp.raise_for_status()
-    return resp.json()
+    return _logged_get(session, f"{BASE}/rounds/{round_id}")
 
 
 def get_budget(session: requests.Session) -> dict:
-    resp = session.get(f"{BASE}/budget")
-    resp.raise_for_status()
-    return resp.json()
+    return _logged_get(session, f"{BASE}/budget")
 
 
 def simulate(session: requests.Session, round_id: str, seed_index: int,
              vx: int, vy: int, vw: int = 15, vh: int = 15) -> dict:
-    resp = session.post(f"{BASE}/simulate", json={
+    payload = {
         "round_id": round_id,
         "seed_index": seed_index,
         "viewport_x": vx,
         "viewport_y": vy,
         "viewport_w": vw,
         "viewport_h": vh,
-    })
-    resp.raise_for_status()
-    return resp.json()
+    }
+    return _logged_post(session, f"{BASE}/simulate", payload)
 
 
 def submit_prediction(session: requests.Session, round_id: str,
                       seed_index: int, prediction: np.ndarray) -> dict:
-    resp = session.post(f"{BASE}/submit", json={
+    payload = {
         "round_id": round_id,
         "seed_index": seed_index,
         "prediction": prediction.tolist(),
-    })
-    resp.raise_for_status()
-    return resp.json()
+    }
+    return _logged_post(session, f"{BASE}/submit", payload)
 
 
 def initial_grid_to_class(grid: list[list[int]]) -> np.ndarray:
@@ -190,8 +251,8 @@ def observe_seed(session: requests.Session, round_id: str, seed_index: int,
     counts = np.zeros((height, width, NUM_CLASSES), dtype=np.float64)
 
     for i, (vx, vy, vw, vh) in enumerate(viewports):
-        print(f"  Seed {seed_index}, query {i+1}/{len(viewports)}: "
-              f"viewport ({vx},{vy}) {vw}x{vh}")
+        RUN_LOG.log(f"  Seed {seed_index}, query {i+1}/{len(viewports)}: "
+                    f"viewport ({vx},{vy}) {vw}x{vh}")
 
         result = simulate(session, round_id, seed_index, vx, vy, vw, vh)
         grid = result["grid"]
@@ -250,12 +311,13 @@ def main():
     session = make_session(args.token)
 
     # 1. Find the round
+    RUN_LOG.header("Round Discovery")
     if args.round_id:
-        round_info = session.get(f"{BASE}/rounds/{args.round_id}").json()
+        round_info = _logged_get(session, f"{BASE}/rounds/{args.round_id}")
     else:
         round_info = get_active_round(session)
         if not round_info:
-            print("No active round found!")
+            RUN_LOG.log("No active round found!")
             return
         round_id = round_info["id"]
         round_info = get_round_detail(session, round_id)
@@ -266,40 +328,39 @@ def main():
     seeds_count = round_info.get("seeds_count", 5)
     initial_states = round_info.get("initial_states", [])
 
-    print(f"Round: {round_id}")
-    print(f"Map: {width}x{height}, {seeds_count} seeds")
-    print(f"Initial states: {len(initial_states)}")
+    RUN_LOG.log(f"Round: {round_id}")
+    RUN_LOG.log(f"Map: {width}x{height}, {seeds_count} seeds")
+    RUN_LOG.log(f"Initial states: {len(initial_states)}")
 
     # 2. Check budget
+    RUN_LOG.header("Budget")
     try:
         budget = get_budget(session)
         remaining = budget["queries_max"] - budget["queries_used"]
-        print(f"Budget: {budget['queries_used']}/{budget['queries_max']} used, {remaining} remaining")
+        RUN_LOG.log(f"Budget: {budget['queries_used']}/{budget['queries_max']} used, {remaining} remaining")
     except Exception as e:
-        print(f"Could not check budget: {e}")
+        RUN_LOG.log(f"Could not check budget: {e}")
         remaining = 50
 
     # 3. Allocate queries across seeds
     queries_per_seed = min(args.queries_per_seed, remaining // seeds_count)
     if queries_per_seed < 1:
-        print("Not enough queries remaining! Submitting prior-only predictions.")
+        RUN_LOG.log("Not enough queries remaining! Submitting prior-only predictions.")
         queries_per_seed = 0
 
-    print(f"Allocating {queries_per_seed} queries per seed "
-          f"({queries_per_seed * seeds_count} total)")
+    RUN_LOG.log(f"Allocating {queries_per_seed} queries per seed "
+                f"({queries_per_seed * seeds_count} total)")
 
     # 4. For each seed: observe + predict + submit
     for seed_idx in range(seeds_count):
-        print(f"\n{'='*60}")
-        print(f"Processing seed {seed_idx}")
-        print(f"{'='*60}")
+        RUN_LOG.header(f"Seed {seed_idx}")
 
         # Get initial grid for this seed
         if seed_idx < len(initial_states):
             initial_grid = initial_states[seed_idx]["grid"]
             initial_class = initial_grid_to_class(initial_grid)
             settlements = initial_states[seed_idx].get("settlements", [])
-            print(f"  Initial settlements: {len(settlements)}")
+            RUN_LOG.log(f"  Initial settlements: {len(settlements)}")
         else:
             initial_class = np.zeros((height, width), dtype=int)
             settlements = []
@@ -312,32 +373,34 @@ def main():
             viewports = plan_viewports(width, height, queries_per_seed, initial_class)
             counts = observe_seed(session, round_id, seed_idx, viewports, width, height)
             observed_cells = (counts.sum(axis=-1) > 0).sum()
-            print(f"  Observed {observed_cells}/{width*height} cells")
+            RUN_LOG.log(f"  Observed {observed_cells}/{width*height} cells")
         else:
             counts = np.zeros((height, width, NUM_CLASSES))
 
         # Build and submit prediction
         prediction = build_prediction(counts, prior)
-        print(f"  Prediction shape: {prediction.shape}")
-        print(f"  Prob range: [{prediction.min():.4f}, {prediction.max():.4f}]")
-        print(f"  Sum check (should be 1.0): {prediction[0,0].sum():.4f}")
+        RUN_LOG.log(f"  Prediction shape: {prediction.shape}")
+        RUN_LOG.log(f"  Prob range: [{prediction.min():.4f}, {prediction.max():.4f}]")
+        RUN_LOG.log(f"  Sum check (should be 1.0): {prediction[0,0].sum():.4f}")
 
         result = submit_prediction(session, round_id, seed_idx, prediction)
-        print(f"  Submitted seed {seed_idx}: {result}")
+        RUN_LOG.log(f"  Submitted seed {seed_idx}: {result}")
 
     # 5. Check scores
-    print(f"\n{'='*60}")
-    print("Done! Checking scores...")
+    RUN_LOG.header("Scores")
     try:
-        my_rounds = session.get(f"{BASE}/my-rounds").json()
+        my_rounds = _logged_get(session, f"{BASE}/my-rounds")
         for r in my_rounds:
             if r["id"] == round_id:
-                print(f"  Round score: {r.get('round_score')}")
-                print(f"  Seed scores: {r.get('seed_scores')}")
-                print(f"  Rank: {r.get('rank')}/{r.get('total_teams')}")
+                RUN_LOG.log(f"  Round score: {r.get('round_score')}")
+                RUN_LOG.log(f"  Seed scores: {r.get('seed_scores')}")
+                RUN_LOG.log(f"  Rank: {r.get('rank')}/{r.get('total_teams')}")
                 break
     except Exception as e:
-        print(f"  Could not fetch scores: {e}")
+        RUN_LOG.log(f"  Could not fetch scores: {e}")
+
+    # 6. Save the run log
+    RUN_LOG.save(round_id)
 
 
 if __name__ == "__main__":

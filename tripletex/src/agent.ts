@@ -53,6 +53,11 @@ POST /invoice — Create invoice
   Batch: POST /invoice/list (max 100)
   NOTE: ALWAYS use today's date (YYYY-MM-DD format) for invoiceDate and orderDate unless the task specifies a different date. The sandbox company may need a bank account registered before invoices can be created — if you get an error about bank account, try GET /ledger/account?isBankAccount=true and update the account with a valid 11-digit Norwegian bank account number (e.g. 15032080001).
 
+PUT /invoice/{id}/:payment — Register payment on invoice
+  Query params: paymentDate (required, "YYYY-MM-DD"), paymentTypeId (required, integer — use GET /ledger/paymentTypeOut to find IDs), paidAmount (required, number — the FULL amount including VAT), paidAmountCurrency (optional)
+  This is a PUT request. Pass all params as query params, NOT in the body. Body should be empty.
+  Example: PUT /invoice/123/:payment with params {paymentDate: "2026-03-19", paymentTypeId: 12345, paidAmount: 55937.5}
+
 PUT /invoice/{id}/:send — Send invoice
   Query params: sendType (required, enum: "EMAIL"|"EHF"|"AVTALEGIRO"|"EFAKTURA"|"VIPPS"|"PAPER"|"MANUAL"), overrideEmailAddress (optional)
   This is a PUT request, not POST.

@@ -55,8 +55,9 @@ POST /invoice — Create invoice
   NOTE: ALWAYS use today's date (YYYY-MM-DD format) for invoiceDate and orderDate unless the task specifies a different date. The sandbox company may need a bank account registered before invoices can be created — if you get an error about bank account, try GET /ledger/account?isBankAccount=true and update the account with a valid 11-digit Norwegian bank account number (e.g. 15032080001).
 
 PUT /invoice/{id}/:payment — Register payment on invoice
-  Query params: paymentDate (required, "YYYY-MM-DD"), paymentTypeId (required, integer — use GET /ledger/paymentTypeOut to find IDs), paidAmount (required, number — the FULL amount including VAT), paidAmountCurrency (optional)
+  Query params: paymentDate (required, "YYYY-MM-DD"), paymentTypeId (required, integer), paidAmount (required, number — the FULL amount including VAT), paidAmountCurrency (optional)
   This is a PUT request. Pass all params as query params, NOT in the body. Body should be empty.
+  CRITICAL: Use GET /invoice/paymentType to find INCOMING payment type IDs. Do NOT use /ledger/paymentTypeOut (those are outgoing).
   Example: PUT /invoice/123/:payment with params {paymentDate: "2026-03-19", paymentTypeId: 12345, paidAmount: 55937.5}
 
 PUT /invoice/{id}/:send — Send invoice
@@ -114,7 +115,7 @@ This prevents trial-and-error errors which hurt your score.
 - Avoid trial-and-error. Look up the docs first, then make the call correctly. Every 4xx error reduces your score.
 - Use batch /list endpoints when creating multiple entities.
 - Minimize total API calls — fewer calls = higher efficiency bonus.
-- Use today's date unless the task specifies a different date.
+- ALWAYS use today's date unless the task specifies a different date. NEVER use hardcoded dates like 2024-12-19.
 
 === FILE HANDLING ===
 When files are attached (CSV, text, etc.), use the "query_file" tool to inspect them:
@@ -370,7 +371,8 @@ function buildUserContent(
     }
   }
 
-  content.push({ type: "text", text: prompt });
+  const today = new Date().toISOString().split("T")[0];
+  content.push({ type: "text", text: `Today's date: ${today}\n\n${prompt}` });
   return content;
 }
 

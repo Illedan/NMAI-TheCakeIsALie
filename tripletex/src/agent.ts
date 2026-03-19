@@ -21,6 +21,10 @@ POST /employee — Create employee
   Optional: phoneNumberMobile, bankAccountNumber, nationalIdentityNumber, employeeNumber, dateOfBirth, address, comments
   IMPORTANT: Do NOT set isContact=true — this makes the employee a "contact" which excludes them from normal employee listings.
   For admin role ("kontoadministrator"): use userType "EXTENDED". Note: admin permissions may also require setting roles via a separate endpoint.
+  IMPORTANT: If the task specifies a START DATE, you must create an Employment record AFTER creating the employee:
+    POST /employee/employment with body: {employee: {"id": employeeId}, startDate: "YYYY-MM-DD", isMainEmployer: true}
+  The startDate is on the Employment object, NOT on the Employee object.
+  Similarly for employment details (salary, job title, etc): POST /employee/employment/details
   First GET /department to find a department ID. First GET /employee to check if employee exists.
   Batch: POST /employee/list (Array of Employee)
 

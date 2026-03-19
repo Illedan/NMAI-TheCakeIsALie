@@ -1,0 +1,204 @@
+{
+  "timestamp": "2026-03-19T22:46:56.532Z",
+  "request": {
+    "prompt": "We have a new employee named Ella Harris, born 21. October 1981. Please create them as an employee with email ella.harris@example.org and start date 28. May 2026.",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "agent": {
+    "callCount": 2,
+    "errorCount": 0,
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "Today's date: 2026-03-19\n\nWe have a new employee named Ella Harris, born 21. October 1981. Please create them as an employee with email ella.harris@example.org and start date 28. May 2026."
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "I'll help you create a new employee named Ella Harris. Let me first check the available departments and then create the employee record."
+          },
+          {
+            "type": "tool_use",
+            "id": "toolu_012eW7UtVenFiTbsDJTKDZ3h",
+            "name": "tripletex_api",
+            "input": {
+              "method": "GET",
+              "path": "/department",
+              "params": {
+                "fields": "*"
+              }
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "toolu_012eW7UtVenFiTbsDJTKDZ3h",
+            "content": "{\"fullResultSize\":1,\"from\":0,\"count\":1,\"versionDigest\":\"'If-None-Match' header not specified\",\"values\":[{\"id\":689631,\"version\":0,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/department/689631\",\"name\":\"Avdeling\",\"departmentNumber\":\"\",\"departmentManager\":null,\"displayName\":\"Avdeling\",\"isInactive\":false,\"businessActivityTypeId\":0}]}",
+            "is_error": false
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "Now I'll create the employee record for Ella Harris with the available department:"
+          },
+          {
+            "type": "tool_use",
+            "id": "toolu_0184wetpLbn87P81wnDSN6th",
+            "name": "tripletex_api",
+            "input": {
+              "method": "POST",
+              "path": "/employee",
+              "body": {
+                "firstName": "Ella",
+                "lastName": "Harris",
+                "email": "ella.harris@example.org",
+                "userType": "STANDARD",
+                "department": {
+                  "id": 689631
+                },
+                "dateOfBirth": "1981-10-21"
+              }
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "toolu_0184wetpLbn87P81wnDSN6th",
+            "content": "{\"value\":{\"id\":18485975,\"version\":1,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/employee/18485975\",\"firstName\":\"Ella\",\"lastName\":\"Harris\",\"displayName\":\"Ella Harris\",\"employeeNumber\":\"\",\"dateOfBirth\":\"1981-10-21\",\"email\":\"ella.harris@example.org\",\"phoneNumberMobileCountry\":{\"id\":161,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/country/161\"},\"phoneNumberMobile\":\"\",\"phoneNumberHome\":\"\",\"phoneNumberWork\":\"\",\"nationalIdentityNumber\":\"\",\"dnumber\":\"\",\"internationalId\":{\"intAmeldingType\":null,\"country\":null,\"number\":\"\"},\"bankAccountNumber\":\"\",\"iban\":\"\",\"bic\":\"\",\"creditorBankCountryId\":0,\"usesAbroadPayment\":false,\"userType\":null,\"allowInformationRegistration\":true,\"isContact\":false,\"isProxy\":false,\"comments\":\"\",\"address\":null,\"department\":{\"id\":689631,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/department/689631\"},\"employments\":[],\"holidayAllowanceEarned\":{\"year\":0,\"amount\":0,\"basis\":0,\"amountExtraHolidayWeek\":0},\"employeeCategory\":null,\"isAuthProjectOverviewURL\":true,\"pictureId\":0,\"companyId\":107809061,\"vismaConnect2FAactive\":false}}",
+            "is_error": false
+          }
+        ]
+      }
+    ]
+  },
+  "apiCalls": [
+    {
+      "timestamp": "2026-03-19T22:46:59.986Z",
+      "method": "GET",
+      "path": "/department",
+      "params": {
+        "fields": "*"
+      },
+      "status": 200,
+      "durationMs": 892,
+      "response": {
+        "fullResultSize": 1,
+        "from": 0,
+        "count": 1,
+        "versionDigest": "'If-None-Match' header not specified",
+        "values": [
+          {
+            "id": 689631,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/department/689631",
+            "name": "Avdeling",
+            "departmentNumber": "",
+            "departmentManager": null,
+            "displayName": "Avdeling",
+            "isInactive": false,
+            "businessActivityTypeId": 0
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-03-19T22:47:03.994Z",
+      "method": "POST",
+      "path": "/employee",
+      "body": {
+        "firstName": "Ella",
+        "lastName": "Harris",
+        "email": "ella.harris@example.org",
+        "userType": "STANDARD",
+        "department": {
+          "id": 689631
+        },
+        "dateOfBirth": "1981-10-21"
+      },
+      "status": 201,
+      "durationMs": 1268,
+      "response": {
+        "value": {
+          "id": 18485975,
+          "version": 1,
+          "url": "kkpqfuj-amager.tripletex.dev/v2/employee/18485975",
+          "firstName": "Ella",
+          "lastName": "Harris",
+          "displayName": "Ella Harris",
+          "employeeNumber": "",
+          "dateOfBirth": "1981-10-21",
+          "email": "ella.harris@example.org",
+          "phoneNumberMobileCountry": {
+            "id": 161,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/country/161"
+          },
+          "phoneNumberMobile": "",
+          "phoneNumberHome": "",
+          "phoneNumberWork": "",
+          "nationalIdentityNumber": "",
+          "dnumber": "",
+          "internationalId": {
+            "intAmeldingType": null,
+            "country": null,
+            "number": ""
+          },
+          "bankAccountNumber": "",
+          "iban": "",
+          "bic": "",
+          "creditorBankCountryId": 0,
+          "usesAbroadPayment": false,
+          "userType": null,
+          "allowInformationRegistration": true,
+          "isContact": false,
+          "isProxy": false,
+          "comments": "",
+          "address": null,
+          "department": {
+            "id": 689631,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/department/689631"
+          },
+          "employments": [],
+          "holidayAllowanceEarned": {
+            "year": 0,
+            "amount": 0,
+            "basis": 0,
+            "amountExtraHolidayWeek": 0
+          },
+          "employeeCategory": null,
+          "isAuthProjectOverviewURL": true,
+          "pictureId": 0,
+          "companyId": 107809061,
+          "vismaConnect2FAactive": false
+        }
+      }
+    }
+  ]
+}

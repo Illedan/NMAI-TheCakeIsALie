@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-03-19T20:57:19.880Z",
+  "request": {
+    "prompt": "Opprett en ansatt med fornavn Erik, etternavn Testesen, og e-post erik.testesen@example.com",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "error": "Error: Could not resolve authentication method. Expected either apiKey or authToken to be set. Or for one of the \"X-Api-Key\" or \"Authorization\" headers to be explicitly omitted"
+}

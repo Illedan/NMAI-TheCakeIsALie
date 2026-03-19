@@ -26,6 +26,8 @@ PUT /employee/{id} — Update employee
 POST /customer — Create customer
   Required: name (string), isCustomer (boolean, set true)
   Optional: organizationNumber, email, invoiceEmail, phoneNumber, phoneNumberMobile, isSupplier, isPrivateIndividual, invoicesDueIn, invoicesDueInType ("DAYS"|"MONTHS"|"RECURRING_DAY_OF_MONTH"), invoiceSendMethod ("EMAIL"|"EHF"|"EFAKTURA"|"AVTALEGIRO"|"VIPPS"|"PAPER"|"MANUAL"), physicalAddress, postalAddress, deliveryAddress, accountManager (Employee ref), language ("NO"|"EN"), currency (Currency ref), bankAccounts (Array<string>)
+  Address object: {addressLine1: string, addressLine2: string, postalCode: string, city: string}
+  IMPORTANT: When a task specifies an address, ALWAYS set BOTH physicalAddress AND postalAddress with the same values.
   Batch: POST /customer/list
 
 POST /product — Create product

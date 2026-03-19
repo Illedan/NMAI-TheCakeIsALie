@@ -1,0 +1,97 @@
+{
+  "timestamp": "2026-03-19T23:17:26.521Z",
+  "request": {
+    "prompt": "Opprett en avdeling med navn 'Avdeling222261' og avdelingsnummer 222261",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "agent": {
+    "callCount": 1,
+    "errorCount": 0,
+    "messages": [
+      {
+        "role": "user",
+        "parts": [
+          {
+            "text": "Opprett en avdeling med navn 'Avdeling222261' og avdelingsnummer 222261"
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "body": "{\"name\": \"Avdeling222261\", \"departmentNumber\": \"222261\"}",
+                "method": "POST",
+                "path": "/department"
+              }
+            },
+            "thoughtSignature": "CpIDAb4+9vsQsUuJ/ERCy122YslrlgOi+FEqAXqioKB7c8aDYcZZNsqc5sIvXov0RQeaNtdOj7DcTOq8wh8ZFt1eowsyieKumdYNn4rbO+SwsLC0GzX9dMo9SpscYbhK4N4g5vpK7s2tW0Y4yJ/u00ZwsKwN9uGxUhDP2uzaNgRx12qXFi74GMV5eHGvmDfHsgw2+BDyKT1YeeoQfvQCwfWg+858B5kDCjsgn/vtmJqYvAdfPbYttAMNARBJNzFWxxjl5sZsLwSMvUxiOIo8tyKTySiiIugN3lbraIZ7Fsk0sqyOMu2/uN1z1E5DJ67MZson+U6XxcFhLa26RL/gfP+ATwWk5g4hRC05R2rhDk/Sc+VwXz0TM/ozv+pvwnxOvA94itusSuye8sQ+C1rawqjxF1DQm/nXKsZHn48kOoFvx+LfTNA6csVsVOW+xfZc7gCxXs2neSXxnNfo/fb29fOFZQYw+tFby0poXusQrPrKszTr9ECyy/iwyzHxLCiqr0c4HK4iDS0WSJTY7vBmA+wHXLDr"
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "value": {
+                  "id": 864387,
+                  "version": 0,
+                  "url": "kkpqfuj-amager.tripletex.dev/v2/department/864387",
+                  "name": "Avdeling222261",
+                  "departmentNumber": "222261",
+                  "departmentManager": null,
+                  "displayName": "222261 Avdeling222261",
+                  "isInactive": false,
+                  "businessActivityTypeId": 0
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "text": "DONE"
+          }
+        ]
+      }
+    ]
+  },
+  "apiCalls": [
+    {
+      "timestamp": "2026-03-19T23:17:27.886Z",
+      "method": "POST",
+      "path": "/department",
+      "body": {
+        "name": "Avdeling222261",
+        "departmentNumber": "222261"
+      },
+      "status": 201,
+      "durationMs": 109,
+      "response": {
+        "value": {
+          "id": 864387,
+          "version": 0,
+          "url": "kkpqfuj-amager.tripletex.dev/v2/department/864387",
+          "name": "Avdeling222261",
+          "departmentNumber": "222261",
+          "departmentManager": null,
+          "displayName": "222261 Avdeling222261",
+          "isInactive": false,
+          "businessActivityTypeId": 0
+        }
+      }
+    }
+  ]
+}

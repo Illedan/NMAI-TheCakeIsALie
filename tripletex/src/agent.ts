@@ -1,6 +1,9 @@
 import Anthropic from "@anthropic-ai/sdk";
+import { GoogleGenerativeAI, type FunctionDeclaration, type Part, SchemaType } from "@google/generative-ai";
 import { TripletexClient, TripletexApiError } from "./tripletex-client.js";
 import type { FileAttachment, ToolCall } from "./types.js";
+
+export type LLMProvider = "anthropic" | "gemini";
 
 const SYSTEM_PROMPT = `You are an expert accounting agent for Tripletex, a Norwegian accounting system.
 You receive a task prompt (possibly in Norwegian, English, Spanish, Portuguese, Nynorsk, German, or French) and must execute it using the Tripletex REST API.
@@ -208,129 +211,106 @@ function handleFileQuery(
   }
 }
 
-const QUERY_FILE_TOOL: Anthropic.Messages.Tool = {
-  name: "query_file",
-  description:
-    "Query an attached file (CSV, text, etc). Use 'info' to see headers/row count, 'read_rows' to read CSV rows, 'read_lines' for raw lines, 'search' to find matching rows/lines.",
-  input_schema: {
-    type: "object" as const,
-    properties: {
-      filename: {
-        type: "string",
-        description: "The filename to query",
-      },
-      action: {
-        type: "string",
-        enum: ["info", "read_rows", "read_lines", "search"],
-        description: "info: get file metadata and headers. read_rows: read CSV rows as objects. read_lines: read raw lines. search: find rows/lines matching a query.",
-      },
-      from: {
-        type: "number",
-        description: "Start index for read_rows/read_lines (default 0)",
-      },
-      count: {
-        type: "number",
-        description: "Number of rows/lines to return (default 50)",
-      },
-      search: {
-        type: "string",
-        description: "Search query string (for action=search)",
-      },
-      column: {
-        type: "string",
-        description: "Limit search to a specific column (for action=search on CSV files)",
-      },
-    },
-    required: ["filename", "action"],
-  },
-};
+// ============================================================
+// Tool definitions in both Anthropic and Gemini formats
+// ============================================================
 
-const TRIPLETEX_TOOL: Anthropic.Messages.Tool = {
+const TRIPLETEX_TOOL_ANTHROPIC: Anthropic.Messages.Tool = {
   name: "tripletex_api",
-  description:
-    "Make an HTTP request to the Tripletex API. Returns the JSON response.",
+  description: "Make an HTTP request to the Tripletex API. Returns the JSON response.",
   input_schema: {
     type: "object" as const,
     properties: {
-      method: {
-        type: "string",
-        enum: ["GET", "POST", "PUT", "DELETE"],
-        description: "HTTP method",
-      },
-      path: {
-        type: "string",
-        description:
-          "API path starting with /, e.g. /employee or /customer/123",
-      },
-      params: {
-        type: "object",
-        description:
-          "Query parameters as key-value pairs, e.g. {fields: '*', count: 100}",
-        additionalProperties: true,
-      },
-      body: {
-        type: "object",
-        description: "JSON request body for POST/PUT requests",
-        additionalProperties: true,
-      },
+      method: { type: "string", enum: ["GET", "POST", "PUT", "DELETE"], description: "HTTP method" },
+      path: { type: "string", description: "API path starting with /, e.g. /employee or /customer/123" },
+      params: { type: "object", description: "Query parameters as key-value pairs", additionalProperties: true },
+      body: { type: "object", description: "JSON request body for POST/PUT requests", additionalProperties: true },
     },
     required: ["method", "path"],
   },
 };
 
-function buildUserContent(
-  prompt: string,
-  files: FileAttachment[]
-): Anthropic.Messages.ContentBlockParam[] {
-  const content: Anthropic.Messages.ContentBlockParam[] = [];
+const QUERY_FILE_TOOL_ANTHROPIC: Anthropic.Messages.Tool = {
+  name: "query_file",
+  description: "Query an attached file (CSV, text, etc). Use 'info' to see headers/row count, 'read_rows' to read CSV rows, 'read_lines' for raw lines, 'search' to find matching rows/lines.",
+  input_schema: {
+    type: "object" as const,
+    properties: {
+      filename: { type: "string", description: "The filename to query" },
+      action: { type: "string", enum: ["info", "read_rows", "read_lines", "search"], description: "Action to perform" },
+      from: { type: "number", description: "Start index for read_rows/read_lines (default 0)" },
+      count: { type: "number", description: "Number of rows/lines to return (default 50)" },
+      search: { type: "string", description: "Search query string (for action=search)" },
+      column: { type: "string", description: "Limit search to a specific column (for action=search on CSV files)" },
+    },
+    required: ["filename", "action"],
+  },
+};
 
+const TRIPLETEX_TOOL_GEMINI: FunctionDeclaration = {
+  name: "tripletex_api",
+  description: "Make an HTTP request to the Tripletex API. Returns the JSON response.",
+  parameters: {
+    type: SchemaType.OBJECT,
+    properties: {
+      method: { type: SchemaType.STRING, description: "HTTP method: GET, POST, PUT, or DELETE" },
+      path: { type: SchemaType.STRING, description: "API path starting with /, e.g. /employee or /customer/123" },
+      params: { type: SchemaType.STRING, description: "Query parameters as JSON string, e.g. '{\"fields\": \"*\", \"count\": 100}'" },
+      body: { type: SchemaType.STRING, description: "JSON request body string for POST/PUT requests" },
+    },
+    required: ["method", "path"],
+  },
+};
+
+const QUERY_FILE_TOOL_GEMINI: FunctionDeclaration = {
+  name: "query_file",
+  description: "Query an attached file (CSV, text, etc). Use 'info' to see headers/row count, 'read_rows' to read CSV rows, 'read_lines' for raw lines, 'search' to find matching rows/lines.",
+  parameters: {
+    type: SchemaType.OBJECT,
+    properties: {
+      filename: { type: SchemaType.STRING, description: "The filename to query" },
+      action: { type: SchemaType.STRING, description: "Action: info, read_rows, read_lines, or search" },
+      from: { type: SchemaType.STRING, description: "Start index (default 0)" },
+      count: { type: SchemaType.STRING, description: "Number of rows/lines to return (default 50)" },
+      search: { type: SchemaType.STRING, description: "Search query string" },
+      column: { type: SchemaType.STRING, description: "Limit search to a specific column" },
+    },
+    required: ["filename", "action"],
+  },
+};
+
+// ============================================================
+// Anthropic agent loop
+// ============================================================
+
+function buildAnthropicContent(prompt: string, files: FileAttachment[]): Anthropic.Messages.ContentBlockParam[] {
+  const content: Anthropic.Messages.ContentBlockParam[] = [];
   for (const file of files) {
     if (file.mime_type === "application/pdf") {
-      content.push({
-        type: "document",
-        source: {
-          type: "base64",
-          media_type: "application/pdf",
-          data: file.content_base64,
-        },
-      });
+      content.push({ type: "document", source: { type: "base64", media_type: "application/pdf", data: file.content_base64 } });
     } else if (file.mime_type.startsWith("image/")) {
-      content.push({
-        type: "image",
-        source: {
-          type: "base64",
-          media_type: file.mime_type as
-            | "image/jpeg"
-            | "image/png"
-            | "image/gif"
-            | "image/webp",
-          data: file.content_base64,
-        },
-      });
+      content.push({ type: "image", source: { type: "base64", media_type: file.mime_type as "image/jpeg" | "image/png" | "image/gif" | "image/webp", data: file.content_base64 } });
     } else {
-      content.push({
-        type: "text",
-        text: `Attached file: "${file.filename}" (${file.mime_type}) — use the query_file tool to read its contents.`,
-      });
+      content.push({ type: "text", text: `Attached file: "${file.filename}" (${file.mime_type}) — use the query_file tool to read its contents.` });
     }
   }
-
   content.push({ type: "text", text: prompt });
   return content;
 }
 
-export async function runAgent(
+async function runAnthropicAgent(
   client: TripletexClient,
   prompt: string,
-  files: FileAttachment[]
-): Promise<{ callCount: number; errorCount: number; messages: Anthropic.Messages.MessageParam[] }> {
+  files: FileAttachment[],
+  model: string,
+  fileMap: Map<string, ParsedFile>,
+): Promise<{ callCount: number; errorCount: number; messages: unknown[] }> {
   const anthropic = new Anthropic();
-  const fileMap = parseFiles(files);
   const hasQueryableFiles = fileMap.size > 0;
-  const tools = hasQueryableFiles ? [TRIPLETEX_TOOL, QUERY_FILE_TOOL] : [TRIPLETEX_TOOL];
+  const tools = hasQueryableFiles ? [TRIPLETEX_TOOL_ANTHROPIC, QUERY_FILE_TOOL_ANTHROPIC] : [TRIPLETEX_TOOL_ANTHROPIC];
 
   const messages: Anthropic.Messages.MessageParam[] = [
-    { role: "user", content: buildUserContent(prompt, files) },
+    { role: "user", content: buildAnthropicContent(prompt, files) },
   ];
 
   let iterations = 0;
@@ -338,9 +318,8 @@ export async function runAgent(
 
   while (iterations < maxIterations) {
     iterations++;
-
     const response = await anthropic.messages.create({
-      model: "claude-sonnet-4-20250514",
+      model,
       max_tokens: 4096,
       system: SYSTEM_PROMPT,
       tools,
@@ -348,15 +327,12 @@ export async function runAgent(
     });
 
     if (response.stop_reason === "end_turn") break;
-
     const toolUseBlocks = response.content.filter(
       (b): b is Anthropic.Messages.ToolUseBlock => b.type === "tool_use"
     );
-
     if (toolUseBlocks.length === 0) break;
 
     messages.push({ role: "assistant", content: response.content });
-
     const toolResults: Anthropic.Messages.ToolResultBlockParam[] = [];
 
     for (const toolUse of toolUseBlocks) {
@@ -373,13 +349,7 @@ export async function runAgent(
         } catch (e) {
           isError = true;
           if (e instanceof TripletexApiError) {
-            result = {
-              error: true,
-              status: e.status,
-              message: e.details.message || e.message,
-              developerMessage: e.details.developerMessage,
-              validationMessages: e.details.validationMessages,
-            };
+            result = { error: true, status: e.status, message: e.details.message || e.message, developerMessage: e.details.developerMessage, validationMessages: e.details.validationMessages };
           } else {
             result = { error: true, message: String(e) };
           }
@@ -398,4 +368,125 @@ export async function runAgent(
   }
 
   return { callCount: client.callCount, errorCount: client.errorCount, messages };
+}
+
+// ============================================================
+// Gemini agent loop
+// ============================================================
+
+async function runGeminiAgent(
+  client: TripletexClient,
+  prompt: string,
+  files: FileAttachment[],
+  model: string,
+  fileMap: Map<string, ParsedFile>,
+): Promise<{ callCount: number; errorCount: number; messages: unknown[] }> {
+  const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY!);
+  const hasQueryableFiles = fileMap.size > 0;
+  const tools = hasQueryableFiles
+    ? [{ functionDeclarations: [TRIPLETEX_TOOL_GEMINI, QUERY_FILE_TOOL_GEMINI] }]
+    : [{ functionDeclarations: [TRIPLETEX_TOOL_GEMINI] }];
+
+  const genModel = genAI.getGenerativeModel({
+    model,
+    systemInstruction: SYSTEM_PROMPT,
+    tools,
+  });
+
+  const parts: Array<{ text: string } | { inlineData: { mimeType: string; data: string } }> = [];
+  for (const file of files) {
+    if (file.mime_type.startsWith("image/") || file.mime_type === "application/pdf") {
+      parts.push({ inlineData: { mimeType: file.mime_type, data: file.content_base64 } });
+    } else {
+      parts.push({ text: `Attached file: "${file.filename}" (${file.mime_type}) — use the query_file tool to read its contents.` });
+    }
+  }
+  parts.push({ text: prompt });
+
+  const chat = genModel.startChat();
+  let response = await chat.sendMessage(parts);
+  const messages: unknown[] = [{ role: "user", parts }];
+
+  let iterations = 0;
+  const maxIterations = 30;
+
+  while (iterations < maxIterations) {
+    iterations++;
+    const candidate = response.response.candidates?.[0];
+    if (!candidate) break;
+
+    messages.push({ role: "model", parts: candidate.content.parts });
+
+    const functionCalls = candidate.content.parts.filter((p: { functionCall?: unknown }) => p.functionCall);
+    if (functionCalls.length === 0) break;
+
+    const functionResponses: Part[] = [];
+
+    for (const part of functionCalls) {
+      const fc = (part as { functionCall: { name: string; args: Record<string, string> } }).functionCall;
+      let result: unknown;
+
+      if (fc.name === "query_file") {
+        const input = {
+          filename: fc.args.filename,
+          action: fc.args.action,
+          from: fc.args.from ? parseInt(fc.args.from) : undefined,
+          count: fc.args.count ? parseInt(fc.args.count) : undefined,
+          search: fc.args.search,
+          column: fc.args.column,
+        };
+        result = handleFileQuery(fileMap, input);
+      } else {
+        const call: ToolCall = {
+          method: fc.args.method as ToolCall["method"],
+          path: fc.args.path,
+          params: fc.args.params ? JSON.parse(fc.args.params) : undefined,
+          body: fc.args.body ? JSON.parse(fc.args.body) : undefined,
+        };
+        try {
+          result = await client.execute(call);
+        } catch (e) {
+          if (e instanceof TripletexApiError) {
+            result = { error: true, status: e.status, message: e.details.message || e.message, developerMessage: e.details.developerMessage, validationMessages: e.details.validationMessages };
+          } else {
+            result = { error: true, message: String(e) };
+          }
+        }
+      }
+
+      functionResponses.push({ functionResponse: { name: fc.name, response: result as Record<string, unknown> } });
+    }
+
+    messages.push({ role: "function", parts: functionResponses });
+    response = await chat.sendMessage(functionResponses);
+  }
+
+  return { callCount: client.callCount, errorCount: client.errorCount, messages };
+}
+
+// ============================================================
+// Public entry point
+// ============================================================
+
+const DEFAULT_MODELS: Record<LLMProvider, string> = {
+  anthropic: "claude-sonnet-4-20250514",
+  gemini: "gemini-2.5-flash",
+};
+
+export async function runAgent(
+  client: TripletexClient,
+  prompt: string,
+  files: FileAttachment[],
+  provider: LLMProvider = (process.env.LLM_PROVIDER as LLMProvider) || "anthropic",
+  model?: string,
+): Promise<{ callCount: number; errorCount: number; messages: unknown[] }> {
+  const resolvedModel = model || process.env.LLM_MODEL || DEFAULT_MODELS[provider];
+  const fileMap = parseFiles(files);
+
+  console.log(`Using ${provider} / ${resolvedModel}`);
+
+  if (provider === "gemini") {
+    return runGeminiAgent(client, prompt, files, resolvedModel, fileMap);
+  }
+  return runAnthropicAgent(client, prompt, files, resolvedModel, fileMap);
 }

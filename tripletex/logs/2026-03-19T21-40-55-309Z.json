@@ -1,0 +1,140 @@
+{
+  "timestamp": "2026-03-19T21:40:55.309Z",
+  "request": {
+    "prompt": "Opprett et prosjekt med navn 'Nettside Redesign', prosjektnummer 100. Bruk den første ansatte som prosjektleder.",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "agent": {
+    "callCount": 3,
+    "errorCount": 1,
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "Opprett et prosjekt med navn 'Nettside Redesign', prosjektnummer 100. Bruk den første ansatte som prosjektleder."
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "Jeg skal opprette et prosjekt med navn 'Nettside Redesign' og prosjektnummer 100. Først må jeg finne den første ansatte som skal være prosjektleder."
+          },
+          {
+            "type": "tool_use",
+            "id": "toolu_01Hgt6Twhq1UBb49Unq1xhNH",
+            "name": "tripletex_api",
+            "input": {
+              "method": "GET",
+              "path": "/employee",
+              "params": {
+                "count": 1,
+                "fields": "id,firstName,lastName"
+              }
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "toolu_01Hgt6Twhq1UBb49Unq1xhNH",
+            "content": "{\"fullResultSize\":2,\"from\":0,\"count\":1,\"versionDigest\":\"Checksum not yet supported for this endpoint\",\"values\":[{\"id\":18445891,\"firstName\":\"Johansokrates\",\"lastName\":\"c695ab54\"}]}",
+            "is_error": false
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "Nå oppretter jeg prosjektet med den første ansatte (ID: 18445891) som prosjektleder:"
+          },
+          {
+            "type": "tool_use",
+            "id": "toolu_014L2aud1e5QX29qqFMaTBqw",
+            "name": "tripletex_api",
+            "input": {
+              "method": "POST",
+              "path": "/project",
+              "body": {
+                "name": "Nettside Redesign",
+                "number": "100",
+                "projectManager": {
+                  "id": 18445891
+                }
+              }
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "toolu_014L2aud1e5QX29qqFMaTBqw",
+            "content": "{\"error\":true,\"status\":422,\"message\":\"Validering feilet.\",\"developerMessage\":\"VALIDATION_ERROR\",\"validationMessages\":[{\"field\":\"startDate\",\"message\":\"Feltet må fylles ut.\",\"path\":null,\"rootId\":null}]}",
+            "is_error": true
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "Jeg må inkludere en startdato for prosjektet. Jeg bruker dagens dato:"
+          },
+          {
+            "type": "tool_use",
+            "id": "toolu_01EBCH5eJ5DFsWFQ1QvqaQzb",
+            "name": "tripletex_api",
+            "input": {
+              "method": "POST",
+              "path": "/project",
+              "body": {
+                "name": "Nettside Redesign",
+                "number": "100",
+                "projectManager": {
+                  "id": 18445891
+                },
+                "startDate": "2024-12-19"
+              }
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "toolu_01EBCH5eJ5DFsWFQ1QvqaQzb",
+            "content": "{\"value\":{\"id\":401949565,\"version\":0,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/project/401949565\",\"name\":\"Nettside Redesign\",\"number\":\"100\",\"displayName\":\"100 Nettside Redesign\",\"description\":\"\",\"projectManager\":{\"id\":18445891,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/employee/18445891\"},\"department\":null,\"mainProject\":null,\"startDate\":\"2024-12-19\",\"endDate\":null,\"customer\":null,\"isClosed\":false,\"isReadyForInvoicing\":false,\"isInternal\":false,\"isOffer\":false,\"isFixedPrice\":false,\"projectCategory\":null,\"deliveryAddress\":null,\"boligmappaAddress\":null,\"displayNameFormat\":\"NAME_STANDARD\",\"reference\":\"\",\"externalAccountsNumber\":\"\",\"discountPercentage\":0,\"vatType\":{\"id\":6,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/6\"},\"fixedprice\":0,\"contributionMarginPercent\":0,\"numberOfSubProjects\":0,\"numberOfProjectParticipants\":1,\"orderLines\":[],\"currency\":{\"id\":1,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/currency/1\"},\"markUpOrderLines\":0,\"markUpFeesEarned\":0,\"isPriceCeiling\":false,\"priceCeilingAmount\":0,\"projectHourlyRates\":[{\"id\":11066818,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/project/hourlyRates/11066818\"}],\"forParticipantsOnly\":false,\"participants\":[{\"id\":15621295,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/project/participant/15621295\"}],\"contact\":null,\"attention\":null,\"invoiceComment\":\"\",\"invoicingPlan\":[],\"preliminaryInvoice\":null,\"generalProjectActivitiesPerProjectOnly\":false,\"projectActivities\":[],\"hierarchyNameAndNumber\":\"100 Nettside Redesign\",\"invoiceDueDate\":0,\"invoiceDueDateType\":\"DAYS\",\"invoiceReceiverEmail\":\"\",\"overdueNoticeEmail\":\"\",\"accessType\":\"WRITE\",\"useProductNetPrice\":false,\"ignoreCompanyProductDiscountAgreement\":false,\"customerName\":\"\",\"hierarchyLevel\":0,\"projectManagerNameAndNumber\":\"Johansokrates c695ab54\",\"totalInvoicedOnAccountAmountAbsoluteCurrency\":0,\"invoiceOnAccountVatHigh\":false,\"invoiceReserveTotalAmountCurrency\":0,\"accountingDimensionValues\":[]}}",
+            "is_error": false
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -45,7 +45,7 @@ class State:
     p_port_collapse = 0.025   # port -> ruin
     p_expand_base = 0.003     # empty land -> settlement (spontaneous)
     p_expand_per_n = 0.005    # empty land -> settlement (per adjacent alive)
-    p_port_form = 0.005       # settlement -> port (if adjacent to ocean)
+    p_port_per_ocean = 0.03   # settlement -> port (per adjacent ocean cell)
     p_ruin_rebuild = 0.48     # ruin -> settlement
     p_ruin_to_empty = 0.33    # ruin -> empty/plains
     p_ruin_to_forest = 0.18   # ruin -> forest
@@ -79,16 +79,17 @@ class State:
         rand = np.array([[random.random() for _ in range(self.W)] for _ in range(self.H)])
 
         n_alive = self._count_neighbors((self.state == 1) | (self.state == 2))
-        has_ocean_neighbor = self._count_neighbors(self.ocean_mask) > 0
+        n_ocean = self._count_neighbors(self.ocean_mask)
 
         # Settlement (1) -> Ruin (3): collapse from winter/raids
         is_settlement = (self.state == 1)
         collapse = is_settlement & (rand < self.p_collapse)
         new_state[collapse] = 3
 
-        # Settlement (1) -> Port (2): develop port if adjacent to ocean
-        can_port = is_settlement & has_ocean_neighbor & ~collapse
-        become_port = can_port & (rand < self.p_port_form)
+        # Settlement (1) -> Port (2): scales with number of ocean neighbors
+        can_port = is_settlement & (n_ocean > 0) & ~collapse
+        p_port = np.minimum(self.p_port_per_ocean * n_ocean, 1.0)
+        become_port = can_port & (rand < p_port)
         new_state[become_port] = 2
 
         # Port (2) -> Ruin (3): port collapse
@@ -115,7 +116,7 @@ class State:
         ruin_to_forest = is_ruin & ~ruin_to_settlement & ~ruin_to_empty & (rand2 < self.p_ruin_rebuild + self.p_ruin_to_empty + self.p_ruin_to_forest)
         new_state[ruin_to_forest] = 4
         # Ruin -> Port (~1%, if coastal)
-        ruin_to_port = is_ruin & ~ruin_to_settlement & ~ruin_to_empty & ~ruin_to_forest & has_ocean_neighbor
+        ruin_to_port = is_ruin & ~ruin_to_settlement & ~ruin_to_empty & ~ruin_to_forest & (n_ocean > 0)
         new_state[ruin_to_port] = 2
 
         # Forest (4) -> Settlement (1): cleared for expansion

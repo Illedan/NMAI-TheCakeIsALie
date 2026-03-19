@@ -1,5 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { TripletexClient, TripletexApiError } from "./tripletex-client.js";
+import { handleApiDocsQuery } from "./api-docs.js";
 import type { FileAttachment, ToolCall } from "./types.js";
 
 const SYSTEM_PROMPT = `You are an expert accounting agent for Tripletex, a Norwegian accounting system.
@@ -97,10 +98,20 @@ POST /ledger/voucher — Create voucher
 
 GET /company/{id} — Get company info (need company ID)
 
+=== API DOCUMENTATION TOOL ===
+You have access to a "query_api_docs" tool that searches the full Tripletex Swagger documentation.
+BEFORE making any API call you haven't done before, use this tool to verify:
+- The exact endpoint path and HTTP method
+- Required vs optional parameters and their exact names
+- The request body schema (model field names)
+- Query parameter names and types
+Workflow: 1) get_endpoint to find the endpoint docs, 2) get_schema to check the model fields, 3) then make the API call with correct params.
+This prevents trial-and-error errors which hurt your score.
+
 === EFFICIENCY RULES ===
 - Plan ALL steps before making any API calls.
 - Use IDs from POST responses directly — never GET after POST just to confirm.
-- Avoid trial-and-error. Use the EXACT field names above. Every 4xx error reduces your score.
+- Avoid trial-and-error. Look up the docs first, then make the call correctly. Every 4xx error reduces your score.
 - Use batch /list endpoints when creating multiple entities.
 - Minimize total API calls — fewer calls = higher efficiency bonus.
 - Use today's date unless the task specifies a different date.
@@ -250,6 +261,45 @@ const QUERY_FILE_TOOL: Anthropic.Messages.Tool = {
   },
 };
 
+const API_DOCS_TOOL: Anthropic.Messages.Tool = {
+  name: "query_api_docs",
+  description:
+    "Search the Tripletex API Swagger documentation. Use this BEFORE making API calls to verify exact field names, required parameters, and endpoint paths. Actions: 'list_endpoints' to find endpoints by category/keyword, 'get_endpoint' to get full docs for a specific endpoint, 'get_schema' to get a model's field definitions, 'search' for free-text search.",
+  input_schema: {
+    type: "object" as const,
+    properties: {
+      action: {
+        type: "string",
+        enum: ["list_categories", "list_endpoints", "get_endpoint", "get_schema", "search"],
+        description:
+          "list_categories: see all API groups. list_endpoints: find endpoints (filter by category/method/query). get_endpoint: get full documentation for a specific endpoint path. get_schema: get model/schema field definitions. search: free-text search across all docs.",
+      },
+      query: {
+        type: "string",
+        description: "Search keyword for list_endpoints or search actions",
+      },
+      method: {
+        type: "string",
+        enum: ["GET", "POST", "PUT", "DELETE"],
+        description: "Filter by HTTP method (for list_endpoints or get_endpoint)",
+      },
+      path: {
+        type: "string",
+        description: "Endpoint path to look up (for get_endpoint), e.g. /invoice/{id}/:payment",
+      },
+      schema: {
+        type: "string",
+        description: "Schema/model name to look up (for get_schema), e.g. Invoice, Employee, Order",
+      },
+      category: {
+        type: "string",
+        description: "Filter by category name (for list_endpoints), e.g. invoice, employee, order",
+      },
+    },
+    required: ["action"],
+  },
+};
+
 const TRIPLETEX_TOOL: Anthropic.Messages.Tool = {
   name: "tripletex_api",
   description:
@@ -332,7 +382,9 @@ export async function runAgent(
   const anthropic = new Anthropic();
   const fileMap = parseFiles(files);
   const hasQueryableFiles = fileMap.size > 0;
-  const tools = hasQueryableFiles ? [TRIPLETEX_TOOL, QUERY_FILE_TOOL] : [TRIPLETEX_TOOL];
+  const tools = hasQueryableFiles
+    ? [TRIPLETEX_TOOL, QUERY_FILE_TOOL, API_DOCS_TOOL]
+    : [TRIPLETEX_TOOL, API_DOCS_TOOL];
 
   const messages: Anthropic.Messages.MessageParam[] = [
     { role: "user", content: buildUserContent(prompt, files) },
@@ -370,6 +422,9 @@ export async function runAgent(
 
       if (toolUse.name === "query_file") {
         result = handleFileQuery(fileMap, toolUse.input as Parameters<typeof handleFileQuery>[1]);
+        isError = !!(result as Record<string, unknown>).error;
+      } else if (toolUse.name === "query_api_docs") {
+        result = handleApiDocsQuery(toolUse.input as Parameters<typeof handleApiDocsQuery>[0]);
         isError = !!(result as Record<string, unknown>).error;
       } else {
         const call = toolUse.input as ToolCall;

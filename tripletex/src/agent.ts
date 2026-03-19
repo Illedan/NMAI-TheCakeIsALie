@@ -43,7 +43,10 @@ POST /product — Create product
   CRITICAL price fields (use EXACT names): priceExcludingVatCurrency (number), priceIncludingVatCurrency (number), costExcludingVatCurrency (number)
   DO NOT use "priceExcludingVat" — the correct field is "priceExcludingVatCurrency"
   Optional: number (string, auto-generated if omitted), description, vatType ({"id": number}), isStockItem, isInactive, currency, productUnit, account, department, supplier
-  ALWAYS GET /ledger/vatType first to find VAT type IDs. Do NOT assume any ID — IDs vary per sandbox. Look for typeOfVat="OUTGOING" and pick the one matching the needed percentage (e.g. 25%). Pass params: {typeOfVat: "OUTGOING", from: 0, count: 100}.
+  ALWAYS GET /ledger/vatType first to find VAT type IDs. Do NOT assume any ID — IDs vary per sandbox.
+  Use EXACTLY these params: {typeOfVat: "OUTGOING", from: 0, count: 100}. Do NOT filter by name — just get all outgoing types and pick the right one by percentage.
+  Common VAT rates: 25% (høy sats/standard), 15% (middels/food), 12% (lav/transport), 0% (fritatt/exempt).
+  For books: look for reduced rate (typically 0% in Norway for books).
   Batch: POST /product/list
 
 POST /order — Create order
@@ -81,9 +84,10 @@ POST /department — Create department
   Batch: POST /department/list
 
 POST /project — Create project
-  Required: name (string), projectManager ({"id": number})
-  Optional: number (string, auto-generated if null), customer, description, startDate, endDate, isInternal, isClosed, isFixedPrice, fixedprice, department, currency, vatType
+  Required: name (string), projectManager ({"id": number}), startDate (string "YYYY-MM-DD" — use today's date if not specified)
+  Optional: number (string, auto-generated if null), customer, description, endDate, isInternal, isClosed, isFixedPrice, fixedprice, department, currency, vatType
   To find projectManager: GET /employee and use the first employee's ID.
+  IMPORTANT: startDate is REQUIRED. Always include it.
   Batch: POST /project/list
 
 POST /travelExpense — Create travel expense

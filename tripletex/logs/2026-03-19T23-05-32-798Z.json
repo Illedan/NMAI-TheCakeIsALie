@@ -1,0 +1,1930 @@
+{
+  "timestamp": "2026-03-19T23:05:32.798Z",
+  "request": {
+    "prompt": "Opprett et produkt med navn 'Produkt492232', produktnummer 492232, og pris 1500 kr eks. mva.",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "agent": {
+    "callCount": 4,
+    "errorCount": 1,
+    "messages": [
+      {
+        "role": "user",
+        "parts": [
+          {
+            "text": "Opprett et produkt med navn 'Produkt492232', produktnummer 492232, og pris 1500 kr eks. mva."
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "method": "GET",
+                "params": "{\"typeOfVat\": \"OUTGOING\", \"count\": 100}",
+                "path": "/ledger/vatType"
+              }
+            },
+            "thoughtSignature": "CowHAb4+9vv3aYvOt0J1+UuaSRc7ZCz24NbVFdPo5omsLquwNscuZTb9dtR+p46fzc7wFqf2PcKmuEA0B25lzRPAr/uX+ypYG+lCu1I6eVSIW3NW9U4v1u3DT9eaotjC2N5rGLQW79iDhO3MsUwBpmPjwlJwo2lNXpde/ZSrJC/gNuFSXy+3qBRDb1rw9N9XEtoRcrWhmHCvPxdGJgXYXqvtdHB2s6PrVL4HLacdT4hESIBzjWSRJY5WiHYVhJpgSOkE8JaPfRX/QuzBmSQAWbG3YQCVPKTybXhQn0TTGpMMcQ4P8/KtwKjpUieKdgzPs+tT7pMYqQ6rWL6u5YEp6HVwgv4xtBWOe9hq4iHdCozSweD6QEVkxoFJhnOxOGOW7ZP2a58LBrXO78bN0ktoc2KTQeiZJ/BJoAbjTW1peAAvARYBkOlFuED7H/10q+d6isOuctJ2nIzGUZ6Z5pi74HDQHBAGjdynTzaOqltp7V2ho5B11CTj9mZ4qxEdcYGiDcB0jJYdcFSQU2OTiwy+NkBa1dGzw+YMiRfJAQsLrrkFvRNWzH5862rTOXHKjxa60ZfuMYwSHXJ5+1haY7TYyEAPJJV9prbr/3Ihvw4TucBA/nMVJMY+XYn1KsmIVWZUvzYKYl6X7WXR7ZXiQymcCYj202EBGp2i/GlKrU5UvLPLrfBp/XyPxZW4mFpzO8KkF0i+YXgoL8nr6NZdKcLqm9f6F7SZCMyL3XCoT9nkI9TWyqm88wOg06c591LTsIPm+pbTuIhz+7HUosnl4bUX5FbHiOXPvmdZkVE66LlTkK3K319NiPvYw6ST9pbCighOdmlQaBzF3+G8eSUJmOZcyAlG7mM6pLOkFNu/lQP0zGnqSzj0NqvsTXa+kvgdHZQ8YF9KYp6C2V7+NO7hQjrxfPPF/T6BNPoUmq6Lavjfpja9OUVVoztWlv6IWKjBMGAIS/4bgV80nSeSdBfqUhMR8xRIZuCdBONcI7nxLjjPlzXIeJ7ifUVJ7JLnoncK1xfslDD0iHO6UGPzxpT020POVqBJkon6QY6w/Ng/B/5XqOv0lWWuopV28g4IxREenbQ93tEXIJ+LRUB80x3mkk6Ri1TOmvHWaR9e/m/nQzKYS+BORCcSwVeJYnue62Ox50f3NGygmGp24MYDG3/9695tcVWZ+8XfiIUIkOqjL8Z0N/Ouz2/mbUDUWV+jmBkpFDI="
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "fullResultSize": 0,
+                "from": 0,
+                "count": 1,
+                "versionDigest": null,
+                "values": [
+                  {
+                    "id": 6,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/6",
+                    "name": "Ingen utgående avgift (utenfor mva-loven)",
+                    "number": "6",
+                    "displayName": "6: (0%) Ingen utgående avgift (utenfor mva-loven)",
+                    "percentage": 0,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "path": "/ledger/vatType",
+                "params": "{\"count\": 100}",
+                "method": "GET"
+              }
+            },
+            "thoughtSignature": "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"
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "fullResultSize": 56,
+                "from": 0,
+                "count": 56,
+                "versionDigest": "'If-None-Match' header not specified",
+                "values": [
+                  {
+                    "id": 1,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/1",
+                    "name": "Fradrag inngående avgift, høy sats",
+                    "number": "1",
+                    "displayName": "1: (25%) Fradrag inngående avgift, høy sats",
+                    "percentage": 25,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 2,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/2",
+                    "name": "Direktepostert fradrag inngående avgift, høy sats (mva-kode utgikk 01.01.2017)",
+                    "number": "UT-2",
+                    "displayName": "UT-2: (100%) Direktepostert fradrag inngående avgift, høy sats (mva-kode utgikk 01.01.2017)",
+                    "percentage": 100,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 3,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/3",
+                    "name": "Utgående avgift, høy sats",
+                    "number": "3",
+                    "displayName": "3: (25%) Utgående avgift, høy sats",
+                    "percentage": 25,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 4,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/4",
+                    "name": "Direktepostert utgående avgift, høy sats",
+                    "number": "4",
+                    "displayName": "4: (100%) Direktepostert utgående avgift, høy sats",
+                    "percentage": 100,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 5,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/5",
+                    "name": "Ingen utgående avgift (innenfor mva-loven)",
+                    "number": "5",
+                    "displayName": "5: (0%) Ingen utgående avgift (innenfor mva-loven)",
+                    "percentage": 0,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 6,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/6",
+                    "name": "Ingen utgående avgift (utenfor mva-loven)",
+                    "number": "6",
+                    "displayName": "6: (0%) Ingen utgående avgift (utenfor mva-loven)",
+                    "percentage": 0,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 7,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/7",
+                    "name": "Ingen avgiftsbehandling (inntekter)",
+                    "number": "7",
+                    "displayName": "7: (0%) Ingen avgiftsbehandling (inntekter)",
+                    "percentage": 0,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 11,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/11",
+                    "name": "Fradrag inngående avgift, middels sats",
+                    "number": "11",
+                    "displayName": "11: (15%) Fradrag inngående avgift, middels sats",
+                    "percentage": 15,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 12,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/12",
+                    "name": "Fradrag inngående avgift, lav sats",
+                    "number": "13",
+                    "displayName": "13: (12%) Fradrag inngående avgift, lav sats",
+                    "percentage": 12,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 13,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/13",
+                    "name": "Grunnlag inngående avgift ved innførsel, høy sats",
+                    "number": "21",
+                    "displayName": "21: (0%) Grunnlag inngående avgift ved innførsel, høy sats",
+                    "percentage": 0,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 14,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/14",
+                    "name": "Grunnlag inngående avgift ved innførsel, middels sats",
+                    "number": "22",
+                    "displayName": "22: (0%) Grunnlag inngående avgift ved innførsel, middels sats",
+                    "percentage": 0,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 21,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/21",
+                    "name": "Direktepostert fradrag inngående avgift, middels sats (mva-kode utgikk 01.01.2017)",
+                    "number": "UT-21",
+                    "displayName": "UT-21: (100%) Direktepostert fradrag inngående avgift, middels sats (mva-kode utgikk 01.01.2017)",
+                    "percentage": 100,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 22,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/22",
+                    "name": "Direktepostert fradrag inngående avgift, lav sats (mva-kode utgikk 01.01.2017)",
+                    "number": "UT-22",
+                    "displayName": "UT-22: (100%) Direktepostert fradrag inngående avgift, lav sats (mva-kode utgikk 01.01.2017)",
+                    "percentage": 100,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 23,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/23",
+                    "name": "Fradrag inngående avgift betalt ved innførsel, høy sats",
+                    "number": "14",
+                    "displayName": "14: (100%) Fradrag inngående avgift betalt ved innførsel, høy sats",
+                    "percentage": 100,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 24,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/24",
+                    "name": "Fradrag inngående avgift betalt ved innførsel, middels sats",
+                    "number": "15",
+                    "displayName": "15: (100%) Fradrag inngående avgift betalt ved innførsel, middels sats",
+                    "percentage": 100,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 31,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/31",
+                    "name": "Utgående avgift, middels sats",
+                    "number": "31",
+                    "displayName": "31: (15%) Utgående avgift, middels sats",
+                    "percentage": 15,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 32,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/32",
+                    "name": "Utgående avgift, lav sats",
+                    "number": "33",
+                    "displayName": "33: (12%) Utgående avgift, lav sats",
+                    "percentage": 12,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 34,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/34",
+                    "name": "Fradrag inngående avgift ved kjøp av tjenester fra utlandet, høy sats",
+                    "number": "86",
+                    "displayName": "86: (25%) Fradrag inngående avgift ved kjøp av tjenester fra utlandet, høy sats",
+                    "percentage": -25,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 35,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/35",
+                    "name": "Kjøp av tjenester fra utlandet uten fradrag, høy sats",
+                    "number": "87",
+                    "displayName": "87: (25%) Kjøp av tjenester fra utlandet uten fradrag, høy sats",
+                    "percentage": -25,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 41,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/41",
+                    "name": "Direktepostert utgående avgift, middels sats",
+                    "number": "41",
+                    "displayName": "41: (100%) Direktepostert utgående avgift, middels sats",
+                    "percentage": 100,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 42,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/42",
+                    "name": "Direktepostert utgående avgift, lav sats",
+                    "number": "42",
+                    "displayName": "42: (100%) Direktepostert utgående avgift, lav sats",
+                    "percentage": 100,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 51,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/51",
+                    "name": "Avgiftsfri innlands omsetning med omvendt avgiftsplikt",
+                    "number": "51",
+                    "displayName": "51: (0%) Avgiftsfri innlands omsetning med omvendt avgiftsplikt",
+                    "percentage": 0,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 52,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/52",
+                    "name": "Avgiftsfri utførsel av varer og tjenester",
+                    "number": "52",
+                    "displayName": "52: (0%) Avgiftsfri utførsel av varer og tjenester",
+                    "percentage": 0,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 81,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/81",
+                    "name": "Fradrag inngående avgift ved innførsel, høy sats",
+                    "number": "81",
+                    "displayName": "81: (25%) Fradrag inngående avgift ved innførsel, høy sats",
+                    "percentage": -25,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 82,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/82",
+                    "name": "Inngående avgift uten fradrag ved innførsel, høy sats",
+                    "number": "82",
+                    "displayName": "82: (25%) Inngående avgift uten fradrag ved innførsel, høy sats",
+                    "percentage": -25,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 83,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/83",
+                    "name": "Fradrag inngående avgift ved innførsel, middels sats",
+                    "number": "83",
+                    "displayName": "83: (15%) Fradrag inngående avgift ved innførsel, middels sats",
+                    "percentage": -15,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 84,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/84",
+                    "name": "Inngående avgift uten fradrag ved innførsel, middels sats",
+                    "number": "84",
+                    "displayName": "84: (15%) Inngående avgift uten fradrag ved innførsel, middels sats",
+                    "percentage": -15,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 85,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/85",
+                    "name": "Grunnlag, avgiftsfri innførsel",
+                    "number": "85",
+                    "displayName": "85: (0%) Grunnlag, avgiftsfri innførsel",
+                    "percentage": 0,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 88,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/88",
+                    "name": "Fradrag inngående avgift ved kjøp av tjenester fra utlandet, lav sats",
+                    "number": "88",
+                    "displayName": "88: (12%) Fradrag inngående avgift ved kjøp av tjenester fra utlandet, lav sats",
+                    "percentage": -12,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 89,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/89",
+                    "name": "Kjøp av tjenester fra utlandet uten fradrag, lav sats",
+                    "number": "89",
+                    "displayName": "89: (12%) Kjøp av tjenester fra utlandet uten fradrag, lav sats",
+                    "percentage": -12,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 91,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/91",
+                    "name": "Fradrag inngående avgift ved kjøp av klimakvoter/gull",
+                    "number": "91",
+                    "displayName": "91: (25%) Fradrag inngående avgift ved kjøp av klimakvoter/gull",
+                    "percentage": -25,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 92,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/92",
+                    "name": "Kjøp av klimakvoter/gull uten avgiftskompensasjon",
+                    "number": "92",
+                    "displayName": "92: (25%) Kjøp av klimakvoter/gull uten avgiftskompensasjon",
+                    "percentage": -25,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 111,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/111",
+                    "name": "Fradrag inngående avgift, råfisk",
+                    "number": "12",
+                    "displayName": "12: (11,11%) Fradrag inngående avgift, råfisk",
+                    "percentage": 11.11,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 230,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/230",
+                    "name": "Grunnlag, ingen inngående avgift ved innførsel",
+                    "number": "20",
+                    "displayName": "20: (0%) Grunnlag, ingen inngående avgift ved innførsel",
+                    "percentage": 0,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 311,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/311",
+                    "name": "Utgående avgift, råfisk",
+                    "number": "32",
+                    "displayName": "32: (11,11%) Utgående avgift, råfisk",
+                    "percentage": 11.11,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 500,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/500",
+                    "name": "Uredusert lav sats for bruk i perioden med midlertidig lav sats i 2020",
+                    "number": "URED-13",
+                    "displayName": "URED-13: (12%) Uredusert lav sats for bruk i perioden med midlertidig lav sats i 2020",
+                    "percentage": 12,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 501,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/501",
+                    "name": "Redusert lav sats (6 %) for bruk etter 01.10.2021",
+                    "number": "RED-13",
+                    "displayName": "RED-13: (6%) Redusert lav sats (6 %) for bruk etter 01.10.2021",
+                    "percentage": 6,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 550,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/550",
+                    "name": "Tap på krav - kode 1",
+                    "number": "TAP-1",
+                    "displayName": "TAP-1: (25%) Tap på krav - kode 1",
+                    "percentage": 25,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 1,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/1"
+                    }
+                  },
+                  {
+                    "id": 551,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/551",
+                    "name": "Tap på krav - kode 11",
+                    "number": "TAP-11",
+                    "displayName": "TAP-11: (15%) Tap på krav - kode 11",
+                    "percentage": 15,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 11,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/11"
+                    }
+                  },
+                  {
+                    "id": 552,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/552",
+                    "name": "Tap på krav - kode 12",
+                    "number": "TAP-12",
+                    "displayName": "TAP-12: (11,11%) Tap på krav - kode 12",
+                    "percentage": 11.11,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 111,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/111"
+                    }
+                  },
+                  {
+                    "id": 553,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/553",
+                    "name": "Tap på krav - kode 13",
+                    "number": "TAP-13",
+                    "displayName": "TAP-13: (12%) Tap på krav - kode 13",
+                    "percentage": 12,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 12,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/12"
+                    }
+                  },
+                  {
+                    "id": 554,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/554",
+                    "name": "Uttak - kode 3",
+                    "number": "UTTAK-3",
+                    "displayName": "UTTAK-3: (25%) Uttak - kode 3",
+                    "percentage": 25,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 3,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/3"
+                    }
+                  },
+                  {
+                    "id": 555,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/555",
+                    "name": "Uttak - kode 5",
+                    "number": "UTTAK-5",
+                    "displayName": "UTTAK-5: (0%) Uttak - kode 5",
+                    "percentage": 0,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 5,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/5"
+                    }
+                  },
+                  {
+                    "id": 556,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/556",
+                    "name": "Uttak - kode 31",
+                    "number": "UTTAK-31",
+                    "displayName": "UTTAK-31: (15%) Uttak - kode 31",
+                    "percentage": 15,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 31,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/31"
+                    }
+                  },
+                  {
+                    "id": 557,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/557",
+                    "name": "Uttak - kode 32",
+                    "number": "UTTAK-32",
+                    "displayName": "UTTAK-32: (11,11%) Uttak - kode 32",
+                    "percentage": 11.11,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 311,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/311"
+                    }
+                  },
+                  {
+                    "id": 558,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/558",
+                    "name": "Uttak - kode 33",
+                    "number": "UTTAK-33",
+                    "displayName": "UTTAK-33: (12%) Uttak - kode 33",
+                    "percentage": 12,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 32,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/32"
+                    }
+                  },
+                  {
+                    "id": 559,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/559",
+                    "name": "Mva-justering for kapitalvarer - kode 1",
+                    "number": "JUST-1",
+                    "displayName": "JUST-1: (25%) Mva-justering for kapitalvarer - kode 1",
+                    "percentage": 25,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 1,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/1"
+                    }
+                  },
+                  {
+                    "id": 560,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/560",
+                    "name": "Tilbakeføring av mva for kapitalvarer - kode 1",
+                    "number": "TILB-1",
+                    "displayName": "TILB-1: (25%) Tilbakeføring av mva for kapitalvarer - kode 1",
+                    "percentage": 25,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 1,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/1"
+                    }
+                  },
+                  {
+                    "id": 561,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/561",
+                    "name": "Tilbakeføring av mva for kapitalvarer - kode 81",
+                    "number": "TILB-81",
+                    "displayName": "TILB-81: (25%) Tilbakeføring av mva for kapitalvarer - kode 81",
+                    "percentage": -25,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 81,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/81"
+                    }
+                  },
+                  {
+                    "id": 562,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/562",
+                    "name": "Mva-justering for kapitalvarer - kode 81",
+                    "number": "JUST-81",
+                    "displayName": "JUST-81: (25%) Mva-justering for kapitalvarer - kode 81",
+                    "percentage": -25,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 81,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/81"
+                    }
+                  },
+                  {
+                    "id": 600,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/600",
+                    "name": "Fradrag inngående avgift ved innførsel, høy sats med kompensasjon",
+                    "number": "81-K",
+                    "displayName": "81-K: (25%) Fradrag inngående avgift ved innførsel, høy sats med kompensasjon",
+                    "percentage": -25,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 601,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/601",
+                    "name": "Fradrag inngående avgift ved innførsel, middels sats med kompensasjon",
+                    "number": "83-K",
+                    "displayName": "83-K: (15%) Fradrag inngående avgift ved innførsel, middels sats med kompensasjon",
+                    "percentage": -15,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 602,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/602",
+                    "name": "Fradrag inngående avgift ved kjøp av tjenester fra utlandet, høy sats med kompensasjon",
+                    "number": "86-K",
+                    "displayName": "86-K: (25%) Fradrag inngående avgift ved kjøp av tjenester fra utlandet, høy sats med kompensasjon",
+                    "percentage": -25,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 603,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/603",
+                    "name": "Fradrag inngående avgift ved kjøp av tjenester fra utlandet, lav sats med kompensasjon",
+                    "number": "88-K",
+                    "displayName": "88-K: (12%) Fradrag inngående avgift ved kjøp av tjenester fra utlandet, lav sats med kompensasjon",
+                    "percentage": -12,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 604,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/604",
+                    "name": "Fradrag inngående avgift ved kjøp av klimakvoter/gull med kompensasjon",
+                    "number": "91-K",
+                    "displayName": "91-K: (25%) Fradrag inngående avgift ved kjøp av klimakvoter/gull med kompensasjon",
+                    "percentage": -25,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  },
+                  {
+                    "id": 0,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0",
+                    "name": "Ingen avgiftsbehandling",
+                    "number": "0",
+                    "displayName": "0: (0%) Ingen avgiftsbehandling",
+                    "percentage": 0,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "path": "/product",
+                "body": "{\"name\": \"Produkt492232\", \"number\": \"492232\", \"priceExcludingVatCurrency\": 1500, \"priceIncludingVatCurrency\": 1875, \"vatType\": {\"id\": 3}}",
+                "method": "POST"
+              }
+            },
+            "thoughtSignature": "CsQEAb4+9vtszz3urGH7iZ/yIzmT1PUQ/uEz1DkbWd+Tj4re845rGejXQljyPwgK1OFC4Nd9rtNjNqXJBWWx4loA0tQnn/+0sFHP8QteTrlqgg3woavTuXFe206iSqxkO7XjNlrzLGXiV5ghfe+tFcXigB7sh8CkJEntguo8+WTbzQkzK8jAzNlMeeb3NW7opqTYpAfNmV1+eNEtif1UwswKyS4K9KhiQGYF/tVpiSDirqrGRUOiNi1esb4KLDsJM3MK9Ui6pI3kQs2SvYo4PvOp+tVxEgNUVq/fV4TJD5DRi4HUKAEutkwFP7hyo09JjMrGvBHJTUQLx/SJLp+PnpC8PEnNoNGKrFV7lyraTxf8GOabA036kwyTeLDXSPcJnd6DcTQ9vsWobG4qjHO9oF04reJeVakg1eJVMv8QhyDk32Bh2YuW5udTnhToBX0ab34YH/Iu1zPuVnzMceEOv6eSV1pjtgZUP5FmiZOQ1H0NqITgMZPMvpWp9Y7v03dJ3d89tk9L4Fu/X2mMSGGpGfsn/aDTRgIW3gdwDqqUCc9p2/7VcVWaYv5XF729cE3EGghq3iUi7YjXBUKpRLUW1KoU1WjaaQJRvUTuWQAnPCSdn4XDtAc0DYb5vnhldkf93rlzl0aayS0wIL4olxIofCMF69n3Wsx0glgH7eh3q2HDznYRFtoAcH1ky3sxq3FG1jNYIAM5BbGqFnKpXl8j+8Y4gNv61kw/fQNoxtDt6TG3VXZyuoONzxVe69guUGhstXzgPykPSg=="
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "error": true,
+                "status": 422,
+                "message": "Validering feilet.",
+                "developerMessage": "VALIDATION_ERROR",
+                "validationMessages": [
+                  {
+                    "field": "Internt felt (vatTypeId)",
+                    "message": "Ugyldig mva-kode.",
+                    "path": null,
+                    "rootId": null
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "method": "POST",
+                "path": "/product",
+                "body": "{\"name\": \"Produkt492232\", \"number\": \"492232\", \"priceExcludingVatCurrency\": 1500, \"priceIncludingVatCurrency\": 1500, \"vatType\": {\"id\": 6}}"
+              }
+            },
+            "thoughtSignature": "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"
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "value": {
+                  "id": 84381899,
+                  "version": 0,
+                  "url": "kkpqfuj-amager.tripletex.dev/v2/product/84381899",
+                  "name": "Produkt492232",
+                  "number": "492232",
+                  "displayNumber": "492232",
+                  "description": "",
+                  "orderLineDescription": "",
+                  "costExcludingVatCurrency": 0,
+                  "costPrice": 0,
+                  "priceExcludingVatCurrency": 1500,
+                  "priceIncludingVatCurrency": 1500,
+                  "isInactive": false,
+                  "productUnit": null,
+                  "incomingStock": 0,
+                  "outgoingStock": 0,
+                  "vatType": {
+                    "id": 6,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/6"
+                  },
+                  "currency": {
+                    "id": 1,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/currency/1"
+                  },
+                  "department": null,
+                  "account": null,
+                  "supplier": null,
+                  "resaleProduct": null,
+                  "isDeletable": false,
+                  "hasSupplierProductConnected": false,
+                  "image": null,
+                  "displayName": "492232 Produkt492232",
+                  "mainSupplierProduct": null,
+                  "isRoundPriceIncVat": false,
+                  "priceInTargetCurrency": 0,
+                  "purchasePriceCurrency": 0
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "text": "DONE",
+            "thoughtSignature": "CqEEAb4+9vvPC8aScxqTPunDDwYxoeCiTTgCAKc74OfQdAzKLKhS9Sl3jL7aNaCYbGauEzygkEYgkO0yLA1tr8JMAa5V7v+UmHb0WmoJyD90+Qdr6tKx7FWBIZErXmy1I9vXhxSIDyis6enE4NeOkMw30ZrKSWPhTiYYZTND6AdPMjCVg9ryiYw57ASK4YWqnZfaGqPf0XBN15OG5+zgf0CEHeqK0A9j2h7kO2eKjG0LuNorArKqvLsQcG10fKBWNEzYOHhW2u4wAXfkgp5FQ07p8A1V1aV8HVngSbRMmlQjp8NkXlJY4Uhr8Ae+pqfMKbrl3hxBRAZnMVRXNtHdPQCiQNznBI8q7UPP8N4U75Ki412FJWBEhmiAtsAZdKr7Q0JSZS7pPyM++ZmcnFvMJndzHR2/9Ub4iMOT/MoHIxCn86HNZtwabOwNnRjQR7O5rwkBI4jDoAp7eiVNkHf8UdS7GPIfW0cZG+MW6TTp8CjcPxkEbqXot/lGm4pw9BDxH33RpOn+xaLzCPw1IntSyLs8iDpwCUtzyrWKuWk1hD/AqrLytuLP0Y7nr5/Uq931rbz866D+qJ9UghoCoHkPLupsChy5iGy37G5WdblMs3tIBCJQ3Tu/WBiIBPJrgcz6ncXoUF6vV44zvrXrTdWNkRnn91D78v5BA0IIh60f15QVitFl//pNkZxKRjMQQN3GElIdzZNDhl4kVJv1KNbcqeZIRQA="
+          }
+        ]
+      }
+    ]
+  },
+  "apiCalls": [
+    {
+      "timestamp": "2026-03-19T23:05:34.821Z",
+      "method": "GET",
+      "path": "/ledger/vatType",
+      "params": {
+        "typeOfVat": "OUTGOING",
+        "count": 100
+      },
+      "status": 200,
+      "durationMs": 95,
+      "response": {
+        "fullResultSize": 0,
+        "from": 0,
+        "count": 1,
+        "versionDigest": null,
+        "values": [
+          {
+            "id": 6,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/6",
+            "name": "Ingen utgående avgift (utenfor mva-loven)",
+            "number": "6",
+            "displayName": "6: (0%) Ingen utgående avgift (utenfor mva-loven)",
+            "percentage": 0,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-03-19T23:05:37.824Z",
+      "method": "GET",
+      "path": "/ledger/vatType",
+      "params": {
+        "count": 100
+      },
+      "status": 200,
+      "durationMs": 78,
+      "response": {
+        "fullResultSize": 56,
+        "from": 0,
+        "count": 56,
+        "versionDigest": "'If-None-Match' header not specified",
+        "values": [
+          {
+            "id": 1,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/1",
+            "name": "Fradrag inngående avgift, høy sats",
+            "number": "1",
+            "displayName": "1: (25%) Fradrag inngående avgift, høy sats",
+            "percentage": 25,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 2,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/2",
+            "name": "Direktepostert fradrag inngående avgift, høy sats (mva-kode utgikk 01.01.2017)",
+            "number": "UT-2",
+            "displayName": "UT-2: (100%) Direktepostert fradrag inngående avgift, høy sats (mva-kode utgikk 01.01.2017)",
+            "percentage": 100,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 3,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/3",
+            "name": "Utgående avgift, høy sats",
+            "number": "3",
+            "displayName": "3: (25%) Utgående avgift, høy sats",
+            "percentage": 25,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 4,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/4",
+            "name": "Direktepostert utgående avgift, høy sats",
+            "number": "4",
+            "displayName": "4: (100%) Direktepostert utgående avgift, høy sats",
+            "percentage": 100,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 5,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/5",
+            "name": "Ingen utgående avgift (innenfor mva-loven)",
+            "number": "5",
+            "displayName": "5: (0%) Ingen utgående avgift (innenfor mva-loven)",
+            "percentage": 0,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 6,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/6",
+            "name": "Ingen utgående avgift (utenfor mva-loven)",
+            "number": "6",
+            "displayName": "6: (0%) Ingen utgående avgift (utenfor mva-loven)",
+            "percentage": 0,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 7,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/7",
+            "name": "Ingen avgiftsbehandling (inntekter)",
+            "number": "7",
+            "displayName": "7: (0%) Ingen avgiftsbehandling (inntekter)",
+            "percentage": 0,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 11,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/11",
+            "name": "Fradrag inngående avgift, middels sats",
+            "number": "11",
+            "displayName": "11: (15%) Fradrag inngående avgift, middels sats",
+            "percentage": 15,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 12,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/12",
+            "name": "Fradrag inngående avgift, lav sats",
+            "number": "13",
+            "displayName": "13: (12%) Fradrag inngående avgift, lav sats",
+            "percentage": 12,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 13,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/13",
+            "name": "Grunnlag inngående avgift ved innførsel, høy sats",
+            "number": "21",
+            "displayName": "21: (0%) Grunnlag inngående avgift ved innførsel, høy sats",
+            "percentage": 0,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 14,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/14",
+            "name": "Grunnlag inngående avgift ved innførsel, middels sats",
+            "number": "22",
+            "displayName": "22: (0%) Grunnlag inngående avgift ved innførsel, middels sats",
+            "percentage": 0,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 21,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/21",
+            "name": "Direktepostert fradrag inngående avgift, middels sats (mva-kode utgikk 01.01.2017)",
+            "number": "UT-21",
+            "displayName": "UT-21: (100%) Direktepostert fradrag inngående avgift, middels sats (mva-kode utgikk 01.01.2017)",
+            "percentage": 100,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 22,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/22",
+            "name": "Direktepostert fradrag inngående avgift, lav sats (mva-kode utgikk 01.01.2017)",
+            "number": "UT-22",
+            "displayName": "UT-22: (100%) Direktepostert fradrag inngående avgift, lav sats (mva-kode utgikk 01.01.2017)",
+            "percentage": 100,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 23,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/23",
+            "name": "Fradrag inngående avgift betalt ved innførsel, høy sats",
+            "number": "14",
+            "displayName": "14: (100%) Fradrag inngående avgift betalt ved innførsel, høy sats",
+            "percentage": 100,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 24,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/24",
+            "name": "Fradrag inngående avgift betalt ved innførsel, middels sats",
+            "number": "15",
+            "displayName": "15: (100%) Fradrag inngående avgift betalt ved innførsel, middels sats",
+            "percentage": 100,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 31,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/31",
+            "name": "Utgående avgift, middels sats",
+            "number": "31",
+            "displayName": "31: (15%) Utgående avgift, middels sats",
+            "percentage": 15,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 32,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/32",
+            "name": "Utgående avgift, lav sats",
+            "number": "33",
+            "displayName": "33: (12%) Utgående avgift, lav sats",
+            "percentage": 12,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 34,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/34",
+            "name": "Fradrag inngående avgift ved kjøp av tjenester fra utlandet, høy sats",
+            "number": "86",
+            "displayName": "86: (25%) Fradrag inngående avgift ved kjøp av tjenester fra utlandet, høy sats",
+            "percentage": -25,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 35,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/35",
+            "name": "Kjøp av tjenester fra utlandet uten fradrag, høy sats",
+            "number": "87",
+            "displayName": "87: (25%) Kjøp av tjenester fra utlandet uten fradrag, høy sats",
+            "percentage": -25,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 41,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/41",
+            "name": "Direktepostert utgående avgift, middels sats",
+            "number": "41",
+            "displayName": "41: (100%) Direktepostert utgående avgift, middels sats",
+            "percentage": 100,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 42,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/42",
+            "name": "Direktepostert utgående avgift, lav sats",
+            "number": "42",
+            "displayName": "42: (100%) Direktepostert utgående avgift, lav sats",
+            "percentage": 100,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 51,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/51",
+            "name": "Avgiftsfri innlands omsetning med omvendt avgiftsplikt",
+            "number": "51",
+            "displayName": "51: (0%) Avgiftsfri innlands omsetning med omvendt avgiftsplikt",
+            "percentage": 0,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 52,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/52",
+            "name": "Avgiftsfri utførsel av varer og tjenester",
+            "number": "52",
+            "displayName": "52: (0%) Avgiftsfri utførsel av varer og tjenester",
+            "percentage": 0,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 81,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/81",
+            "name": "Fradrag inngående avgift ved innførsel, høy sats",
+            "number": "81",
+            "displayName": "81: (25%) Fradrag inngående avgift ved innførsel, høy sats",
+            "percentage": -25,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 82,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/82",
+            "name": "Inngående avgift uten fradrag ved innførsel, høy sats",
+            "number": "82",
+            "displayName": "82: (25%) Inngående avgift uten fradrag ved innførsel, høy sats",
+            "percentage": -25,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 83,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/83",
+            "name": "Fradrag inngående avgift ved innførsel, middels sats",
+            "number": "83",
+            "displayName": "83: (15%) Fradrag inngående avgift ved innførsel, middels sats",
+            "percentage": -15,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 84,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/84",
+            "name": "Inngående avgift uten fradrag ved innførsel, middels sats",
+            "number": "84",
+            "displayName": "84: (15%) Inngående avgift uten fradrag ved innførsel, middels sats",
+            "percentage": -15,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 85,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/85",
+            "name": "Grunnlag, avgiftsfri innførsel",
+            "number": "85",
+            "displayName": "85: (0%) Grunnlag, avgiftsfri innførsel",
+            "percentage": 0,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 88,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/88",
+            "name": "Fradrag inngående avgift ved kjøp av tjenester fra utlandet, lav sats",
+            "number": "88",
+            "displayName": "88: (12%) Fradrag inngående avgift ved kjøp av tjenester fra utlandet, lav sats",
+            "percentage": -12,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 89,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/89",
+            "name": "Kjøp av tjenester fra utlandet uten fradrag, lav sats",
+            "number": "89",
+            "displayName": "89: (12%) Kjøp av tjenester fra utlandet uten fradrag, lav sats",
+            "percentage": -12,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 91,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/91",
+            "name": "Fradrag inngående avgift ved kjøp av klimakvoter/gull",
+            "number": "91",
+            "displayName": "91: (25%) Fradrag inngående avgift ved kjøp av klimakvoter/gull",
+            "percentage": -25,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 92,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/92",
+            "name": "Kjøp av klimakvoter/gull uten avgiftskompensasjon",
+            "number": "92",
+            "displayName": "92: (25%) Kjøp av klimakvoter/gull uten avgiftskompensasjon",
+            "percentage": -25,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 111,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/111",
+            "name": "Fradrag inngående avgift, råfisk",
+            "number": "12",
+            "displayName": "12: (11,11%) Fradrag inngående avgift, råfisk",
+            "percentage": 11.11,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 230,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/230",
+            "name": "Grunnlag, ingen inngående avgift ved innførsel",
+            "number": "20",
+            "displayName": "20: (0%) Grunnlag, ingen inngående avgift ved innførsel",
+            "percentage": 0,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 311,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/311",
+            "name": "Utgående avgift, råfisk",
+            "number": "32",
+            "displayName": "32: (11,11%) Utgående avgift, råfisk",
+            "percentage": 11.11,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 500,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/500",
+            "name": "Uredusert lav sats for bruk i perioden med midlertidig lav sats i 2020",
+            "number": "URED-13",
+            "displayName": "URED-13: (12%) Uredusert lav sats for bruk i perioden med midlertidig lav sats i 2020",
+            "percentage": 12,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 501,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/501",
+            "name": "Redusert lav sats (6 %) for bruk etter 01.10.2021",
+            "number": "RED-13",
+            "displayName": "RED-13: (6%) Redusert lav sats (6 %) for bruk etter 01.10.2021",
+            "percentage": 6,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 550,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/550",
+            "name": "Tap på krav - kode 1",
+            "number": "TAP-1",
+            "displayName": "TAP-1: (25%) Tap på krav - kode 1",
+            "percentage": 25,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 1,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/1"
+            }
+          },
+          {
+            "id": 551,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/551",
+            "name": "Tap på krav - kode 11",
+            "number": "TAP-11",
+            "displayName": "TAP-11: (15%) Tap på krav - kode 11",
+            "percentage": 15,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 11,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/11"
+            }
+          },
+          {
+            "id": 552,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/552",
+            "name": "Tap på krav - kode 12",
+            "number": "TAP-12",
+            "displayName": "TAP-12: (11,11%) Tap på krav - kode 12",
+            "percentage": 11.11,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 111,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/111"
+            }
+          },
+          {
+            "id": 553,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/553",
+            "name": "Tap på krav - kode 13",
+            "number": "TAP-13",
+            "displayName": "TAP-13: (12%) Tap på krav - kode 13",
+            "percentage": 12,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 12,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/12"
+            }
+          },
+          {
+            "id": 554,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/554",
+            "name": "Uttak - kode 3",
+            "number": "UTTAK-3",
+            "displayName": "UTTAK-3: (25%) Uttak - kode 3",
+            "percentage": 25,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 3,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/3"
+            }
+          },
+          {
+            "id": 555,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/555",
+            "name": "Uttak - kode 5",
+            "number": "UTTAK-5",
+            "displayName": "UTTAK-5: (0%) Uttak - kode 5",
+            "percentage": 0,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 5,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/5"
+            }
+          },
+          {
+            "id": 556,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/556",
+            "name": "Uttak - kode 31",
+            "number": "UTTAK-31",
+            "displayName": "UTTAK-31: (15%) Uttak - kode 31",
+            "percentage": 15,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 31,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/31"
+            }
+          },
+          {
+            "id": 557,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/557",
+            "name": "Uttak - kode 32",
+            "number": "UTTAK-32",
+            "displayName": "UTTAK-32: (11,11%) Uttak - kode 32",
+            "percentage": 11.11,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 311,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/311"
+            }
+          },
+          {
+            "id": 558,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/558",
+            "name": "Uttak - kode 33",
+            "number": "UTTAK-33",
+            "displayName": "UTTAK-33: (12%) Uttak - kode 33",
+            "percentage": 12,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 32,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/32"
+            }
+          },
+          {
+            "id": 559,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/559",
+            "name": "Mva-justering for kapitalvarer - kode 1",
+            "number": "JUST-1",
+            "displayName": "JUST-1: (25%) Mva-justering for kapitalvarer - kode 1",
+            "percentage": 25,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 1,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/1"
+            }
+          },
+          {
+            "id": 560,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/560",
+            "name": "Tilbakeføring av mva for kapitalvarer - kode 1",
+            "number": "TILB-1",
+            "displayName": "TILB-1: (25%) Tilbakeføring av mva for kapitalvarer - kode 1",
+            "percentage": 25,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 1,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/1"
+            }
+          },
+          {
+            "id": 561,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/561",
+            "name": "Tilbakeføring av mva for kapitalvarer - kode 81",
+            "number": "TILB-81",
+            "displayName": "TILB-81: (25%) Tilbakeføring av mva for kapitalvarer - kode 81",
+            "percentage": -25,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 81,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/81"
+            }
+          },
+          {
+            "id": 562,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/562",
+            "name": "Mva-justering for kapitalvarer - kode 81",
+            "number": "JUST-81",
+            "displayName": "JUST-81: (25%) Mva-justering for kapitalvarer - kode 81",
+            "percentage": -25,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 81,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/81"
+            }
+          },
+          {
+            "id": 600,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/600",
+            "name": "Fradrag inngående avgift ved innførsel, høy sats med kompensasjon",
+            "number": "81-K",
+            "displayName": "81-K: (25%) Fradrag inngående avgift ved innførsel, høy sats med kompensasjon",
+            "percentage": -25,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 601,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/601",
+            "name": "Fradrag inngående avgift ved innførsel, middels sats med kompensasjon",
+            "number": "83-K",
+            "displayName": "83-K: (15%) Fradrag inngående avgift ved innførsel, middels sats med kompensasjon",
+            "percentage": -15,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 602,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/602",
+            "name": "Fradrag inngående avgift ved kjøp av tjenester fra utlandet, høy sats med kompensasjon",
+            "number": "86-K",
+            "displayName": "86-K: (25%) Fradrag inngående avgift ved kjøp av tjenester fra utlandet, høy sats med kompensasjon",
+            "percentage": -25,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 603,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/603",
+            "name": "Fradrag inngående avgift ved kjøp av tjenester fra utlandet, lav sats med kompensasjon",
+            "number": "88-K",
+            "displayName": "88-K: (12%) Fradrag inngående avgift ved kjøp av tjenester fra utlandet, lav sats med kompensasjon",
+            "percentage": -12,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 604,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/604",
+            "name": "Fradrag inngående avgift ved kjøp av klimakvoter/gull med kompensasjon",
+            "number": "91-K",
+            "displayName": "91-K: (25%) Fradrag inngående avgift ved kjøp av klimakvoter/gull med kompensasjon",
+            "percentage": -25,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          },
+          {
+            "id": 0,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0",
+            "name": "Ingen avgiftsbehandling",
+            "number": "0",
+            "displayName": "0: (0%) Ingen avgiftsbehandling",
+            "percentage": 0,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-03-19T23:05:39.785Z",
+      "method": "POST",
+      "path": "/product",
+      "body": {
+        "name": "Produkt492232",
+        "number": "492232",
+        "priceExcludingVatCurrency": 1500,
+        "priceIncludingVatCurrency": 1875,
+        "vatType": {
+          "id": 3
+        }
+      },
+      "status": 422,
+      "durationMs": 109,
+      "error": {
+        "status": 422,
+        "code": 18000,
+        "message": "Validering feilet.",
+        "link": "https://tripletex.no/v2-docs/",
+        "developerMessage": "VALIDATION_ERROR",
+        "validationMessages": [
+          {
+            "field": "Internt felt (vatTypeId)",
+            "message": "Ugyldig mva-kode.",
+            "path": null,
+            "rootId": null
+          }
+        ],
+        "requestId": "6196c176-6fe2-4bbf-a9f9-6d7195cd2a98"
+      }
+    },
+    {
+      "timestamp": "2026-03-19T23:05:46.043Z",
+      "method": "POST",
+      "path": "/product",
+      "body": {
+        "name": "Produkt492232",
+        "number": "492232",
+        "priceExcludingVatCurrency": 1500,
+        "priceIncludingVatCurrency": 1500,
+        "vatType": {
+          "id": 6
+        }
+      },
+      "status": 201,
+      "durationMs": 221,
+      "response": {
+        "value": {
+          "id": 84381899,
+          "version": 0,
+          "url": "kkpqfuj-amager.tripletex.dev/v2/product/84381899",
+          "name": "Produkt492232",
+          "number": "492232",
+          "displayNumber": "492232",
+          "description": "",
+          "orderLineDescription": "",
+          "costExcludingVatCurrency": 0,
+          "costPrice": 0,
+          "priceExcludingVatCurrency": 1500,
+          "priceIncludingVatCurrency": 1500,
+          "isInactive": false,
+          "productUnit": null,
+          "incomingStock": 0,
+          "outgoingStock": 0,
+          "vatType": {
+            "id": 6,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/6"
+          },
+          "currency": {
+            "id": 1,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/currency/1"
+          },
+          "department": null,
+          "account": null,
+          "supplier": null,
+          "resaleProduct": null,
+          "isDeletable": false,
+          "hasSupplierProductConnected": false,
+          "image": null,
+          "displayName": "492232 Produkt492232",
+          "mainSupplierProduct": null,
+          "isRoundPriceIncVat": false,
+          "priceInTargetCurrency": 0,
+          "purchasePriceCurrency": 0
+        }
+      }
+    }
+  ]
+}

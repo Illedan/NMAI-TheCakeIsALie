@@ -125,7 +125,7 @@ export function handleApiDocsQuery(input: {
         results = results.filter((e) => e.category.toLowerCase().includes(cat));
       }
       if (input.method) {
-        results = results.filter((e) => e.method === input.method.toUpperCase());
+        results = results.filter((e) => e.method === input.method!.toUpperCase());
       }
       if (input.query) {
         const q = input.query.toLowerCase();

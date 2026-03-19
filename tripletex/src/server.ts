@@ -64,8 +64,8 @@ app.post("/solve", async (req, res) => {
     },
   };
 
+  const client = new TripletexClient(body.tripletex_credentials);
   try {
-    const client = new TripletexClient(body.tripletex_credentials);
     const result = await runAgent(client, body.prompt, body.files || []);
     console.log(
       `Completed: ${result.callCount} API calls, ${result.errorCount} errors`

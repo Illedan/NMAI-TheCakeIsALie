@@ -1,0 +1,119 @@
+{
+  "timestamp": "2026-03-19T23:06:03.539Z",
+  "request": {
+    "prompt": "Opprett et prosjekt med navn 'Prosjekt492232', prosjektnummer 492232. Bruk den første ansatte som prosjektleder.",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "error": "TypeError: Cannot read properties of undefined (reading 'parts')",
+  "apiCalls": [
+    {
+      "timestamp": "2026-03-19T23:06:05.009Z",
+      "method": "GET",
+      "path": "/employee",
+      "params": {
+        "from": 0,
+        "count": 1
+      },
+      "status": 200,
+      "durationMs": 181,
+      "response": {
+        "fullResultSize": 2,
+        "from": 0,
+        "count": 1,
+        "versionDigest": "Checksum not yet supported for this endpoint",
+        "values": [
+          {
+            "id": 18445891,
+            "version": 1,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/employee/18445891",
+            "firstName": "Johansokrates",
+            "lastName": "c695ab54",
+            "displayName": "Johansokrates c695ab54",
+            "employeeNumber": "",
+            "dateOfBirth": null,
+            "email": "johansokrates@hotmail.com",
+            "phoneNumberMobileCountry": {
+              "id": 161,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/country/161"
+            },
+            "phoneNumberMobile": "",
+            "phoneNumberHome": "",
+            "phoneNumberWork": "",
+            "nationalIdentityNumber": "",
+            "dnumber": "",
+            "internationalId": {
+              "intAmeldingType": null,
+              "country": null,
+              "number": ""
+            },
+            "bankAccountNumber": "",
+            "iban": "",
+            "bic": "",
+            "creditorBankCountryId": 0,
+            "usesAbroadPayment": false,
+            "userType": null,
+            "allowInformationRegistration": true,
+            "isContact": false,
+            "isProxy": false,
+            "comments": "",
+            "address": null,
+            "department": {
+              "id": 839940,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/department/839940"
+            },
+            "employments": [
+              {
+                "id": 2739116,
+                "url": "kkpqfuj-amager.tripletex.dev/v2/employee/employment/2739116"
+              }
+            ],
+            "holidayAllowanceEarned": {
+              "year": 0,
+              "amount": 0,
+              "basis": 0,
+              "amountExtraHolidayWeek": 0
+            },
+            "employeeCategory": null,
+            "isAuthProjectOverviewURL": true,
+            "pictureId": 0,
+            "companyId": 108118447,
+            "vismaConnect2FAactive": false
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-03-19T23:06:06.330Z",
+      "method": "POST",
+      "path": "/project",
+      "body": {
+        "name": "Prosjekt492232",
+        "number": "492232",
+        "projectManager": {
+          "id": 18445891
+        }
+      },
+      "status": 422,
+      "durationMs": 104,
+      "error": {
+        "status": 422,
+        "code": 18000,
+        "message": "Validering feilet.",
+        "link": "https://tripletex.no/v2-docs/",
+        "developerMessage": "VALIDATION_ERROR",
+        "validationMessages": [
+          {
+            "field": "startDate",
+            "message": "Feltet må fylles ut.",
+            "path": null,
+            "rootId": null
+          }
+        ],
+        "requestId": "dbf19cea-055e-4035-8a8b-79dbdc448855"
+      }
+    }
+  ]
+}

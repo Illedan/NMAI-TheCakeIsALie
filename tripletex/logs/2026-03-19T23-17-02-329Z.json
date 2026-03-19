@@ -1,0 +1,260 @@
+{
+  "timestamp": "2026-03-19T23:17:02.329Z",
+  "request": {
+    "prompt": "Opprett en ansatt med fornavn Test222261, etternavn Ansen, og e-post test222261@example.com",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "agent": {
+    "callCount": 2,
+    "errorCount": 0,
+    "messages": [
+      {
+        "role": "user",
+        "parts": [
+          {
+            "text": "Opprett en ansatt med fornavn Test222261, etternavn Ansen, og e-post test222261@example.com"
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "params": "{\"fields\": \"*\", \"count\": 1}",
+                "path": "/department",
+                "method": "GET"
+              }
+            },
+            "thoughtSignature": "CvgDAb4+9vuHrG4LZd6LJNwTj3Dvf2SK4R/qHQW81qPgd5zrREpxS4rLZKEEXS5Mwx1rxVqpNIw2ixM1YcadT9aaFmQwc8Q3hdLG/DV3uc8I/m5jQiVlzYyqaKv+umzYeEeoxKhD6fmM6/RBBMXeNELZZVJ1G6KRhxjaLNC7PeT+uhWM8obMiDG/4y4bdb9VWPDNjoPadgFDeoMkXBc0f5x83eBv/NUK0DeeL6D/ENTDpnVs98oQvpFKepXaZ9aTz98YLgPw1pnstvb/Mdm0J21HfGBQgi+9jZ7u/oP7TpeaZCk/CksMKkXYW4ChUfZzfE9tevTHi1xAq3bibRnNkk76qBCjvkwnzjYfgGZuu1qRu+dTvuZCc/kwMHPHIuZjnIzEw60Fnxw3lBpyTNvj3+t8EsJJKEM8zaxapMaedlTpHD+JNGKx8tpJx75NV7NTAwjsV26k3hY/qz1kAB6scMsZrxcEyXwKFwk5D+vdOjHQNZMLyd6cnKQycTczoUCl45R0wAXLdUL/71CpYTNNm3SG4JOh6psbWAPBSoVuJDrDFnz553WJlw+SZe1foAOajB4t0CGy3QLNZy9CX8FHtHQ1O0grBg+O9KQwOg9imL8AQY/nhwQtzIZaVvPc9BJ7Lx1stkOfiD6fwYHfWIvRAtfyfqv0Shm0lNYP"
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "fullResultSize": 2,
+                "from": 0,
+                "count": 1,
+                "versionDigest": "'If-None-Match' header not specified",
+                "values": [
+                  {
+                    "id": 839940,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/department/839940",
+                    "name": "Avdeling",
+                    "departmentNumber": "",
+                    "departmentManager": null,
+                    "displayName": "Avdeling",
+                    "isInactive": false,
+                    "businessActivityTypeId": 0
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "path": "/employee",
+                "method": "POST",
+                "body": "{\"firstName\": \"Test222261\", \"lastName\": \"Ansen\", \"email\": \"test222261@example.com\", \"userType\": \"STANDARD\", \"department\": {\"id\": 839940}}"
+              }
+            },
+            "thoughtSignature": "Cu4BAb4+9vt00BWvxsG5z2VNQZF9oXyzckUQmIB+p1HBFsV3OgusqBzmqhvz3lcXgjUn3Ua06HUEBEPzsaO1hjN8eW62JKVtzRdexetDa5nQ+YxmHEhVyqbl+ZnmkoDdYjkm7veUDW/E5TZStFD+aEdzja4pD+BQaa32ym8lCKnqCEHMSlONmtiqR9ZnL6W7IClCQCXoP/pn1zl0eOu7lpgye1INnaap3tfK9qt6H9MrkL/X2aeDbgAvxKHfBQATcfgJq0M1dpkdQEbTaQAYJ3lGP0habMmb6PiP+eFzK24g1qL9VVP1nbamQfGIdU7sqQ=="
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "value": {
+                  "id": 18491117,
+                  "version": 1,
+                  "url": "kkpqfuj-amager.tripletex.dev/v2/employee/18491117",
+                  "firstName": "Test222261",
+                  "lastName": "Ansen",
+                  "displayName": "Test222261 Ansen",
+                  "employeeNumber": "",
+                  "dateOfBirth": null,
+                  "email": "test222261@example.com",
+                  "phoneNumberMobileCountry": {
+                    "id": 161,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/country/161"
+                  },
+                  "phoneNumberMobile": "",
+                  "phoneNumberHome": "",
+                  "phoneNumberWork": "",
+                  "nationalIdentityNumber": "",
+                  "dnumber": "",
+                  "internationalId": {
+                    "intAmeldingType": null,
+                    "country": null,
+                    "number": ""
+                  },
+                  "bankAccountNumber": "",
+                  "iban": "",
+                  "bic": "",
+                  "creditorBankCountryId": 0,
+                  "usesAbroadPayment": false,
+                  "userType": null,
+                  "allowInformationRegistration": true,
+                  "isContact": false,
+                  "isProxy": false,
+                  "comments": "",
+                  "address": null,
+                  "department": {
+                    "id": 839940,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/department/839940"
+                  },
+                  "employments": [],
+                  "holidayAllowanceEarned": {
+                    "year": 0,
+                    "amount": 0,
+                    "basis": 0,
+                    "amountExtraHolidayWeek": 0
+                  },
+                  "employeeCategory": null,
+                  "isAuthProjectOverviewURL": true,
+                  "pictureId": 0,
+                  "companyId": 108118447,
+                  "vismaConnect2FAactive": false
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "text": "Ansatt Test222261 Ansen (test222261@example.com) er opprettet med avdelings-ID 839940.\nDONE",
+            "thoughtSignature": "CrECAb4+9vtFaFbpzoYeU/rEIUJ11BfvcH+HD4bl2xvdpkd+VirP5GjmxW6rJkn8z2CobeJGCD24qpYLQgXTjJO7KrNggJxxDp903bAnhpmB3OPD3z3InePK+Y9Zv3D9/6ESx5rvEAxAlxz8RcPm90DOqwDGrjoUQmUHG3hzx9xjXGKaX9eip1XGv9qVv0mJ7HqxFpNEKLPRPGtmqnU5xSjLj21tShszJ41pPyWrG/IP9/HF8vpJ3xj4RQWKMWV2KTMFudhCs3f+oip4ED7QLaOvaGXC1BMOQF14Y7aAROmEkyoH4PIto4WxJjCYk0Ywn7+rpGYoK4vWFG1nDrb2iJLZHJG2ifXN5MBK6IN8SIh+DYOCKlVlgMyyBVRA22L1P7pwU+ZiOc9MxExDw/KOkmqscdM="
+          }
+        ]
+      }
+    ]
+  },
+  "apiCalls": [
+    {
+      "timestamp": "2026-03-19T23:17:03.809Z",
+      "method": "GET",
+      "path": "/department",
+      "params": {
+        "fields": "*",
+        "count": 1
+      },
+      "status": 200,
+      "durationMs": 201,
+      "response": {
+        "fullResultSize": 2,
+        "from": 0,
+        "count": 1,
+        "versionDigest": "'If-None-Match' header not specified",
+        "values": [
+          {
+            "id": 839940,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/department/839940",
+            "name": "Avdeling",
+            "departmentNumber": "",
+            "departmentManager": null,
+            "displayName": "Avdeling",
+            "isInactive": false,
+            "businessActivityTypeId": 0
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-03-19T23:17:05.708Z",
+      "method": "POST",
+      "path": "/employee",
+      "body": {
+        "firstName": "Test222261",
+        "lastName": "Ansen",
+        "email": "test222261@example.com",
+        "userType": "STANDARD",
+        "department": {
+          "id": 839940
+        }
+      },
+      "status": 201,
+      "durationMs": 457,
+      "response": {
+        "value": {
+          "id": 18491117,
+          "version": 1,
+          "url": "kkpqfuj-amager.tripletex.dev/v2/employee/18491117",
+          "firstName": "Test222261",
+          "lastName": "Ansen",
+          "displayName": "Test222261 Ansen",
+          "employeeNumber": "",
+          "dateOfBirth": null,
+          "email": "test222261@example.com",
+          "phoneNumberMobileCountry": {
+            "id": 161,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/country/161"
+          },
+          "phoneNumberMobile": "",
+          "phoneNumberHome": "",
+          "phoneNumberWork": "",
+          "nationalIdentityNumber": "",
+          "dnumber": "",
+          "internationalId": {
+            "intAmeldingType": null,
+            "country": null,
+            "number": ""
+          },
+          "bankAccountNumber": "",
+          "iban": "",
+          "bic": "",
+          "creditorBankCountryId": 0,
+          "usesAbroadPayment": false,
+          "userType": null,
+          "allowInformationRegistration": true,
+          "isContact": false,
+          "isProxy": false,
+          "comments": "",
+          "address": null,
+          "department": {
+            "id": 839940,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/department/839940"
+          },
+          "employments": [],
+          "holidayAllowanceEarned": {
+            "year": 0,
+            "amount": 0,
+            "basis": 0,
+            "amountExtraHolidayWeek": 0
+          },
+          "employeeCategory": null,
+          "isAuthProjectOverviewURL": true,
+          "pictureId": 0,
+          "companyId": 108118447,
+          "vismaConnect2FAactive": false
+        }
+      }
+    }
+  ]
+}

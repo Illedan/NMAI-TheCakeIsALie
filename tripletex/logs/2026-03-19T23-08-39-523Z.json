@@ -1,0 +1,97 @@
+{
+  "timestamp": "2026-03-19T23:08:39.523Z",
+  "request": {
+    "prompt": "Opprett en avdeling med navn 'Avdeling666541' og avdelingsnummer 666541",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "agent": {
+    "callCount": 1,
+    "errorCount": 0,
+    "messages": [
+      {
+        "role": "user",
+        "parts": [
+          {
+            "text": "Opprett en avdeling med navn 'Avdeling666541' og avdelingsnummer 666541"
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "method": "POST",
+                "path": "/department",
+                "body": "{\"name\": \"Avdeling666541\", \"departmentNumber\": \"666541\"}"
+              }
+            },
+            "thoughtSignature": "CsYIAb4+9vslfmmTLppx92GJC4+PKBldFrt6EB3AsGGLefiSxqe8rN3Q/n8jrBwROA7qPAxn+ypt7TbRpZ4o6Pua69Wd1ZY6Bffd26tC10YQUpYq/YIr7XaHL/WzxN1owGPy5UyQFQ4Dc9Q9Eh4lpC/Ub10Dbfgd4TxBFdNBFeOFhC4jIPu+EYPJsx+op2xvJU75QSC1hc3XhAfFdzkBVrxdos++APp+9I3mN9ubDCFsX18Rv1bHuBw57rW01vw1JB9qlmcamDQn9UWF88s4hL3Ub7IbF4YL6OZOw981KQXEW8XEiAkgsy3oqlTogm+tx9v2VTjTBuZN/qQ1RQdm5A88f1Nkm9EQSuA0BiB7hT3+QfC1jxm+KUzePZL1j/HNLBX25WbTjJLbtyK2T1eG32QIDxaQgYip+xNsXLmXwa7w4sMP2uCKrGjAdFfW45n72snAJNFFargE4gnZzgYJl5/TuKwbV6CaMVQbwY88QigggebadxpV3TTVwJCLDUuUtyg040qf4e984XiMdKC17BK8RRqKOZ3IL8AsSray0Kaw4YzCRdL4hhbWVDp7bHalHq6NZS2j/iIfQN9lxxJH2IJwOkixCPaowW8IWV9vTt00j9jEcYGdhXQ25fpzyOLG6+mJ3il4dLOOeruOAo+pm4KmUjPSc2L9BkpCdHc9tbgPYPMcxbd4sdoGrVJQ7CrjAmIm4EOoMBAr55gFf47Z4LBu6jpE6kC79+TshgfQsTVSaBksfpScLO21pg9r1QqvCwoiLMvM5PGFz5XfaR2f5+wCVdXypsEwrJNFOmIonK5qjINeIgWdFgA/Ua9KNiVu3MIplrN6/xZ+CFzTZzTtvljZQUOFLeSFqQaFhAG7fQCuJ78gdO6NRITSxuGVnbBFIiD8+ItrTdG6are1CTF/6rGhHrR5q+9oHw/bT2pabkXo83Jk6DnIbTS5XgAQzqsl9zcFL0yMGwc+h5qVj9UWy2GvrABPfyEaqQ2VA1ugyA5JTmjXisAqY5mx7aAnrXL7rR3BaUeMGeErRntyCsnTVHoD5K3jlQno3QxKyF5RI+WwC73nmm69Ysm9B58Q/lMQOUZBPNhY9st/KwtIHhxRGCeIKib3r9TPWGNmS9wiDiI3V26+sX6QAo6z8srQlM/u8F/ocDAsriAahnK6FRFaqJaDeMIIFjZEPORYoVaQjOCDoz7dxWjvonCDEwXOBfkuGkoCrp3bOHrE6dRKw/Ivx5Ot2GO4kSnnkbv7IgQqveHd2ES0GYkXkGutIdmItf8mcG3VhqhmekI/Z7udWgCbIi53VsXEYQ6ujciC/pHaSaV72jnaJFtfZt603REYpUTAFKGQXmme+kihh9xZSJAfkaQyZdDSllmhh2DtCZ3AjiDH9QZK4jQLbx98XtCOzznb1feRebOQW5nNk5UpunobxLodwmArKkt5MLeq7cUQUeFNPd1oxNo5nzg="
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "value": {
+                  "id": 863591,
+                  "version": 0,
+                  "url": "kkpqfuj-amager.tripletex.dev/v2/department/863591",
+                  "name": "Avdeling666541",
+                  "departmentNumber": "666541",
+                  "departmentManager": null,
+                  "displayName": "666541 Avdeling666541",
+                  "isInactive": false,
+                  "businessActivityTypeId": 0
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "text": "DONE\n"
+          }
+        ]
+      }
+    ]
+  },
+  "apiCalls": [
+    {
+      "timestamp": "2026-03-19T23:08:43.530Z",
+      "method": "POST",
+      "path": "/department",
+      "body": {
+        "name": "Avdeling666541",
+        "departmentNumber": "666541"
+      },
+      "status": 201,
+      "durationMs": 209,
+      "response": {
+        "value": {
+          "id": 863591,
+          "version": 0,
+          "url": "kkpqfuj-amager.tripletex.dev/v2/department/863591",
+          "name": "Avdeling666541",
+          "departmentNumber": "666541",
+          "departmentManager": null,
+          "displayName": "666541 Avdeling666541",
+          "isInactive": false,
+          "businessActivityTypeId": 0
+        }
+      }
+    }
+  ]
+}

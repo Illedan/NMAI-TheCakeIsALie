@@ -1,0 +1,680 @@
+{
+  "timestamp": "2026-03-19T22:27:57.871Z",
+  "request": {
+    "prompt": "Crie e envie uma fatura ao cliente Cliente277827 Lda (org. nº 987277827) por 25800 NOK sem IVA. A fatura refere-se a Consultoria em nuvem.",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "agent": {
+    "callCount": 7,
+    "errorCount": 1,
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "Crie e envie uma fatura ao cliente Cliente277827 Lda (org. nº 987277827) por 25800 NOK sem IVA. A fatura refere-se a Consultoria em nuvem."
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "Vou ajudá-lo a criar e enviar uma fatura para o Cliente277827 Lda. Primeiro, preciso verificar se o cliente existe e, se não existir, criá-lo. Depois criarei a fatura e a enviarei.\n\nVamos começar verificando se o cliente já existe:"
+          },
+          {
+            "type": "tool_use",
+            "id": "toolu_015FyUENA6xG6yuNtG47SLLF",
+            "name": "tripletex_api",
+            "input": {
+              "method": "GET",
+              "path": "/customer",
+              "params": {
+                "organizationNumber": "987277827",
+                "fields": "*"
+              }
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "toolu_015FyUENA6xG6yuNtG47SLLF",
+            "content": "{\"fullResultSize\":0,\"from\":0,\"count\":0,\"versionDigest\":\"'If-None-Match' header not specified\",\"values\":[]}",
+            "is_error": false
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "O cliente não existe, então vou criá-lo primeiro:"
+          },
+          {
+            "type": "tool_use",
+            "id": "toolu_01AY6af1dneq3tRM9tJeecSt",
+            "name": "tripletex_api",
+            "input": {
+              "method": "POST",
+              "path": "/customer",
+              "body": {
+                "name": "Cliente277827 Lda",
+                "organizationNumber": "987277827",
+                "isCustomer": true
+              }
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "toolu_01AY6af1dneq3tRM9tJeecSt",
+            "content": "{\"value\":{\"id\":108157956,\"version\":1,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/customer/108157956\",\"name\":\"Cliente277827 Lda\",\"organizationNumber\":\"987277827\",\"globalLocationNumber\":0,\"supplierNumber\":0,\"customerNumber\":10013,\"isSupplier\":false,\"isCustomer\":true,\"isInactive\":false,\"accountManager\":null,\"department\":null,\"email\":\"\",\"invoiceEmail\":\"\",\"overdueNoticeEmail\":\"\",\"phoneNumber\":\"\",\"phoneNumberMobile\":\"\",\"description\":\"\",\"language\":\"NO\",\"displayName\":\"Cliente277827 Lda (10013)\",\"isPrivateIndividual\":false,\"singleCustomerInvoice\":false,\"invoiceSendMethod\":\"EMAIL\",\"emailAttachmentType\":\"ATTACHMENT\",\"postalAddress\":{\"id\":405167379,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/address/405167379\"},\"physicalAddress\":{\"id\":405167378,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/address/405167378\"},\"deliveryAddress\":null,\"category1\":null,\"category2\":null,\"category3\":null,\"invoicesDueIn\":14,\"invoicesDueInType\":\"DAYS\",\"currency\":{\"id\":1,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/currency/1\"},\"bankAccountPresentation\":[],\"ledgerAccount\":{\"id\":425217066,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/ledger/account/425217066\"},\"isFactoring\":false,\"invoiceSendSMSNotification\":false,\"invoiceSMSNotificationNumber\":\"\",\"isAutomaticSoftReminderEnabled\":false,\"isAutomaticReminderEnabled\":false,\"isAutomaticNoticeOfDebtCollectionEnabled\":false,\"discountPercentage\":0,\"website\":\"\"}}",
+            "is_error": false
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "Excelente! O cliente foi criado com sucesso (ID: 108157956). Agora preciso verificar os tipos de IVA disponíveis para criar a fatura corretamente:"
+          },
+          {
+            "type": "tool_use",
+            "id": "toolu_01GQ9Na9KRUPQGXDYvMUV24J",
+            "name": "tripletex_api",
+            "input": {
+              "method": "GET",
+              "path": "/ledger/vatType",
+              "params": {
+                "typeOfVat": "OUTGOING",
+                "from": 0,
+                "count": 100,
+                "fields": "*"
+              }
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "toolu_01GQ9Na9KRUPQGXDYvMUV24J",
+            "content": "{\"fullResultSize\":0,\"from\":0,\"count\":1,\"versionDigest\":null,\"values\":[{\"id\":6,\"version\":0,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/6\",\"name\":\"Ingen utgående avgift (utenfor mva-loven)\",\"number\":\"6\",\"displayName\":\"6: (0%) Ingen utgående avgift (utenfor mva-loven)\",\"percentage\":0,\"deductionPercentage\":100,\"parentType\":{\"id\":0,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0\"}}]}",
+            "is_error": false
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "Agora vou criar uma fatura usando o tipo de IVA 0% (já que a fatura é de 25800 NOK sem IVA). Primeiro, preciso obter a data de hoje:"
+          },
+          {
+            "type": "tool_use",
+            "id": "toolu_01J1rnawnu1UvsMeuAw7cYcH",
+            "name": "tripletex_api",
+            "input": {
+              "method": "POST",
+              "path": "/invoice",
+              "body": {
+                "invoiceDate": "2024-12-20",
+                "invoiceDueDate": "2025-01-03",
+                "customer": {
+                  "id": 108157956
+                },
+                "invoiceComment": "Consultoria em nuvem",
+                "orderLines": [
+                  {
+                    "description": "Consultoria em nuvem",
+                    "count": 1,
+                    "unitPriceExcludingVatCurrency": 25800,
+                    "unitPriceIncludingVatCurrency": 25800,
+                    "vatType": {
+                      "id": 6
+                    }
+                  }
+                ]
+              }
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "toolu_01J1rnawnu1UvsMeuAw7cYcH",
+            "content": "{\"error\":true,\"status\":422,\"message\":\"Validering feilet.\",\"developerMessage\":null,\"validationMessages\":[{\"field\":\"orders\",\"message\":\"Listen kan ikke være tom.\",\"path\":\"null.orders\",\"rootId\":null},{\"field\":\"orders\",\"message\":\"Kan ikke være null.\",\"path\":\"null.orders\",\"rootId\":null}]}",
+            "is_error": true
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "Parece que preciso criar um pedido primeiro. Vou criar um pedido e depois a fatura:"
+          },
+          {
+            "type": "tool_use",
+            "id": "toolu_01BqY7Qb93ffzRKAnv4a5gxt",
+            "name": "tripletex_api",
+            "input": {
+              "method": "POST",
+              "path": "/order",
+              "body": {
+                "orderDate": "2024-12-20",
+                "deliveryDate": "2024-12-20",
+                "customer": {
+                  "id": 108157956
+                },
+                "orderLines": [
+                  {
+                    "description": "Consultoria em nuvem",
+                    "count": 1,
+                    "unitPriceExcludingVatCurrency": 25800,
+                    "unitPriceIncludingVatCurrency": 25800,
+                    "vatType": {
+                      "id": 6
+                    }
+                  }
+                ]
+              }
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "toolu_01BqY7Qb93ffzRKAnv4a5gxt",
+            "content": "{\"value\":{\"id\":401950181,\"version\":0,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/order/401950181\",\"customer\":{\"id\":108157956,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/customer/108157956\"},\"contact\":null,\"attn\":null,\"displayName\":\"680668 Ordre\",\"receiverEmail\":\"\",\"overdueNoticeEmail\":\"\",\"number\":\"680668\",\"reference\":\"\",\"department\":null,\"orderDate\":\"2024-12-20\",\"project\":null,\"invoiceComment\":\"\",\"currency\":{\"id\":1,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/currency/1\"},\"invoicesDueIn\":14,\"invoicesDueInType\":\"DAYS\",\"isShowOpenPostsOnInvoices\":false,\"isClosed\":false,\"deliveryDate\":\"2024-12-20\",\"deliveryAddress\":null,\"deliveryComment\":\"\",\"isPrioritizeAmountsIncludingVat\":true,\"orderLineSorting\":\"PRODUCT\",\"orderGroups\":[],\"orderLines\":[],\"isSubscription\":false,\"subscriptionDuration\":0,\"subscriptionDurationType\":\"MONTHS\",\"subscriptionPeriodsOnInvoice\":0,\"subscriptionPeriodsOnInvoiceType\":\"MONTHS\",\"subscriptionInvoicingTimeInAdvanceOrArrears\":\"ADVANCE\",\"subscriptionInvoicingTime\":0,\"subscriptionInvoicingTimeType\":\"MONTHS\",\"isSubscriptionAutoInvoicing\":false,\"preliminaryInvoice\":{\"id\":2147517997,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/invoice/2147517997\"},\"attachment\":[],\"sendMethodDescription\":\"Faktura må sendes manuelt.\",\"invoiceOnAccountVatHigh\":false,\"totalInvoicedOnAccountAmountAbsoluteCurrency\":0,\"invoiceSendSMSNotification\":false,\"invoiceSMSNotificationNumber\":\"\",\"markUpOrderLines\":0,\"discountPercentage\":0,\"customerName\":\"Cliente277827 Lda\",\"projectManagerNameAndNumber\":\"\",\"travelReports\":[],\"accountingDimensionValues\":[]}}",
+            "is_error": false
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "Ótimo! O pedido foi criado (ID: 401950181). Agora vou criar a fatura baseada neste pedido:"
+          },
+          {
+            "type": "tool_use",
+            "id": "toolu_01VoapaaFCvNxrxVWmhuBmRi",
+            "name": "tripletex_api",
+            "input": {
+              "method": "POST",
+              "path": "/invoice",
+              "body": {
+                "invoiceDate": "2024-12-20",
+                "invoiceDueDate": "2025-01-03",
+                "customer": {
+                  "id": 108157956
+                },
+                "orders": [
+                  {
+                    "id": 401950181
+                  }
+                ],
+                "invoiceComment": "Consultoria em nuvem"
+              }
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "toolu_01VoapaaFCvNxrxVWmhuBmRi",
+            "content": "{\"value\":{\"id\":2147517998,\"version\":3,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/invoice/2147517998\",\"invoiceNumber\":4,\"invoiceDate\":\"2024-12-20\",\"customer\":{\"id\":108157956,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/customer/108157956\"},\"creditedInvoice\":0,\"isCredited\":false,\"invoiceDueDate\":\"2025-01-03\",\"kid\":\"\",\"invoiceComment\":\"\",\"comment\":\"\",\"orders\":[{\"id\":401950181,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/order/401950181\"}],\"orderLines\":[{\"id\":1607495268,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/order/orderline/1607495268\"}],\"travelReports\":[],\"projectInvoiceDetails\":[{\"id\":1965722971,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/invoice/details/1965722971\"}],\"voucher\":{\"id\":608818022,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/ledger/voucher/608818022\"},\"deliveryDate\":\"2024-12-20\",\"amount\":25800,\"amountCurrency\":25800,\"amountExcludingVat\":25800,\"amountExcludingVatCurrency\":25800,\"amountRoundoff\":0,\"amountRoundoffCurrency\":0,\"amountOutstanding\":25800,\"amountCurrencyOutstanding\":25800,\"amountOutstandingTotal\":25800,\"amountCurrencyOutstandingTotal\":25800,\"sumRemits\":0,\"currency\":{\"id\":1,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/currency/1\"},\"isCreditNote\":false,\"isCharged\":true,\"isApproved\":false,\"postings\":[{\"id\":3844899316,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/ledger/posting/3844899316\"}],\"reminders\":[],\"invoiceRemarks\":\"\",\"invoiceRemark\":null,\"isPeriodizationPossible\":true,\"documentId\":1024147000}}",
+            "is_error": false
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "Perfeito! A fatura foi criada com sucesso (ID: 2147517998, número da fatura: 4). Agora vou enviá-la ao cliente por email:"
+          },
+          {
+            "type": "tool_use",
+            "id": "toolu_01CgVuS6auN2xBvqCN2Bzqup",
+            "name": "tripletex_api",
+            "input": {
+              "method": "PUT",
+              "path": "/invoice/2147517998/:send",
+              "params": {
+                "sendType": "EMAIL"
+              }
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "toolu_01CgVuS6auN2xBvqCN2Bzqup",
+            "is_error": false
+          }
+        ]
+      }
+    ]
+  },
+  "apiCalls": [
+    {
+      "timestamp": "2026-03-19T22:28:01.851Z",
+      "method": "GET",
+      "path": "/customer",
+      "params": {
+        "organizationNumber": "987277827",
+        "fields": "*"
+      },
+      "status": 200,
+      "durationMs": 210,
+      "response": {
+        "fullResultSize": 0,
+        "from": 0,
+        "count": 0,
+        "versionDigest": "'If-None-Match' header not specified",
+        "values": []
+      }
+    },
+    {
+      "timestamp": "2026-03-19T22:28:04.481Z",
+      "method": "POST",
+      "path": "/customer",
+      "body": {
+        "name": "Cliente277827 Lda",
+        "organizationNumber": "987277827",
+        "isCustomer": true
+      },
+      "status": 201,
+      "durationMs": 147,
+      "response": {
+        "value": {
+          "id": 108157956,
+          "version": 1,
+          "url": "kkpqfuj-amager.tripletex.dev/v2/customer/108157956",
+          "name": "Cliente277827 Lda",
+          "organizationNumber": "987277827",
+          "globalLocationNumber": 0,
+          "supplierNumber": 0,
+          "customerNumber": 10013,
+          "isSupplier": false,
+          "isCustomer": true,
+          "isInactive": false,
+          "accountManager": null,
+          "department": null,
+          "email": "",
+          "invoiceEmail": "",
+          "overdueNoticeEmail": "",
+          "phoneNumber": "",
+          "phoneNumberMobile": "",
+          "description": "",
+          "language": "NO",
+          "displayName": "Cliente277827 Lda (10013)",
+          "isPrivateIndividual": false,
+          "singleCustomerInvoice": false,
+          "invoiceSendMethod": "EMAIL",
+          "emailAttachmentType": "ATTACHMENT",
+          "postalAddress": {
+            "id": 405167379,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/address/405167379"
+          },
+          "physicalAddress": {
+            "id": 405167378,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/address/405167378"
+          },
+          "deliveryAddress": null,
+          "category1": null,
+          "category2": null,
+          "category3": null,
+          "invoicesDueIn": 14,
+          "invoicesDueInType": "DAYS",
+          "currency": {
+            "id": 1,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/currency/1"
+          },
+          "bankAccountPresentation": [],
+          "ledgerAccount": {
+            "id": 425217066,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/account/425217066"
+          },
+          "isFactoring": false,
+          "invoiceSendSMSNotification": false,
+          "invoiceSMSNotificationNumber": "",
+          "isAutomaticSoftReminderEnabled": false,
+          "isAutomaticReminderEnabled": false,
+          "isAutomaticNoticeOfDebtCollectionEnabled": false,
+          "discountPercentage": 0,
+          "website": ""
+        }
+      }
+    },
+    {
+      "timestamp": "2026-03-19T22:28:08.709Z",
+      "method": "GET",
+      "path": "/ledger/vatType",
+      "params": {
+        "typeOfVat": "OUTGOING",
+        "from": 0,
+        "count": 100,
+        "fields": "*"
+      },
+      "status": 200,
+      "durationMs": 184,
+      "response": {
+        "fullResultSize": 0,
+        "from": 0,
+        "count": 1,
+        "versionDigest": null,
+        "values": [
+          {
+            "id": 6,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/6",
+            "name": "Ingen utgående avgift (utenfor mva-loven)",
+            "number": "6",
+            "displayName": "6: (0%) Ingen utgående avgift (utenfor mva-loven)",
+            "percentage": 0,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-03-19T22:28:13.398Z",
+      "method": "POST",
+      "path": "/invoice",
+      "body": {
+        "invoiceDate": "2024-12-20",
+        "invoiceDueDate": "2025-01-03",
+        "customer": {
+          "id": 108157956
+        },
+        "invoiceComment": "Consultoria em nuvem",
+        "orderLines": [
+          {
+            "description": "Consultoria em nuvem",
+            "count": 1,
+            "unitPriceExcludingVatCurrency": 25800,
+            "unitPriceIncludingVatCurrency": 25800,
+            "vatType": {
+              "id": 6
+            }
+          }
+        ]
+      },
+      "status": 422,
+      "durationMs": 181,
+      "error": {
+        "status": 422,
+        "code": 18000,
+        "message": "Validering feilet.",
+        "link": "https://tripletex.no/v2-docs/",
+        "developerMessage": null,
+        "validationMessages": [
+          {
+            "field": "orders",
+            "message": "Listen kan ikke være tom.",
+            "path": "null.orders",
+            "rootId": null
+          },
+          {
+            "field": "orders",
+            "message": "Kan ikke være null.",
+            "path": "null.orders",
+            "rootId": null
+          }
+        ],
+        "requestId": "9571e298-c3be-4e28-b3a7-89ee9e37a919"
+      }
+    },
+    {
+      "timestamp": "2026-03-19T22:28:16.761Z",
+      "method": "POST",
+      "path": "/order",
+      "body": {
+        "orderDate": "2024-12-20",
+        "deliveryDate": "2024-12-20",
+        "customer": {
+          "id": 108157956
+        },
+        "orderLines": [
+          {
+            "description": "Consultoria em nuvem",
+            "count": 1,
+            "unitPriceExcludingVatCurrency": 25800,
+            "unitPriceIncludingVatCurrency": 25800,
+            "vatType": {
+              "id": 6
+            }
+          }
+        ]
+      },
+      "status": 201,
+      "durationMs": 267,
+      "response": {
+        "value": {
+          "id": 401950181,
+          "version": 0,
+          "url": "kkpqfuj-amager.tripletex.dev/v2/order/401950181",
+          "customer": {
+            "id": 108157956,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/customer/108157956"
+          },
+          "contact": null,
+          "attn": null,
+          "displayName": "680668 Ordre",
+          "receiverEmail": "",
+          "overdueNoticeEmail": "",
+          "number": "680668",
+          "reference": "",
+          "department": null,
+          "orderDate": "2024-12-20",
+          "project": null,
+          "invoiceComment": "",
+          "currency": {
+            "id": 1,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/currency/1"
+          },
+          "invoicesDueIn": 14,
+          "invoicesDueInType": "DAYS",
+          "isShowOpenPostsOnInvoices": false,
+          "isClosed": false,
+          "deliveryDate": "2024-12-20",
+          "deliveryAddress": null,
+          "deliveryComment": "",
+          "isPrioritizeAmountsIncludingVat": true,
+          "orderLineSorting": "PRODUCT",
+          "orderGroups": [],
+          "orderLines": [],
+          "isSubscription": false,
+          "subscriptionDuration": 0,
+          "subscriptionDurationType": "MONTHS",
+          "subscriptionPeriodsOnInvoice": 0,
+          "subscriptionPeriodsOnInvoiceType": "MONTHS",
+          "subscriptionInvoicingTimeInAdvanceOrArrears": "ADVANCE",
+          "subscriptionInvoicingTime": 0,
+          "subscriptionInvoicingTimeType": "MONTHS",
+          "isSubscriptionAutoInvoicing": false,
+          "preliminaryInvoice": {
+            "id": 2147517997,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/invoice/2147517997"
+          },
+          "attachment": [],
+          "sendMethodDescription": "Faktura må sendes manuelt.",
+          "invoiceOnAccountVatHigh": false,
+          "totalInvoicedOnAccountAmountAbsoluteCurrency": 0,
+          "invoiceSendSMSNotification": false,
+          "invoiceSMSNotificationNumber": "",
+          "markUpOrderLines": 0,
+          "discountPercentage": 0,
+          "customerName": "Cliente277827 Lda",
+          "projectManagerNameAndNumber": "",
+          "travelReports": [],
+          "accountingDimensionValues": []
+        }
+      }
+    },
+    {
+      "timestamp": "2026-03-19T22:28:19.990Z",
+      "method": "POST",
+      "path": "/invoice",
+      "body": {
+        "invoiceDate": "2024-12-20",
+        "invoiceDueDate": "2025-01-03",
+        "customer": {
+          "id": 108157956
+        },
+        "orders": [
+          {
+            "id": 401950181
+          }
+        ],
+        "invoiceComment": "Consultoria em nuvem"
+      },
+      "status": 201,
+      "durationMs": 326,
+      "response": {
+        "value": {
+          "id": 2147517998,
+          "version": 3,
+          "url": "kkpqfuj-amager.tripletex.dev/v2/invoice/2147517998",
+          "invoiceNumber": 4,
+          "invoiceDate": "2024-12-20",
+          "customer": {
+            "id": 108157956,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/customer/108157956"
+          },
+          "creditedInvoice": 0,
+          "isCredited": false,
+          "invoiceDueDate": "2025-01-03",
+          "kid": "",
+          "invoiceComment": "",
+          "comment": "",
+          "orders": [
+            {
+              "id": 401950181,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/order/401950181"
+            }
+          ],
+          "orderLines": [
+            {
+              "id": 1607495268,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/order/orderline/1607495268"
+            }
+          ],
+          "travelReports": [],
+          "projectInvoiceDetails": [
+            {
+              "id": 1965722971,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/invoice/details/1965722971"
+            }
+          ],
+          "voucher": {
+            "id": 608818022,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/voucher/608818022"
+          },
+          "deliveryDate": "2024-12-20",
+          "amount": 25800,
+          "amountCurrency": 25800,
+          "amountExcludingVat": 25800,
+          "amountExcludingVatCurrency": 25800,
+          "amountRoundoff": 0,
+          "amountRoundoffCurrency": 0,
+          "amountOutstanding": 25800,
+          "amountCurrencyOutstanding": 25800,
+          "amountOutstandingTotal": 25800,
+          "amountCurrencyOutstandingTotal": 25800,
+          "sumRemits": 0,
+          "currency": {
+            "id": 1,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/currency/1"
+          },
+          "isCreditNote": false,
+          "isCharged": true,
+          "isApproved": false,
+          "postings": [
+            {
+              "id": 3844899316,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/posting/3844899316"
+            }
+          ],
+          "reminders": [],
+          "invoiceRemarks": "",
+          "invoiceRemark": null,
+          "isPeriodizationPossible": true,
+          "documentId": 1024147000
+        }
+      }
+    },
+    {
+      "timestamp": "2026-03-19T22:28:24.813Z",
+      "method": "PUT",
+      "path": "/invoice/2147517998/:send",
+      "params": {
+        "sendType": "EMAIL"
+      },
+      "status": 204,
+      "durationMs": 486
+    }
+  ]
+}

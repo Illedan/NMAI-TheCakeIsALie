@@ -5,11 +5,24 @@ import type {
   TripletexError,
 } from "./types.js";
 
+export interface ApiCallLog {
+  timestamp: string;
+  method: string;
+  path: string;
+  params?: Record<string, string | number | boolean>;
+  body?: Record<string, unknown>;
+  status: number;
+  durationMs: number;
+  response?: unknown;
+  error?: unknown;
+}
+
 export class TripletexClient {
   private baseUrl: string;
   private authHeader: string;
   callCount = 0;
   errorCount = 0;
+  apiCalls: ApiCallLog[] = [];
 
   constructor(credentials: TripletexCredentials) {
     this.baseUrl = credentials.base_url.replace(/\/$/, "");
@@ -34,6 +47,7 @@ export class TripletexClient {
     }
 
     this.callCount++;
+    const start = Date.now();
 
     const res = await fetch(url.toString(), {
       method,
@@ -45,14 +59,39 @@ export class TripletexClient {
       ...(options.body ? { body: JSON.stringify(options.body) } : {}),
     });
 
+    const durationMs = Date.now() - start;
+
     if (!res.ok) {
       this.errorCount++;
       const err = (await res.json().catch(() => ({}))) as TripletexError;
+      this.apiCalls.push({
+        timestamp: new Date().toISOString(),
+        method, path,
+        params: options.params,
+        body: options.body,
+        status: res.status,
+        durationMs,
+        error: err,
+      });
       throw new TripletexApiError(res.status, err);
     }
 
-    if (res.status === 204) return undefined as T;
-    return res.json() as Promise<T>;
+    if (res.status === 204) {
+      this.apiCalls.push({ timestamp: new Date().toISOString(), method, path, params: options.params, body: options.body, status: 204, durationMs });
+      return undefined as T;
+    }
+
+    const json = await res.json() as T;
+    this.apiCalls.push({
+      timestamp: new Date().toISOString(),
+      method, path,
+      params: options.params,
+      body: options.body,
+      status: res.status,
+      durationMs,
+      response: json,
+    });
+    return json;
   }
 
   async get<T>(

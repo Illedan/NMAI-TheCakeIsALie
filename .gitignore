@@ -208,6 +208,7 @@ __marimo__/
 /norgesgruppen/data
 /norgesgruppen/checkpoints
 *.pt
+/norgesgruppen/data
 norgesgruppen/.DS_Store
 .DS_Store
 /norgesgruppen/yolo_single_class

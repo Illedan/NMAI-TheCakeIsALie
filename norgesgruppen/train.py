@@ -305,6 +305,12 @@ def main():
     mapping_path = args.save_dir / "category_mapping.json"
     mapping_path.write_text(json.dumps({"cat_to_label": cat_to_label, "label_to_cat": {str(k): v for k, v in label_to_cat.items()}}))
 
+    # Training log
+    log_path = args.save_dir / "training_log.json"
+    training_log: list[dict] = []
+    if log_path.exists():
+        training_log = json.loads(log_path.read_text())
+
     # Warmup: linearly ramp up LR for first 3 epochs
     warmup_epochs = 3
 
@@ -346,6 +352,18 @@ def main():
         det_ap50, cls_ap50, final_score = evaluate(model, val_ds, device, cat_to_label, label_to_cat, annotations_path, args.batch_size)
         print(f"Epoch {epoch+1}/{args.epochs} | loss={avg_loss:.4f} lr={lr:.6f} | det_AP50={det_ap50:.4f} cls_AP50={cls_ap50:.4f} score={final_score:.4f}")
 
+        # Save training log
+        training_log.append({
+            "epoch": epoch + 1,
+            "loss": round(avg_loss, 4),
+            "lr": round(lr, 6),
+            "det_AP50": round(det_ap50, 4),
+            "cls_AP50": round(cls_ap50, 4),
+            "score": round(final_score, 4),
+            "best_score": round(max(best_score, final_score), 4),
+        })
+        log_path.write_text(json.dumps(training_log, indent=2))
+
         ckpt_data = {
             "model": model.state_dict(),
             "optimizer": optimizer.state_dict(),
@@ -362,6 +380,20 @@ def main():
             best_score = final_score
             torch.save(ckpt_data, args.save_dir / "best.pt")
             print(f"  -> New best: {best_score:.4f}")
+
+    # Save final summary
+    summary = {
+        "total_epochs": args.epochs,
+        "best_score": round(best_score, 4),
+        "final_loss": round(avg_loss, 4),
+        "num_classes": num_classes - 1,
+        "train_images": len(train_ds),
+        "val_images": len(val_ds),
+        "img_size": args.img_size,
+        "batch_size": args.batch_size,
+        "lr": args.lr,
+    }
+    (args.save_dir / "training_summary.json").write_text(json.dumps(summary, indent=2))
 
     print(f"\nTraining complete. Best score: {best_score:.4f}")
 

@@ -360,16 +360,30 @@ for round_id, datestr in ROUNDS:
     round_scores = []
     round_maxlikes = []
     print(f"\n=== Round {round_id[:8]} ===")
+
+    # Calibrate params from ALL replays in this round for better estimates
+    all_replays = []
+    all_ocean_masks = []
+    for idx in range(5):
+        replay_file = f"{datestr}_replay_seed_{idx}_{round_id}.json"
+        analysis_file = f"{datestr}_analysis_seed_{idx}_{round_id}.json"
+        _, initial_raw = load_analysis(analysis_file)
+        replay = load_replay(replay_file)
+        all_replays.append(replay)
+        all_ocean_masks.append(initial_raw == 10)
+
+    # Average calibration across all seeds in this round
+    all_params = [calibrate_params(r, o) for r, o in zip(all_replays, all_ocean_masks)]
+    params = {k: np.mean([p[k] for p in all_params]) for k in all_params[0]}
+
     for idx in range(5):
         analysis_file = f"{datestr}_analysis_seed_{idx}_{round_id}.json"
         replay_file = f"{datestr}_replay_seed_{idx}_{round_id}.json"
         ground_truth, initial_raw = load_analysis(analysis_file)
-        replay = load_replay(replay_file)
+        replay = all_replays[idx]
 
-        ocean_mask = (initial_raw == 10)
+        ocean_mask = all_ocean_masks[idx]
         H, W = replay.shape[1], replay.shape[2]
-        # Calibrate parameters from this replay
-        params = calibrate_params(replay, ocean_mask)
         # Precompute ocean neighbor count once per seed
         _tmp = State(replay[0], ocean_mask)
         n_ocean = _tmp.n_ocean

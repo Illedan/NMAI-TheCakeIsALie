@@ -55,7 +55,7 @@ class State:
     p_ruin_rebuild = 0.48     # ruin -> settlement
     p_ruin_to_empty = 0.33    # ruin -> empty/plains
     p_ruin_to_forest = 0.18   # ruin -> forest
-    p_ruin_to_port = 0.01     # ruin -> port (coastal)
+    p_ruin_port_per_ocean = 0.05  # ruin -> port (per ocean neighbor)
     p_forest_base = 0.004     # forest -> settlement (spontaneous)
     p_forest_per_n = 0.005    # forest -> settlement (per adjacent alive)
     p_empty_to_ruin = 0.0004  # empty -> ruin (rare)
@@ -123,20 +123,24 @@ class State:
         new_state[empty_to_ruin] = 3
 
         # Ruin (3) transitions: ruins always transition immediately (categorical draw)
+        # Port probability scales with ocean neighbors; remaining probability split among others
         is_ruin = (self.state == 3)
         rand2 = _rand(self.H, self.W)
-        # Ruin -> Settlement (most likely, ~48%)
-        ruin_to_settlement = is_ruin & (rand2 < self.p_ruin_rebuild)
-        new_state[ruin_to_settlement] = 1
-        # Ruin -> Empty (~33%)
-        ruin_to_empty = is_ruin & ~ruin_to_settlement & (rand2 < self.p_ruin_rebuild + self.p_ruin_to_empty)
-        new_state[ruin_to_empty] = 0
-        # Ruin -> Forest (~18%)
-        ruin_to_forest = is_ruin & ~ruin_to_settlement & ~ruin_to_empty & (rand2 < self.p_ruin_rebuild + self.p_ruin_to_empty + self.p_ruin_to_forest)
-        new_state[ruin_to_forest] = 4
-        # Ruin -> Port (~1%, if coastal)
-        ruin_to_port = is_ruin & ~ruin_to_settlement & ~ruin_to_empty & ~ruin_to_forest & (n_ocean > 0)
+        p_port = np.minimum(self.p_ruin_port_per_ocean * n_ocean, 0.5)
+        remaining = 1.0 - p_port
+        # Scale base rates by remaining probability
+        p_settl = self.p_ruin_rebuild * remaining
+        p_empty = self.p_ruin_to_empty * remaining
+        p_forest = self.p_ruin_to_forest * remaining
+        # Categorical: port, then settlement, then empty, then forest
+        ruin_to_port = is_ruin & (rand2 < p_port)
         new_state[ruin_to_port] = 2
+        ruin_to_settlement = is_ruin & ~ruin_to_port & (rand2 < p_port + p_settl)
+        new_state[ruin_to_settlement] = 1
+        ruin_to_empty = is_ruin & ~ruin_to_port & ~ruin_to_settlement & (rand2 < p_port + p_settl + p_empty)
+        new_state[ruin_to_empty] = 0
+        ruin_to_forest = is_ruin & ~ruin_to_port & ~ruin_to_settlement & ~ruin_to_empty
+        new_state[ruin_to_forest] = 4
 
         # Forest (4) -> Settlement (1): cleared for expansion
         is_forest = (self.state == 4)

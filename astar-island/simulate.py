@@ -115,9 +115,10 @@ class State:
         become_port = can_port & (rand < p_port)
         new_state[become_port] = 2
 
-        # Port (2) -> Ruin (3): port collapse
+        # Port (2) -> Ruin (3): port collapse (also density-dependent)
         is_port = (self.state == 2)
-        port_collapse = is_port & (rand < self.p_port_collapse)
+        p_port_coll = self.p_port_collapse + self.p_collapse_density * n_total_alive * 0.5
+        port_collapse = is_port & (rand < p_port_coll)
         new_state[port_collapse] = 3
 
         # Plains (class 0, not ocean) -> Settlement (1): expansion

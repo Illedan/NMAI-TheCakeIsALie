@@ -61,6 +61,7 @@ def calibrate_params(replay, ocean_mask):
     e_by_n = np.zeros(9); e_total_by_n = np.zeros(9)
     r_to = np.zeros(5)  # settl, empty, forest, port, other
     f_total = 0; f_to_s = 0
+    f_by_n = np.zeros(9); f_total_by_n = np.zeros(9)
 
     def _cn(grid, mask):
         padded = np.pad(mask.astype(np.float64), 1, mode='constant', constant_values=0)
@@ -98,6 +99,10 @@ def calibrate_params(replay, ocean_mask):
         is_f = (prev == 4)
         f_total += is_f.sum()
         f_to_s += (is_f & (curr == 1)).sum()
+        for n in range(9):
+            mask = is_f & (n_alive == n)
+            f_total_by_n[n] += mask.sum()
+            f_by_n[n] += (mask & (curr == 1)).sum()
 
         is_r = (prev == 3)
         r_to[0] += (is_r & (curr == 1)).sum()
@@ -111,6 +116,20 @@ def calibrate_params(replay, ocean_mask):
     obs['port_collapse'] = p_to_r / max(p_total, 1)
     obs['expand'] = e_to_s / max(e_total, 1)
     obs['forest_clear'] = f_to_s / max(f_total, 1)
+    # Fit forest base and per_n
+    f_rates = []
+    for n in range(9):
+        if f_total_by_n[n] > 20:
+            f_rates.append((n, f_by_n[n] / f_total_by_n[n]))
+    if len(f_rates) >= 2:
+        fns, frs = zip(*f_rates)
+        fA = np.vstack([np.ones(len(fns)), np.array(fns)]).T
+        ffit = np.linalg.lstsq(fA, np.array(frs), rcond=None)[0]
+        obs['forest_base'] = max(ffit[0], 0.0)
+        obs['forest_per_n'] = max(ffit[1], 0.0)
+    else:
+        obs['forest_base'] = obs['forest_clear'] * 0.5
+        obs['forest_per_n'] = obs['forest_clear'] * 1.0
     # Fit expand base and per_n from neighbor-stratified data
     rates = []
     for n in range(9):
@@ -140,7 +159,8 @@ def calibrate_params(replay, ocean_mask):
     w = 0.6
     priors = dict(collapse=0.055, port_collapse=0.025, expand=0.005,
                   expand_base=0.003, expand_per_n=0.005,
-                  forest_clear=0.007, port_per_ocean=0.03,
+                  forest_clear=0.007, forest_base=0.004, forest_per_n=0.005,
+                  port_per_ocean=0.03,
                   ruin_rebuild=0.48, ruin_to_empty=0.33, ruin_to_forest=0.18)
     blended = {k: w * obs[k] + (1-w) * priors[k] for k in priors}
     return blended
@@ -184,8 +204,8 @@ class State:
             self.p_expand_base = params['expand_base']
             self.p_expand_per_n = params['expand_per_n']
             self.p_port_per_ocean = params['port_per_ocean']
-            self.p_forest_base = params['forest_clear'] * 0.5
-            self.p_forest_per_n = params['forest_clear'] * 1.0
+            self.p_forest_base = params['forest_base']
+            self.p_forest_per_n = params['forest_per_n']
             self.p_ruin_rebuild = params['ruin_rebuild']
             self.p_ruin_to_empty = params['ruin_to_empty']
             self.p_ruin_to_forest = params['ruin_to_forest']

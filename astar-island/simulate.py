@@ -213,12 +213,15 @@ class Statistic:
 
 
 #Run simulations covering all available rounds and seeds
-ROUNDS = [
-    ("71451d74-be9f-471f-aacd-a41f3b68a9cd", "03_19_22"),
-]
-_r2 = "76909e29-f664-4b2f-b16b-61b7507277e9"
-if os.path.exists(os.path.join(ANALYSIS_DIR, f"03_20_01_analysis_seed_0_{_r2}.json")):
-    ROUNDS.append((_r2, "03_20_01"))
+# Auto-discover rounds from analysis directory
+import glob as _glob
+ROUNDS = []
+for path in sorted(_glob.glob(os.path.join(ANALYSIS_DIR, "*_analysis_seed_0_*.json"))):
+    fname = os.path.basename(path)
+    # Parse: {datestr}_analysis_seed_0_{round_id}.json
+    parts = fname.replace("_analysis_seed_0_", "|").replace(".json", "").split("|")
+    if len(parts) == 2:
+        ROUNDS.append((parts[1], parts[0]))
 number_of_simulations = 1200
 
 all_scores = []

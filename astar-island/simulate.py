@@ -354,7 +354,7 @@ class Statistic:
     #Then normalize the sum over the bins to 1, and then cap the probability to a lower bound of 0.01, then normalize the values again.
     def normalize(self):
         # Laplace smoothing: add alpha pseudo-counts per class
-        alpha = 0.02
+        alpha = 0.015
         counts = np.zeros((self.H, self.W, NUM_CLASSES), dtype=np.float64)
         for c in range(NUM_CLASSES):
             counts[:, :, c] = (self.final_states[:self.count] == c).sum(axis=0)

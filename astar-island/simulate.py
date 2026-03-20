@@ -53,8 +53,8 @@ def load_replay(ifile):
 
 class State:
     # Stochastic transition parameters (calibrated from replay data)
-    p_collapse_base = 0.035   # settlement -> ruin (early game)
-    p_collapse_growth = 0.0006 # increase per timestep
+    p_collapse_min = 0.035    # settlement -> ruin (base rate)
+    p_collapse_density = 0.00015 # extra collapse per alive settlement on map
     p_port_collapse = 0.018   # port -> ruin
     p_expand_base = 0.003     # empty land -> settlement (spontaneous)
     p_expand_per_n = 0.005    # empty land -> settlement (per adjacent alive)
@@ -102,9 +102,10 @@ class State:
         n_alive = self._count_neighbors((self.state == 1) | (self.state == 2))
         n_ocean = self.n_ocean
 
-        # Settlement (1) -> Ruin (3): collapse increases over time
+        # Settlement (1) -> Ruin (3): collapse increases with map density
         is_settlement = (self.state == 1)
-        p_collapse = self.p_collapse_base + self.p_collapse_growth * self.step
+        n_total_alive = np.sum(is_settlement) + np.sum(self.state == 2)
+        p_collapse = self.p_collapse_min + self.p_collapse_density * n_total_alive
         collapse = is_settlement & (rand < p_collapse)
         new_state[collapse] = 3
 

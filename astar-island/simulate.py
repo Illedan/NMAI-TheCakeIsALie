@@ -51,6 +51,80 @@ def load_replay(ifile):
     return np.array(frames, dtype=np.int32)
 
 
+def calibrate_params(replay, ocean_mask):
+    """Estimate key parameters from a single replay, blended with priors."""
+    T, H, W = replay.shape
+    # Count transitions
+    s_total = 0; s_to_r = 0; s_to_p_ocean = 0; s_ocean_total = 0
+    p_total = 0; p_to_r = 0
+    e_total = 0; e_to_s = 0
+    r_to = np.zeros(5)  # settl, empty, forest, port, other
+    f_total = 0; f_to_s = 0
+
+    def _cn(grid, mask):
+        padded = np.pad(mask.astype(np.float64), 1, mode='constant', constant_values=0)
+        counts = np.zeros((H, W), dtype=np.float64)
+        for dy in range(3):
+            for dx in range(3):
+                if dy == 1 and dx == 1: continue
+                counts += padded[dy:dy+H, dx:dx+W]
+        return counts
+
+    n_ocean = _cn(replay[0], ocean_mask)
+
+    for t in range(1, T):
+        prev, curr = replay[t-1], replay[t]
+        is_s = (prev == 1)
+        s_total += is_s.sum()
+        s_to_r += (is_s & (curr == 3)).sum()
+        coastal_s = is_s & (n_ocean > 0)
+        s_ocean_total += n_ocean[coastal_s].sum()
+        s_to_p_ocean += (coastal_s & (curr == 2)).sum()
+
+        is_p = (prev == 2)
+        p_total += is_p.sum()
+        p_to_r += (is_p & (curr == 3)).sum()
+
+        is_e = (prev == 0) & ~ocean_mask
+        e_total += is_e.sum()
+        e_to_s += (is_e & (curr == 1)).sum()
+
+        is_f = (prev == 4)
+        f_total += is_f.sum()
+        f_to_s += (is_f & (curr == 1)).sum()
+
+        is_r = (prev == 3)
+        r_to[0] += (is_r & (curr == 1)).sum()
+        r_to[1] += (is_r & (curr == 0)).sum()
+        r_to[2] += (is_r & (curr == 4)).sum()
+        r_to[3] += (is_r & (curr == 2)).sum()
+
+    # Estimate rates from replay
+    obs = {}
+    obs['collapse'] = s_to_r / max(s_total, 1)
+    obs['port_collapse'] = p_to_r / max(p_total, 1)
+    obs['expand'] = e_to_s / max(e_total, 1)
+    obs['forest_clear'] = f_to_s / max(f_total, 1)
+    obs['port_per_ocean'] = s_to_p_ocean / max(s_ocean_total, 1)
+    r_sum = r_to.sum()
+    if r_sum > 0:
+        obs['ruin_rebuild'] = r_to[0] / r_sum
+        obs['ruin_to_empty'] = r_to[1] / r_sum
+        obs['ruin_to_forest'] = r_to[2] / r_sum
+    else:
+        obs['ruin_rebuild'] = 0.48
+        obs['ruin_to_empty'] = 0.33
+        obs['ruin_to_forest'] = 0.18
+
+    # Blend with priors (weight: 0.7 replay, 0.3 prior)
+    w = 0.7
+    priors = dict(collapse=0.055, port_collapse=0.025, expand=0.005,
+                  forest_clear=0.007, port_per_ocean=0.03,
+                  ruin_rebuild=0.48, ruin_to_empty=0.33, ruin_to_forest=0.18)
+    blended = {k: w * obs[k] + (1-w) * priors[k] for k in priors}
+    return blended
+
+
 class State:
     # Stochastic transition parameters (calibrated from replay data)
     p_collapse_min = 0.035    # settlement -> ruin (base rate)
@@ -69,7 +143,7 @@ class State:
     p_forest_to_ruin = 0.0005 # forest -> ruin (rare)
 
     #Based on the first state in replay 0 set the initial state.
-    def __init__(self, initial_state, ocean_mask, n_ocean=None):
+    def __init__(self, initial_state, ocean_mask, n_ocean=None, params=None):
         self.state = initial_state.copy()
         self.H, self.W = self.state.shape
         self.ocean_mask = ocean_mask
@@ -80,6 +154,19 @@ class State:
             self.n_ocean = n_ocean
         else:
             self.n_ocean = self._count_neighbors(ocean_mask)
+        # Override parameters if calibrated
+        if params:
+            self.p_collapse_min = max(params['collapse'] * 0.6, 0.01)
+            self.p_collapse_density = params['collapse'] * 0.002
+            self.p_port_collapse = params['port_collapse']
+            self.p_expand_base = params['expand'] * 0.5
+            self.p_expand_per_n = params['expand'] * 0.8
+            self.p_port_per_ocean = params['port_per_ocean']
+            self.p_forest_base = params['forest_clear'] * 0.5
+            self.p_forest_per_n = params['forest_clear'] * 0.7
+            self.p_ruin_rebuild = params['ruin_rebuild']
+            self.p_ruin_to_empty = params['ruin_to_empty']
+            self.p_ruin_to_forest = params['ruin_to_forest']
 
     def _count_neighbors(self, mask):
         """Count how many of the 8 neighbors satisfy the boolean mask."""
@@ -239,13 +326,15 @@ for round_id, datestr in ROUNDS:
 
         ocean_mask = (initial_raw == 10)
         H, W = replay.shape[1], replay.shape[2]
+        # Calibrate parameters from this replay
+        params = calibrate_params(replay, ocean_mask)
         # Precompute ocean neighbor count once per seed
         _tmp = State(replay[0], ocean_mask)
         n_ocean = _tmp.n_ocean
         stats = Statistic(number_of_simulations, H, W)
 
         for i in range(number_of_simulations):
-            game = State(replay[0], ocean_mask, n_ocean=n_ocean)
+            game = State(replay[0], ocean_mask, n_ocean=n_ocean, params=params)
             game.simulate()
             stats.update(i, game.state)
 

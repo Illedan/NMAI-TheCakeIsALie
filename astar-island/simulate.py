@@ -1,8 +1,13 @@
 from prepare import score_fun
 import numpy as np
-import random
 import json
 import os
+
+
+def _rand(H, W):
+    """Fast uniform random array using os.urandom (numpy.random is broken)."""
+    buf = os.urandom(H * W * 4)
+    return np.frombuffer(buf, dtype=np.uint32).astype(np.float64).reshape(H, W) / 0xFFFFFFFF
 
 NSTEPS = 50
 NUM_CLASSES = 6
@@ -76,7 +81,7 @@ class State:
     #and that given 200 runs produce the distributions seen in the /analysis folder for the five different seeds that dictate some of the hidden, but stationary process parameters.
     def evolve(self):
         new_state = self.state.copy()
-        rand = np.array([[random.random() for _ in range(self.W)] for _ in range(self.H)])
+        rand = _rand(self.H, self.W)
 
         n_alive = self._count_neighbors((self.state == 1) | (self.state == 2))
         n_ocean = self._count_neighbors(self.ocean_mask)
@@ -105,7 +110,7 @@ class State:
 
         # Ruin (3) transitions: ruins always transition immediately (categorical draw)
         is_ruin = (self.state == 3)
-        rand2 = np.array([[random.random() for _ in range(self.W)] for _ in range(self.H)])
+        rand2 = _rand(self.H, self.W)
         # Ruin -> Settlement (most likely, ~48%)
         ruin_to_settlement = is_ruin & (rand2 < self.p_ruin_rebuild)
         new_state[ruin_to_settlement] = 1
@@ -182,7 +187,7 @@ class Statistic:
 #Run simulations covering all seeds
 ROUND_ID = "71451d74-be9f-471f-aacd-a41f3b68a9cd"
 datestr = "03_19_22"
-number_of_simulations = 200
+number_of_simulations = 500
 
 scores = []
 maxlikes = []

@@ -135,15 +135,10 @@ class State:
 
         self.state = new_state
 
-    #Simulate evolution from the initial state to timestep 50 by calling evolve, and record the states at every timestep.
+    #Simulate evolution from the initial state to timestep 50 by calling evolve.
     def simulate(self):
-        nsteps = NSTEPS
-        game_states = np.zeros((nsteps + 1, self.H, self.W), dtype=np.int32)
-        game_states[0] = self.state
-        for i in range(nsteps):
+        for _ in range(NSTEPS):
             self.evolve()
-            game_states[i + 1] = self.state
-        return game_states
 
 
 class Statistic:
@@ -154,8 +149,8 @@ class Statistic:
         self.final_states = np.zeros((size, H, W), dtype=np.int32)
         self.count = 0
 
-    def update(self, i, game_states):
-        self.final_states[i] = game_states[-1]
+    def update(self, i, final_state):
+        self.final_states[i] = final_state
         self.count = i + 1
 
     #The maximum likelihood of seeing the observed replays given the stochastic model for the evolution of the state.
@@ -187,7 +182,7 @@ class Statistic:
 #Run simulations covering all seeds
 ROUND_ID = "71451d74-be9f-471f-aacd-a41f3b68a9cd"
 datestr = "03_19_22"
-number_of_simulations = 1000
+number_of_simulations = 1200
 
 scores = []
 maxlikes = []
@@ -204,8 +199,8 @@ for idx in range(5):
 
     for i in range(number_of_simulations):
         game = State(replay[0], ocean_mask)
-        game_states = game.simulate()
-        stats.update(i, game_states)
+        game.simulate()
+        stats.update(i, game.state)
 
     normalized_stats = stats.normalize()
     score = score_fun(ground_truth, normalized_stats)

@@ -62,12 +62,17 @@ class State:
     p_forest_to_ruin = 0.0005 # forest -> ruin (rare)
 
     #Based on the first state in replay 0 set the initial state.
-    def __init__(self, initial_state, ocean_mask):
+    def __init__(self, initial_state, ocean_mask, n_ocean=None):
         self.state = initial_state.copy()
         self.H, self.W = self.state.shape
         self.ocean_mask = ocean_mask
         self.static_mask = ocean_mask | (initial_state == 5)
         self.step = 0
+        # Precompute ocean neighbor count (static, never changes)
+        if n_ocean is not None:
+            self.n_ocean = n_ocean
+        else:
+            self.n_ocean = self._count_neighbors(ocean_mask)
 
     def _count_neighbors(self, mask):
         """Count how many of the 8 neighbors satisfy the boolean mask."""
@@ -88,7 +93,7 @@ class State:
         rand = _rand(self.H, self.W)
 
         n_alive = self._count_neighbors((self.state == 1) | (self.state == 2))
-        n_ocean = self._count_neighbors(self.ocean_mask)
+        n_ocean = self.n_ocean
 
         # Settlement (1) -> Ruin (3): collapse increases over time
         is_settlement = (self.state == 1)
@@ -193,12 +198,14 @@ class Statistic:
         return probs
 
 
-#Run simulations covering all rounds and seeds
+#Run simulations covering all available rounds and seeds
 ROUNDS = [
     ("71451d74-be9f-471f-aacd-a41f3b68a9cd", "03_19_22"),
-    ("76909e29-f664-4b2f-b16b-61b7507277e9", "03_20_01"),
 ]
-number_of_simulations = 1200
+_r2 = "76909e29-f664-4b2f-b16b-61b7507277e9"
+if os.path.exists(os.path.join(ANALYSIS_DIR, f"03_20_01_analysis_seed_0_{_r2}.json")):
+    ROUNDS.append((_r2, "03_20_01"))
+number_of_simulations = 1500
 
 all_scores = []
 all_maxlikes = []
@@ -215,10 +222,13 @@ for round_id, datestr in ROUNDS:
 
         ocean_mask = (initial_raw == 10)
         H, W = replay.shape[1], replay.shape[2]
+        # Precompute ocean neighbor count once per seed
+        _tmp = State(replay[0], ocean_mask)
+        n_ocean = _tmp.n_ocean
         stats = Statistic(number_of_simulations, H, W)
 
         for i in range(number_of_simulations):
-            game = State(replay[0], ocean_mask)
+            game = State(replay[0], ocean_mask, n_ocean=n_ocean)
             game.simulate()
             stats.update(i, game.state)
 

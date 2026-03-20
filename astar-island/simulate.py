@@ -162,11 +162,11 @@ def calibrate_params(replay, ocean_mask):
                   port_per_ocean=0.03,
                   ruin_rebuild=0.48, ruin_to_empty=0.33, ruin_to_forest=0.18)
     # Weight per param: high-count params get more trust
-    weights = dict(collapse=0.8, port_collapse=0.7, expand=0.7,
+    weights = dict(collapse=0.85, port_collapse=0.75, expand=0.7,
                    expand_base=0.6, expand_per_n=0.6,
                    forest_clear=0.7, forest_base=0.6, forest_per_n=0.6,
                    port_per_ocean=0.6,
-                   ruin_rebuild=0.8, ruin_to_empty=0.8, ruin_to_forest=0.8)
+                   ruin_rebuild=0.85, ruin_to_empty=0.85, ruin_to_forest=0.85)
     blended = {k: weights[k] * obs[k] + (1-weights[k]) * priors[k] for k in priors}
     return blended
 

@@ -197,7 +197,7 @@ class Statistic:
         probs = np.zeros((self.H, self.W, NUM_CLASSES), dtype=np.float64)
         for c in range(NUM_CLASSES):
             probs[:, :, c] = (self.final_states[:self.count] == c).mean(axis=0)
-        probs = np.maximum(probs, 0.001)
+        probs = np.maximum(probs, 0.0005)
         probs = probs / probs.sum(axis=-1, keepdims=True)
         return probs
 

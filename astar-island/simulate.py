@@ -194,11 +194,12 @@ class Statistic:
     #Make a histogram over all object types based on the observations of each of them over all the size simulations, producing one bin for each the six object types.
     #Then normalize the sum over the bins to 1, and then cap the probability to a lower bound of 0.01, then normalize the values again.
     def normalize(self):
-        probs = np.zeros((self.H, self.W, NUM_CLASSES), dtype=np.float64)
+        # Laplace smoothing: add alpha pseudo-counts per class
+        alpha = 0.1
+        counts = np.zeros((self.H, self.W, NUM_CLASSES), dtype=np.float64)
         for c in range(NUM_CLASSES):
-            probs[:, :, c] = (self.final_states[:self.count] == c).mean(axis=0)
-        probs = np.maximum(probs, 0.0001)
-        probs = probs / probs.sum(axis=-1, keepdims=True)
+            counts[:, :, c] = (self.final_states[:self.count] == c).sum(axis=0)
+        probs = (counts + alpha) / (self.count + alpha * NUM_CLASSES)
         return probs
 
 

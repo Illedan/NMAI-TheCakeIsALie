@@ -156,14 +156,15 @@ class State:
             self.n_ocean = self._count_neighbors(ocean_mask)
         # Override parameters if calibrated
         if params:
-            self.p_collapse_min = max(params['collapse'] * 0.6, 0.01)
-            self.p_collapse_density = params['collapse'] * 0.002
+            # Use flat collapse rate (density-dependent didn't calibrate well)
+            self.p_collapse_min = params['collapse']
+            self.p_collapse_density = 0.0
             self.p_port_collapse = params['port_collapse']
-            self.p_expand_base = params['expand'] * 0.5
-            self.p_expand_per_n = params['expand'] * 0.8
+            self.p_expand_base = params['expand'] * 0.4
+            self.p_expand_per_n = params['expand'] * 1.2
             self.p_port_per_ocean = params['port_per_ocean']
-            self.p_forest_base = params['forest_clear'] * 0.5
-            self.p_forest_per_n = params['forest_clear'] * 0.7
+            self.p_forest_base = params['forest_clear'] * 0.4
+            self.p_forest_per_n = params['forest_clear'] * 1.2
             self.p_ruin_rebuild = params['ruin_rebuild']
             self.p_ruin_to_empty = params['ruin_to_empty']
             self.p_ruin_to_forest = params['ruin_to_forest']

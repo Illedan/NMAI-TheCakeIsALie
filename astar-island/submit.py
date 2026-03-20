@@ -1,7 +1,6 @@
 """Fetch active round, run simulations, and submit predictions to Astar Island."""
 
 import numpy as np
-import random
 import requests
 import sys
 from secrets import ACCESS_TOKEN
@@ -9,7 +8,7 @@ from simulate import State, Statistic, RAW_TO_CLASS, NUM_CLASSES
 
 BASE_URL = "https://api.ainm.no/astar-island"
 HEADERS = {"Authorization": f"Bearer {ACCESS_TOKEN}"}
-NUM_SIMULATIONS = 200
+NUM_SIMULATIONS = 1200
 
 
 def get_active_round():

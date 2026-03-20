@@ -193,38 +193,48 @@ class Statistic:
         return probs
 
 
-#Run simulations covering all seeds
-ROUND_ID = "71451d74-be9f-471f-aacd-a41f3b68a9cd"
-datestr = "03_19_22"
+#Run simulations covering all rounds and seeds
+ROUNDS = [
+    ("71451d74-be9f-471f-aacd-a41f3b68a9cd", "03_19_22"),
+    ("76909e29-f664-4b2f-b16b-61b7507277e9", "03_20_01"),
+]
 number_of_simulations = 1200
 
-scores = []
-maxlikes = []
+all_scores = []
+all_maxlikes = []
 
-for idx in range(5):
-    analysis_file = f"{datestr}_analysis_seed_{idx}_{ROUND_ID}.json"
-    replay_file = f"{datestr}_replay_seed_{idx}_{ROUND_ID}.json"
-    ground_truth, initial_raw = load_analysis(analysis_file)
-    replay = load_replay(replay_file)
+for round_id, datestr in ROUNDS:
+    round_scores = []
+    round_maxlikes = []
+    print(f"\n=== Round {round_id[:8]} ===")
+    for idx in range(5):
+        analysis_file = f"{datestr}_analysis_seed_{idx}_{round_id}.json"
+        replay_file = f"{datestr}_replay_seed_{idx}_{round_id}.json"
+        ground_truth, initial_raw = load_analysis(analysis_file)
+        replay = load_replay(replay_file)
 
-    ocean_mask = (initial_raw == 10)
-    H, W = replay.shape[1], replay.shape[2]
-    stats = Statistic(number_of_simulations, H, W)
+        ocean_mask = (initial_raw == 10)
+        H, W = replay.shape[1], replay.shape[2]
+        stats = Statistic(number_of_simulations, H, W)
 
-    for i in range(number_of_simulations):
-        game = State(replay[0], ocean_mask)
-        game.simulate()
-        stats.update(i, game.state)
+        for i in range(number_of_simulations):
+            game = State(replay[0], ocean_mask)
+            game.simulate()
+            stats.update(i, game.state)
 
-    normalized_stats = stats.normalize()
-    score = score_fun(ground_truth, normalized_stats)
-    max_likelihood = stats.maximum_log_likelihood(replay)
-    scores.append(score)
-    maxlikes.append(max_likelihood)
-    print(f"Seed {idx}: score={score:.4f}, maxlike={max_likelihood:.4f}")
+        normalized_stats = stats.normalize()
+        score = score_fun(ground_truth, normalized_stats)
+        max_likelihood = stats.maximum_log_likelihood(replay)
+        round_scores.append(score)
+        round_maxlikes.append(max_likelihood)
+        print(f"  Seed {idx}: score={score:.4f}, maxlike={max_likelihood:.4f}")
 
-avg_score = np.mean(scores)
-avg_maxlike = np.mean(maxlikes)
+    avg_s = np.mean(round_scores)
+    avg_m = np.mean(round_maxlikes)
+    print(f"  Round avg: score={avg_s:.4f}, maxlike={avg_m:.4f}")
+    all_scores.extend(round_scores)
+    all_maxlikes.extend(round_maxlikes)
+
 print("---")
-print(f"score:  {avg_score:.4f}")
-print(f"maxlike: {avg_maxlike:.4f}")
+print(f"score:  {np.mean(all_scores):.4f}")
+print(f"maxlike: {np.mean(all_maxlikes):.4f}")

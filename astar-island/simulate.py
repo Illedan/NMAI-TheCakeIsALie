@@ -197,9 +197,9 @@ class State:
             self.n_ocean = self._count_neighbors(ocean_mask)
         # Override parameters if calibrated
         if params:
-            # Use flat collapse rate (density-dependent didn't calibrate well)
-            self.p_collapse_min = params['collapse']
-            self.p_collapse_density = 0.0
+            # Split calibrated collapse: 70% base, 30% density-dependent
+            self.p_collapse_min = params['collapse'] * 0.7
+            self.p_collapse_density = params['collapse'] * 0.3 / 200
             self.p_port_collapse = params['port_collapse']
             self.p_expand_base = params['expand_base']
             self.p_expand_per_n = params['expand_per_n']

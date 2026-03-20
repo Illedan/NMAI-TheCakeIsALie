@@ -9,8 +9,28 @@ from datetime import datetime
 from time import sleep
 
 BASE_URL = "https://api.ainm.no/astar-island"
-ROUND_ID = "71451d74-be9f-471f-aacd-a41f3b68a9cd"
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+SIMULATIONS_DIR = os.path.join(SCRIPT_DIR, "simulations")
+
+
+def get_latest_round_id() -> str:
+    """Read round_id from the most recent simulation run's summary.json."""
+    folders = sorted(
+        (d for d in os.listdir(SIMULATIONS_DIR)
+         if os.path.isdir(os.path.join(SIMULATIONS_DIR, d))),
+        reverse=True,
+    )
+    if not folders:
+        raise FileNotFoundError("No simulation runs found in simulations/")
+    summary_path = os.path.join(SIMULATIONS_DIR, folders[0], "summary.json")
+    with open(summary_path) as f:
+        summary = json.load(f)
+    round_id = summary["round_id"]
+    print(f"Using round_id from {folders[0]}/summary.json: {round_id}")
+    return round_id
+
+
+ROUND_ID = get_latest_round_id()
 PREFIX = datetime.now().strftime("%m_%d_%H")
 REPLAY_DIR = os.path.join(SCRIPT_DIR, "replays")
 ANALYSIS_DIR = os.path.join(SCRIPT_DIR, "analysis")
@@ -45,7 +65,7 @@ def get_replays():
         with open(out_path, "w") as f:
             json.dump(resp.json(), f)
         print(f"  Saved to {out_path}")
-        sleep(1)
+        sleep(20)
 
     print("Done.")
 

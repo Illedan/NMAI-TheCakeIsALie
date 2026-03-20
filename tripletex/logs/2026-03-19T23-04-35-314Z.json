@@ -1,0 +1,260 @@
+{
+  "timestamp": "2026-03-19T23:04:35.314Z",
+  "request": {
+    "prompt": "Create an employee with first name Worker470089, last name Smith, and email worker470089@company.com",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "agent": {
+    "callCount": 2,
+    "errorCount": 0,
+    "messages": [
+      {
+        "role": "user",
+        "parts": [
+          {
+            "text": "Create an employee with first name Worker470089, last name Smith, and email worker470089@company.com"
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "method": "GET",
+                "path": "/department",
+                "params": "{\"fields\": \"*\", \"count\": 1}"
+              }
+            },
+            "thoughtSignature": "CtMEAb4+9vt3I34oVK7iOUGcaQh8e0R23kckQgPRKNcDkDZLbxGd83Px+uWmKNy7k6/BSXMjI05G75Eb4UIChkakeCtQHpsra7WId4TqQjD49XGtOkc+SW5wFypeTTOn4iUiptNGv1//F5K9jWXF5pTupvhwT/Z1JYFEzkTwgLuQFhwbErrV8IVLixWabdIIE9UFg692iUz1sl3uHO6VS7v/lPe/KXglehzB3PRUy+zBTQbVWDiyCsXDOIUWsw/+dmhwf02WeItp+bedra6Nv5WQ9yU6/5r0glizeRXUjS8fbAdGRKR9L3brJ5QlE55QX+pUGd8TIPoKjEBZ89Y/JQrZwnFKXu4r9+26tEgUD9bK6QX2EGHNr7yyk4q+1flzd5UaVhguBkdWaca+1kXJxxdcVWu27sR4BjgPlgj4d9KcaR2X1V5KG4vsW9ot0Lxh+uMaEt2Vl1rF2DbfvuFZn0Qfy8HOyyoBdYB8vA2F/q4bKQtoozClHVSHbGh0UOJ36y+fSjbFGeybVqcit0xOlii6Dp92EnNSQEKOpqsYl/LuySdtAVHv/bq3MM6tDWG+Rg6ekoWpZS+QbzLZWWcO0xwHnyQQOmgMQ5E3b1agWe9G2hRiXxzEMsUZ+yVGb9FdhhwhamXSma+aWBbJefKd7dF3LSoOKpuRL+GkWr/4gj5IXH3+NVCnsKhs5oukndrcb6DrsYdjVUUUwlrh6xhRqrhT66FGogjcgmkComdVgnf9aOPrAHgpboOUR3XaZXSwprrvLe7SOWlWJQ+U0d27jrQC40JRaw=="
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "fullResultSize": 2,
+                "from": 0,
+                "count": 1,
+                "versionDigest": "'If-None-Match' header not specified",
+                "values": [
+                  {
+                    "id": 839940,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/department/839940",
+                    "name": "Avdeling",
+                    "departmentNumber": "",
+                    "departmentManager": null,
+                    "displayName": "Avdeling",
+                    "isInactive": false,
+                    "businessActivityTypeId": 0
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "path": "/employee",
+                "method": "POST",
+                "body": "{\"firstName\": \"Worker470089\", \"lastName\": \"Smith\", \"email\": \"worker470089@company.com\", \"userType\": \"STANDARD\", \"department\": {\"id\": 839940}}"
+              }
+            },
+            "thoughtSignature": "Ct4CAb4+9vvGdDX1UU4ya5yB77zgdShtd2rn/57TcwpNxUm360gbTY2bp93j7y95+xqa7E15gxFEryz7b0VYdaZr065DF28XVU7pJgvrOiqlS9sKZOTfL3/lZGOTXjH623LJJQSO0byV9liTAzdsj4mXrK6BnzouefcrfPB/HsY3cbe0QELY/R9xZ7ygjQCNspTyAesd+L8PsBXMSqFkeXNkZ9dVstRpNfceOf076NfLlG5r2YB+SBVC8MHFlpIrusr8dOSCw2cfE5OEzTu30O0yycP+J8LWZs/13dqBqK9/3nfBEPyaw4Z5bdsTcaEp1i6filGjOigfGTwtSSNAFyH+TmLQv+JojDgKacIwYOvig2TYwjS6ORHNgnHcn8Fg7Pm4JZFUloh77j6jf8M27/QYholM+q8FmvcDoHkwvZ495dX0tj8suGfyQ9e0Ec1AIlrZoA5/0rT/ForWB4+ZtDMKIgG+Pvb7GuJjVz5FL8wHNAiefE5OPjHx6rPscSuo4PPwM6A="
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "value": {
+                  "id": 18488981,
+                  "version": 1,
+                  "url": "kkpqfuj-amager.tripletex.dev/v2/employee/18488981",
+                  "firstName": "Worker470089",
+                  "lastName": "Smith",
+                  "displayName": "Worker470089 Smith",
+                  "employeeNumber": "",
+                  "dateOfBirth": null,
+                  "email": "worker470089@company.com",
+                  "phoneNumberMobileCountry": {
+                    "id": 161,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/country/161"
+                  },
+                  "phoneNumberMobile": "",
+                  "phoneNumberHome": "",
+                  "phoneNumberWork": "",
+                  "nationalIdentityNumber": "",
+                  "dnumber": "",
+                  "internationalId": {
+                    "intAmeldingType": null,
+                    "country": null,
+                    "number": ""
+                  },
+                  "bankAccountNumber": "",
+                  "iban": "",
+                  "bic": "",
+                  "creditorBankCountryId": 0,
+                  "usesAbroadPayment": false,
+                  "userType": null,
+                  "allowInformationRegistration": true,
+                  "isContact": false,
+                  "isProxy": false,
+                  "comments": "",
+                  "address": null,
+                  "department": {
+                    "id": 839940,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/department/839940"
+                  },
+                  "employments": [],
+                  "holidayAllowanceEarned": {
+                    "year": 0,
+                    "amount": 0,
+                    "basis": 0,
+                    "amountExtraHolidayWeek": 0
+                  },
+                  "employeeCategory": null,
+                  "isAuthProjectOverviewURL": true,
+                  "pictureId": 0,
+                  "companyId": 108118447,
+                  "vismaConnect2FAactive": false
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "text": "DONE",
+            "thoughtSignature": "CnwBvj72+29G3O0+uwKJpV8yvD6iBYKXr4l/FCHuHPbZ1CxZoUBUzdSXVHlTv7nkpqqjEoJujvSinibB7a+CF+T/d9mdGyS4oMqVnAirAsLY9mNBxdGbIjwTiqXfmHLHM40B/jYzzGj2+ti0L6d3S9fMAOZizTLJty4CXHzs"
+          }
+        ]
+      }
+    ]
+  },
+  "apiCalls": [
+    {
+      "timestamp": "2026-03-19T23:04:36.423Z",
+      "method": "GET",
+      "path": "/department",
+      "params": {
+        "fields": "*",
+        "count": 1
+      },
+      "status": 200,
+      "durationMs": 92,
+      "response": {
+        "fullResultSize": 2,
+        "from": 0,
+        "count": 1,
+        "versionDigest": "'If-None-Match' header not specified",
+        "values": [
+          {
+            "id": 839940,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/department/839940",
+            "name": "Avdeling",
+            "departmentNumber": "",
+            "departmentManager": null,
+            "displayName": "Avdeling",
+            "isInactive": false,
+            "businessActivityTypeId": 0
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-03-19T23:04:38.166Z",
+      "method": "POST",
+      "path": "/employee",
+      "body": {
+        "firstName": "Worker470089",
+        "lastName": "Smith",
+        "email": "worker470089@company.com",
+        "userType": "STANDARD",
+        "department": {
+          "id": 839940
+        }
+      },
+      "status": 201,
+      "durationMs": 436,
+      "response": {
+        "value": {
+          "id": 18488981,
+          "version": 1,
+          "url": "kkpqfuj-amager.tripletex.dev/v2/employee/18488981",
+          "firstName": "Worker470089",
+          "lastName": "Smith",
+          "displayName": "Worker470089 Smith",
+          "employeeNumber": "",
+          "dateOfBirth": null,
+          "email": "worker470089@company.com",
+          "phoneNumberMobileCountry": {
+            "id": 161,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/country/161"
+          },
+          "phoneNumberMobile": "",
+          "phoneNumberHome": "",
+          "phoneNumberWork": "",
+          "nationalIdentityNumber": "",
+          "dnumber": "",
+          "internationalId": {
+            "intAmeldingType": null,
+            "country": null,
+            "number": ""
+          },
+          "bankAccountNumber": "",
+          "iban": "",
+          "bic": "",
+          "creditorBankCountryId": 0,
+          "usesAbroadPayment": false,
+          "userType": null,
+          "allowInformationRegistration": true,
+          "isContact": false,
+          "isProxy": false,
+          "comments": "",
+          "address": null,
+          "department": {
+            "id": 839940,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/department/839940"
+          },
+          "employments": [],
+          "holidayAllowanceEarned": {
+            "year": 0,
+            "amount": 0,
+            "basis": 0,
+            "amountExtraHolidayWeek": 0
+          },
+          "employeeCategory": null,
+          "isAuthProjectOverviewURL": true,
+          "pictureId": 0,
+          "companyId": 108118447,
+          "vismaConnect2FAactive": false
+        }
+      }
+    }
+  ]
+}

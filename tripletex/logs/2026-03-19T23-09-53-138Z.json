@@ -1,0 +1,12 @@
+{
+  "timestamp": "2026-03-19T23:09:53.138Z",
+  "request": {
+    "prompt": "Crie e envie uma fatura ao cliente Cliente666541 Lda (org. nº 987666541) por 25800 NOK sem IVA. A fatura refere-se a Consultoria em nuvem.",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "error": "SyntaxError: \"[object Object]\" is not valid JSON",
+  "apiCalls": []
+}

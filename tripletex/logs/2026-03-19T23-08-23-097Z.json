@@ -1,0 +1,193 @@
+{
+  "timestamp": "2026-03-19T23:08:23.097Z",
+  "request": {
+    "prompt": "Opprett en kunde med navn 'Bedrift666541 AS' og e-post post666541@bedrift.no",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "agent": {
+    "callCount": 1,
+    "errorCount": 0,
+    "messages": [
+      {
+        "role": "user",
+        "parts": [
+          {
+            "text": "Opprett en kunde med navn 'Bedrift666541 AS' og e-post post666541@bedrift.no"
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "path": "/customer",
+                "body": "{\"name\": \"Bedrift666541 AS\", \"isCustomer\": true, \"email\": \"post666541@bedrift.no\"}",
+                "method": "POST"
+              }
+            },
+            "thoughtSignature": "CroIAb4+9vuz1E+wbh/8RdfgsET1BXnWs46AkJ9YTu/DaqQHgCZF3ZucElj3Dqt/Ny1AGz5hkRJQKe3uFu12/ZYgM1mBicUrrYV+Tg1UDugXhjyK55Pm8b8krqxquqpSuSMqsPPf8W1gKPAm+CI5wdy/91Og88V80YvlKkhP3pa7LndIhvG/pbmX2w2OG6/1QD7iwhemNk00nC5RlDfy3G533xsSfjha0rOFD8g17p+e6Q7F5ZdBdoY/7C8JaDrCmP5lWCxrE66YdU1tTB387rAOfY9ASqurjYZDl+o3GOwVfal5QsShqya52lcZkdDH6V7hJBOCs3eOSyNr41jmztk7hZLiEjrLdUt4mVCY0dNx9v2w3NqCzZTajhcXQVraHlTbvIbt6lK/59CeOx1ncIW/9hUkDRCUrzQlCjerSoktUzeL71F7ERkRTqwl5QXOIQ3R5fZXHCITTUtNIpNLM+58Y6LXtwMFTvIDEPEkD8eEDDcFh4opKm4zyih0DmGI4JUQqtJfMX5/sYqj/y2RhkOcfzESNcixfF46+/rb+44RM/3k8QSCRXgezZB71HF4zhgShpb2mggUduZS0nCGoxikx27ffVYjrZjmqCkLjf5xICrnl/DNnS9ObMq+bjM0Jnkpbh6R340R671uF40F3SYozTcPFVTJxUZrb0ceKG6p6APR8jVY3zI9PzTCSO7urZ46id1nVRgz+6S0pGp0c71iw0nMru01HXx07itO473z72321lkAaOBinCfDvTPQ0oygM+Hqne2aC7EAZWLOJKXb3AkYJtu2ePSwm4THsyLz01+CCtaEb98OE2+QQH/NLbqoih5DIXcC4aw7H0txhKS3Gf+1WVl7PgtUb8BGX4xZ0GPjF4sXk7d6mjP/Bfu79WNXnDCrqO40BkzTqMVMd9uGi+WFIONJKL7DHY/nRCPuDS9DyjX2BwpZU3yzN/vfdJueQ46ECvn0eaON3T8f/BVgadu5QFQ1D1HUYGh38iwe3JrXtzLwHY4ysDtAF/h0+0KLSbdEn4YF4F5GCb5kijJpPljoLstwYX0tFkH5aRy/I58ekkIUEne+Ph1E106oIfOA12s0l7YGysFpfBheUDLVvGcW0xXiIiHvEZ3u5n7C77lM+7Zd/Bxkch9+XmZFTj7G13faCmgZVt6XrDs2GNdhN7G82ngMEwcxvDQqkiy+5lwgEVTsBbpHrg1KgAXCDh02zlH1Tfbu0ffJ3mS0h4M6gfs3NoSrGr6TRBMotF7P8IVbMLQR6ntSVUx99/QvHOzoArtLFpXG/KUQ2LTX595vzaXh6t1VbmhQpNeMW1CNSaciv1CgI4TiudIYnVh9crDQOIGESO5g6NTeXw7077eTgBtIJ//VGWAJL6ZA7e/p/I+IV6aGDNJI5eYg9vwwI9DiVitR+XJslHkASjY6hL2JfpwL/57bd+co5xQ="
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "value": {
+                  "id": 108165102,
+                  "version": 1,
+                  "url": "kkpqfuj-amager.tripletex.dev/v2/customer/108165102",
+                  "name": "Bedrift666541 AS",
+                  "organizationNumber": "",
+                  "globalLocationNumber": 0,
+                  "supplierNumber": 0,
+                  "customerNumber": 10026,
+                  "isSupplier": false,
+                  "isCustomer": true,
+                  "isInactive": false,
+                  "accountManager": null,
+                  "department": null,
+                  "email": "post666541@bedrift.no",
+                  "invoiceEmail": "",
+                  "overdueNoticeEmail": "",
+                  "phoneNumber": "",
+                  "phoneNumberMobile": "",
+                  "description": "",
+                  "language": "NO",
+                  "displayName": "Bedrift666541 AS (10026)",
+                  "isPrivateIndividual": false,
+                  "singleCustomerInvoice": false,
+                  "invoiceSendMethod": "EMAIL",
+                  "emailAttachmentType": "ATTACHMENT",
+                  "postalAddress": {
+                    "id": 405181680,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/address/405181680"
+                  },
+                  "physicalAddress": {
+                    "id": 405181679,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/address/405181679"
+                  },
+                  "deliveryAddress": null,
+                  "category1": null,
+                  "category2": null,
+                  "category3": null,
+                  "invoicesDueIn": 14,
+                  "invoicesDueInType": "DAYS",
+                  "currency": {
+                    "id": 1,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/currency/1"
+                  },
+                  "bankAccountPresentation": [],
+                  "ledgerAccount": {
+                    "id": 425217066,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/account/425217066"
+                  },
+                  "isFactoring": false,
+                  "invoiceSendSMSNotification": false,
+                  "invoiceSMSNotificationNumber": "",
+                  "isAutomaticSoftReminderEnabled": false,
+                  "isAutomaticReminderEnabled": false,
+                  "isAutomaticNoticeOfDebtCollectionEnabled": false,
+                  "discountPercentage": 0,
+                  "website": ""
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "text": "DONE",
+            "thoughtSignature": "Co0BAb4+9vu3lPaY8caog48lbbAztez6qRYysQRaAgHXtkP8pVXA8u0jLc0AtXmIj1sX14A+oA/lMiRtKpJz9MncY7qJZtaJp6JfVjIIWG17jOSwlGWCr8mEAAw5TjpZwrahsol0uW94NyvpZS0hB2wkRurgbo6fWVfT6OdOCz9H4YRiyShL/7kX2m8n/yT7"
+          }
+        ]
+      }
+    ]
+  },
+  "apiCalls": [
+    {
+      "timestamp": "2026-03-19T23:08:28.776Z",
+      "method": "POST",
+      "path": "/customer",
+      "body": {
+        "name": "Bedrift666541 AS",
+        "isCustomer": true,
+        "email": "post666541@bedrift.no"
+      },
+      "status": 201,
+      "durationMs": 253,
+      "response": {
+        "value": {
+          "id": 108165102,
+          "version": 1,
+          "url": "kkpqfuj-amager.tripletex.dev/v2/customer/108165102",
+          "name": "Bedrift666541 AS",
+          "organizationNumber": "",
+          "globalLocationNumber": 0,
+          "supplierNumber": 0,
+          "customerNumber": 10026,
+          "isSupplier": false,
+          "isCustomer": true,
+          "isInactive": false,
+          "accountManager": null,
+          "department": null,
+          "email": "post666541@bedrift.no",
+          "invoiceEmail": "",
+          "overdueNoticeEmail": "",
+          "phoneNumber": "",
+          "phoneNumberMobile": "",
+          "description": "",
+          "language": "NO",
+          "displayName": "Bedrift666541 AS (10026)",
+          "isPrivateIndividual": false,
+          "singleCustomerInvoice": false,
+          "invoiceSendMethod": "EMAIL",
+          "emailAttachmentType": "ATTACHMENT",
+          "postalAddress": {
+            "id": 405181680,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/address/405181680"
+          },
+          "physicalAddress": {
+            "id": 405181679,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/address/405181679"
+          },
+          "deliveryAddress": null,
+          "category1": null,
+          "category2": null,
+          "category3": null,
+          "invoicesDueIn": 14,
+          "invoicesDueInType": "DAYS",
+          "currency": {
+            "id": 1,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/currency/1"
+          },
+          "bankAccountPresentation": [],
+          "ledgerAccount": {
+            "id": 425217066,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/account/425217066"
+          },
+          "isFactoring": false,
+          "invoiceSendSMSNotification": false,
+          "invoiceSMSNotificationNumber": "",
+          "isAutomaticSoftReminderEnabled": false,
+          "isAutomaticReminderEnabled": false,
+          "isAutomaticNoticeOfDebtCollectionEnabled": false,
+          "discountPercentage": 0,
+          "website": ""
+        }
+      }
+    }
+  ]
+}

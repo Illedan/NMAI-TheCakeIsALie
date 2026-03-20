@@ -1,0 +1,13 @@
+{
+  "round_id": "f1dac9a9-5cf1-49a9-8f17-d6cb5d5ba5cb",
+  "timestamp": "20260320_010821",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "viewports_per_seed": 10,
+  "total_queries": 50
+}

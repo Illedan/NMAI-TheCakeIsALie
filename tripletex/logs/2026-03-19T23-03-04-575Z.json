@@ -1,0 +1,97 @@
+{
+  "timestamp": "2026-03-19T23:03:04.575Z",
+  "request": {
+    "prompt": "Opprett en avdeling med navn 'Avdeling365227' og avdelingsnummer 365227",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "agent": {
+    "callCount": 1,
+    "errorCount": 0,
+    "messages": [
+      {
+        "role": "user",
+        "parts": [
+          {
+            "text": "Opprett en avdeling med navn 'Avdeling365227' og avdelingsnummer 365227"
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "body": "{\"name\": \"Avdeling365227\", \"departmentNumber\": \"365227\"}",
+                "method": "POST",
+                "path": "/department"
+              }
+            },
+            "thoughtSignature": "CvYBAb4+9vuEv2AdU8YamiABQ6PbC9QYMCKTLc1/ha9bx0dhSAGR86nIv7j9TW8yHXAJA8Shn3IvuZusw3Nv/pWeTe6FObz/ldy37/gS1aGkLNi4Fu0Z7wZ0Xoai+dTpSlo2x0roSNIVx4ybsabkacjVVLadejPABuXiHYthUJjfrXHJMYVz8FQczQmfqH1Qq/X6rZfC7VKCqvXaJor1jzNxxgyLJX3JB4BejEQKuFGLb8QAMU0ADsfsBpfpiGLi3xC4Cn43I/SdPtDvuyUo7Oc82qk8M1IJshplG/LRbvguhWWtMGvQ+VEcHzLGBUzvbykOHMTxszgG"
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "value": {
+                  "id": 863104,
+                  "version": 0,
+                  "url": "kkpqfuj-amager.tripletex.dev/v2/department/863104",
+                  "name": "Avdeling365227",
+                  "departmentNumber": "365227",
+                  "departmentManager": null,
+                  "displayName": "365227 Avdeling365227",
+                  "isInactive": false,
+                  "businessActivityTypeId": 0
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "text": "DONE"
+          }
+        ]
+      }
+    ]
+  },
+  "apiCalls": [
+    {
+      "timestamp": "2026-03-19T23:03:05.773Z",
+      "method": "POST",
+      "path": "/department",
+      "body": {
+        "name": "Avdeling365227",
+        "departmentNumber": "365227"
+      },
+      "status": 201,
+      "durationMs": 120,
+      "response": {
+        "value": {
+          "id": 863104,
+          "version": 0,
+          "url": "kkpqfuj-amager.tripletex.dev/v2/department/863104",
+          "name": "Avdeling365227",
+          "departmentNumber": "365227",
+          "departmentManager": null,
+          "displayName": "365227 Avdeling365227",
+          "isInactive": false,
+          "businessActivityTypeId": 0
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,193 @@
+{
+  "timestamp": "2026-03-19T23:05:22.045Z",
+  "request": {
+    "prompt": "Opprett en kunde med navn 'Bedrift492232 AS' og e-post post492232@bedrift.no",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "agent": {
+    "callCount": 1,
+    "errorCount": 0,
+    "messages": [
+      {
+        "role": "user",
+        "parts": [
+          {
+            "text": "Opprett en kunde med navn 'Bedrift492232 AS' og e-post post492232@bedrift.no"
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "path": "/customer",
+                "method": "POST",
+                "body": "{\"name\": \"Bedrift492232 AS\", \"email\": \"post492232@bedrift.no\", \"isCustomer\": true}"
+              }
+            },
+            "thoughtSignature": "CrECAb4+9vsbFz+wxsi1X0WOlV4MIxSI7KgoFb3bU12A5owH02o1sERs23ZBcjkG9quX9I2vdCWl3rHGblxuuHpPMlN1FOtiQfZ+9RZgvJcFDNHO6v5wWtVaEWfARHGs4VJpkXilINOuo0sC9MvrcyHNkzkS0dJyp3jyVwC7ucqJNFYqMAgiQR65V4MLcWUaE2JNSb09HyDdrOZTVFiZCp34kIwEcDeb7UFfCqdQ3nPysnaQcmo5YVfF6Po7bMRiBMVFrwv7P80ZBZaINrKFypOebcevnPncTGthliTDK11ukNfN/8IgfZcpOY+Nzt3TMBEo3jIH6qmq2PvULGVq9kdmxygrXSbyQNihGUXLgeGvxMgTt09fv3b5I5UOTfPI1A2x+SmtWZjR9vzZGq/HOZV2IWE="
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "value": {
+                  "id": 108164565,
+                  "version": 1,
+                  "url": "kkpqfuj-amager.tripletex.dev/v2/customer/108164565",
+                  "name": "Bedrift492232 AS",
+                  "organizationNumber": "",
+                  "globalLocationNumber": 0,
+                  "supplierNumber": 0,
+                  "customerNumber": 10022,
+                  "isSupplier": false,
+                  "isCustomer": true,
+                  "isInactive": false,
+                  "accountManager": null,
+                  "department": null,
+                  "email": "post492232@bedrift.no",
+                  "invoiceEmail": "",
+                  "overdueNoticeEmail": "",
+                  "phoneNumber": "",
+                  "phoneNumberMobile": "",
+                  "description": "",
+                  "language": "NO",
+                  "displayName": "Bedrift492232 AS (10022)",
+                  "isPrivateIndividual": false,
+                  "singleCustomerInvoice": false,
+                  "invoiceSendMethod": "EMAIL",
+                  "emailAttachmentType": "ATTACHMENT",
+                  "postalAddress": {
+                    "id": 405180605,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/address/405180605"
+                  },
+                  "physicalAddress": {
+                    "id": 405180604,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/address/405180604"
+                  },
+                  "deliveryAddress": null,
+                  "category1": null,
+                  "category2": null,
+                  "category3": null,
+                  "invoicesDueIn": 14,
+                  "invoicesDueInType": "DAYS",
+                  "currency": {
+                    "id": 1,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/currency/1"
+                  },
+                  "bankAccountPresentation": [],
+                  "ledgerAccount": {
+                    "id": 425217066,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/account/425217066"
+                  },
+                  "isFactoring": false,
+                  "invoiceSendSMSNotification": false,
+                  "invoiceSMSNotificationNumber": "",
+                  "isAutomaticSoftReminderEnabled": false,
+                  "isAutomaticReminderEnabled": false,
+                  "isAutomaticNoticeOfDebtCollectionEnabled": false,
+                  "discountPercentage": 0,
+                  "website": ""
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "text": "DONE",
+            "thoughtSignature": "CmwBvj72+2gNaduIzHmIUw9k1R/b54Iq39MMqnhDOPCXKyiTQ5EtulNUib3XzAEqiSvwIDwghPW6dcsM+xE6P7Aa5Iwb0fsAN1TgUsqK6A7neF0n8kKb8fDKIcR+EkX+mD9CWLI0VAhgxgDu9rw="
+          }
+        ]
+      }
+    ]
+  },
+  "apiCalls": [
+    {
+      "timestamp": "2026-03-19T23:05:23.250Z",
+      "method": "POST",
+      "path": "/customer",
+      "body": {
+        "name": "Bedrift492232 AS",
+        "email": "post492232@bedrift.no",
+        "isCustomer": true
+      },
+      "status": 201,
+      "durationMs": 225,
+      "response": {
+        "value": {
+          "id": 108164565,
+          "version": 1,
+          "url": "kkpqfuj-amager.tripletex.dev/v2/customer/108164565",
+          "name": "Bedrift492232 AS",
+          "organizationNumber": "",
+          "globalLocationNumber": 0,
+          "supplierNumber": 0,
+          "customerNumber": 10022,
+          "isSupplier": false,
+          "isCustomer": true,
+          "isInactive": false,
+          "accountManager": null,
+          "department": null,
+          "email": "post492232@bedrift.no",
+          "invoiceEmail": "",
+          "overdueNoticeEmail": "",
+          "phoneNumber": "",
+          "phoneNumberMobile": "",
+          "description": "",
+          "language": "NO",
+          "displayName": "Bedrift492232 AS (10022)",
+          "isPrivateIndividual": false,
+          "singleCustomerInvoice": false,
+          "invoiceSendMethod": "EMAIL",
+          "emailAttachmentType": "ATTACHMENT",
+          "postalAddress": {
+            "id": 405180605,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/address/405180605"
+          },
+          "physicalAddress": {
+            "id": 405180604,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/address/405180604"
+          },
+          "deliveryAddress": null,
+          "category1": null,
+          "category2": null,
+          "category3": null,
+          "invoicesDueIn": 14,
+          "invoicesDueInType": "DAYS",
+          "currency": {
+            "id": 1,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/currency/1"
+          },
+          "bankAccountPresentation": [],
+          "ledgerAccount": {
+            "id": 425217066,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/account/425217066"
+          },
+          "isFactoring": false,
+          "invoiceSendSMSNotification": false,
+          "invoiceSMSNotificationNumber": "",
+          "isAutomaticSoftReminderEnabled": false,
+          "isAutomaticReminderEnabled": false,
+          "isAutomaticNoticeOfDebtCollectionEnabled": false,
+          "discountPercentage": 0,
+          "website": ""
+        }
+      }
+    }
+  ]
+}

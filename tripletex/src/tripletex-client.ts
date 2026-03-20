@@ -132,11 +132,16 @@ export class TripletexClient {
     method: string;
     path: string;
     params?: Record<string, string | number | boolean>;
-    body?: Record<string, unknown>;
+    body?: Record<string, unknown> | unknown[] | string;
   }): Promise<unknown> {
+    let body = call.body;
+    // Handle stringified JSON bodies (LLM sometimes sends arrays as strings)
+    if (typeof body === "string") {
+      try { body = JSON.parse(body); } catch { /* keep as-is */ }
+    }
     return this.request(call.method, call.path, {
       params: call.params,
-      body: call.body,
+      body: body as Record<string, unknown>,
     });
   }
 }

@@ -43,7 +43,10 @@ POST /product — Create product
   CRITICAL price fields (use EXACT names): priceExcludingVatCurrency (number), priceIncludingVatCurrency (number), costExcludingVatCurrency (number)
   DO NOT use "priceExcludingVat" — the correct field is "priceExcludingVatCurrency"
   Optional: number (string, auto-generated if omitted), description, vatType ({"id": number}), isStockItem, isInactive, currency, productUnit, account, department, supplier
-  ALWAYS GET /ledger/vatType first to find VAT type IDs. Do NOT assume any ID — IDs vary per sandbox. Look for typeOfVat="OUTGOING" and pick the one matching the needed percentage (e.g. 25%). Pass params: {typeOfVat: "OUTGOING", from: 0, count: 100}.
+  ALWAYS GET /ledger/vatType first to find VAT type IDs. Do NOT assume any ID — IDs vary per sandbox.
+  Use EXACTLY these params: {typeOfVat: "OUTGOING", from: 0, count: 100}. Do NOT filter by name — just get all outgoing types and pick the right one by percentage.
+  Common VAT rates: 25% (høy sats/standard), 15% (middels/food), 12% (lav/transport), 0% (fritatt/exempt).
+  For books: look for reduced rate (typically 0% in Norway for books).
   Batch: POST /product/list
 
 POST /order — Create order
@@ -54,12 +57,19 @@ POST /order — Create order
   Batch: POST /order/list (max 100)
 
 POST /invoice — Create invoice
-  Required: invoiceDate (string "YYYY-MM-DD"), invoiceDueDate (string "YYYY-MM-DD"), customer ({"id": number})
-  Link to order: orders ([{"id": number}]) — max 1 order per invoice
-  Query params: sendToCustomer (boolean, default true), paymentTypeId (integer, optional), paidAmount (number, optional)
+  Required: invoiceDate (string "YYYY-MM-DD"), invoiceDueDate (string "YYYY-MM-DD"), orders ([{"id": number}]) — MUST link to an order, max 1 order per invoice
+  NEVER try to create an invoice without first creating an order. The orders field is REQUIRED and cannot be empty.
+  Query params: sendToCustomer (boolean, default true — set this to send the invoice, no need for separate PUT /:send), paymentTypeId (integer, optional), paidAmount (number, optional)
   Optional: comment, invoiceComment, kid
   Batch: POST /invoice/list (max 100)
-  NOTE: ALWAYS use today's date (YYYY-MM-DD format) for invoiceDate and orderDate unless the task specifies a different date. The sandbox company may need a bank account registered before invoices can be created — if you get an error about bank account, try GET /ledger/account?isBankAccount=true and update the account with a valid 11-digit Norwegian bank account number (e.g. 15032080001).
+  NOTE: ALWAYS use today's date for invoiceDate and orderDate unless the task specifies a different date.
+
+=== BANK ACCOUNT SETUP (required before creating invoices) ===
+  New sandbox companies have no bank account. You MUST set one up before creating invoices.
+  ALWAYS do this proactively at the start of any invoice workflow — do NOT wait for an error.
+  Steps: GET /ledger/account?isBankAccount=true -> PUT /ledger/account/{id} with bankAccountNumber set to a valid 11-digit Norwegian bank account.
+  Valid test numbers: "28002222222" or "63450618820". Use "28002222222" as first choice.
+  Include the account's current version number in the PUT body. Only set bankAccountNumber — keep other fields from the GET response.
 
 PUT /invoice/{id}/:payment — Register payment on invoice
   Query params: paymentDate (required, "YYYY-MM-DD"), paymentTypeId (required, integer), paidAmount (required, number — the FULL amount including VAT), paidAmountCurrency (optional)
@@ -81,9 +91,10 @@ POST /department — Create department
   Batch: POST /department/list
 
 POST /project — Create project
-  Required: name (string), projectManager ({"id": number})
-  Optional: number (string, auto-generated if null), customer, description, startDate, endDate, isInternal, isClosed, isFixedPrice, fixedprice, department, currency, vatType
+  Required: name (string), projectManager ({"id": number}), startDate (string "YYYY-MM-DD" — use today's date if not specified)
+  Optional: number (string, auto-generated if null), customer, description, endDate, isInternal, isClosed, isFixedPrice, fixedprice, department, currency, vatType
   To find projectManager: GET /employee and use the first employee's ID.
+  IMPORTANT: startDate is REQUIRED. Always include it.
   Batch: POST /project/list
 
 POST /travelExpense — Create travel expense
@@ -117,12 +128,41 @@ Workflow: 1) get_endpoint to find the endpoint docs, 2) get_schema to check the 
 This prevents trial-and-error errors which hurt your score.
 
 === EFFICIENCY RULES ===
-- Plan ALL steps before making any API calls.
-- Use IDs from POST responses directly — never GET after POST just to confirm.
+- Plan ALL steps before making any API calls. Think through the entire workflow first.
+- Use IDs from POST responses directly — NEVER GET after POST just to confirm.
 - Avoid trial-and-error. Look up the docs first, then make the call correctly. Every 4xx error reduces your score.
 - Use batch /list endpoints when creating multiple entities.
 - Minimize total API calls — fewer calls = higher efficiency bonus.
-- ALWAYS use today's date unless the task specifies a different date. NEVER use hardcoded dates like 2024-12-19.
+- ALWAYS use today's date unless the task specifies a different date.
+- When sendToCustomer=true on POST /invoice, the invoice is automatically sent — do NOT also call PUT /:send.
+- NEVER do unnecessary GET calls to verify what you just created. Trust the POST response.
+
+=== OPTIMAL WORKFLOWS (follow these exactly) ===
+
+CREATE INVOICE workflow (5 calls, 0 errors):
+  1. GET /customer (find customer)
+  2. GET /ledger/vatType?typeOfVat=OUTGOING&from=0&count=100 (find VAT type)
+  3. GET /ledger/account?isBankAccount=true -> PUT /ledger/account/{id} with bankAccountNumber "15032080001" (ensure bank account exists)
+  4. POST /order (create order with orderLines, product can be embedded or created separately)
+  5. POST /invoice with orders=[{"id": orderId}] and sendToCustomer=true
+
+REGISTER PAYMENT workflow (4 calls, 0 errors):
+  1. GET /customer (find customer)
+  2. GET /invoice?customerId={id}&invoiceDateFrom=2020-01-01&invoiceDateTo=2030-12-31 (find invoice)
+  3. GET /invoice/paymentType (find INCOMING payment type)
+  4. PUT /invoice/{id}/:payment with params {paymentDate, paymentTypeId, paidAmount}
+
+CREATE EMPLOYEE workflow (2 calls, 0 errors):
+  1. GET /department?from=0&count=1 (find a department)
+  2. POST /employee (with department, userType, etc.)
+  If start date needed: 3. POST /employee/employment
+
+CREATE CUSTOMER workflow (1 call, 0 errors):
+  1. POST /customer (include physicalAddress AND postalAddress if address given)
+
+CREATE PROJECT workflow (2 calls, 0 errors):
+  1. GET /employee?from=0&count=1 (find project manager)
+  2. POST /project (include startDate — it's required!)
 
 === FILE HANDLING ===
 When files are attached (CSV, text, etc.), use the "query_file" tool to inspect them:

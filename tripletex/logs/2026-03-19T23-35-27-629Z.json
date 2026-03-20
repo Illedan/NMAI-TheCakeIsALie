@@ -1,0 +1,119 @@
+{
+  "timestamp": "2026-03-19T23:35:27.629Z",
+  "request": {
+    "prompt": "Crie três departamentos no Tripletex: \"Drift\", \"Logistikk\" e \"IT\".",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "agent": {
+    "callCount": 1,
+    "errorCount": 0,
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "Today's date: 2026-03-19\n\nCrie três departamentos no Tripletex: \"Drift\", \"Logistikk\" e \"IT\"."
+          }
+        ]
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "I'll create three departments in Tripletex: \"Drift\", \"Logistikk\", and \"IT\". Let me use the batch endpoint to create all three efficiently."
+          },
+          {
+            "type": "tool_use",
+            "id": "toolu_01FDHGtvekPyDkm4AqjUzaCP",
+            "name": "tripletex_api",
+            "input": {
+              "method": "POST",
+              "path": "/department/list",
+              "body": "[\n  {\n    \"name\": \"Drift\"\n  },\n  {\n    \"name\": \"Logistikk\"\n  },\n  {\n    \"name\": \"IT\"\n  }\n]"
+            },
+            "caller": {
+              "type": "direct"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "toolu_01FDHGtvekPyDkm4AqjUzaCP",
+            "content": "{\"fullResultSize\":0,\"from\":0,\"count\":3,\"versionDigest\":null,\"values\":[{\"id\":866027,\"version\":0,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/department/866027\",\"name\":\"Drift\",\"departmentNumber\":\"\",\"departmentManager\":null,\"displayName\":\"Drift\",\"isInactive\":false,\"businessActivityTypeId\":0},{\"id\":866028,\"version\":0,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/department/866028\",\"name\":\"Logistikk\",\"departmentNumber\":\"\",\"departmentManager\":null,\"displayName\":\"Logistikk\",\"isInactive\":false,\"businessActivityTypeId\":0},{\"id\":866029,\"version\":0,\"url\":\"kkpqfuj-amager.tripletex.dev/v2/department/866029\",\"name\":\"IT\",\"departmentNumber\":\"\",\"departmentManager\":null,\"displayName\":\"IT\",\"isInactive\":false,\"businessActivityTypeId\":0}]}",
+            "is_error": false
+          }
+        ]
+      }
+    ]
+  },
+  "apiCalls": [
+    {
+      "timestamp": "2026-03-19T23:35:32.224Z",
+      "method": "POST",
+      "path": "/department/list",
+      "body": [
+        {
+          "name": "Drift"
+        },
+        {
+          "name": "Logistikk"
+        },
+        {
+          "name": "IT"
+        }
+      ],
+      "status": 201,
+      "durationMs": 1285,
+      "response": {
+        "fullResultSize": 0,
+        "from": 0,
+        "count": 3,
+        "versionDigest": null,
+        "values": [
+          {
+            "id": 866027,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/department/866027",
+            "name": "Drift",
+            "departmentNumber": "",
+            "departmentManager": null,
+            "displayName": "Drift",
+            "isInactive": false,
+            "businessActivityTypeId": 0
+          },
+          {
+            "id": 866028,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/department/866028",
+            "name": "Logistikk",
+            "departmentNumber": "",
+            "departmentManager": null,
+            "displayName": "Logistikk",
+            "isInactive": false,
+            "businessActivityTypeId": 0
+          },
+          {
+            "id": 866029,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/department/866029",
+            "name": "IT",
+            "departmentNumber": "",
+            "departmentManager": null,
+            "displayName": "IT",
+            "isInactive": false,
+            "businessActivityTypeId": 0
+          }
+        ]
+      }
+    }
+  ]
+}

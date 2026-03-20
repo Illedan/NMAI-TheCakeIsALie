@@ -1,0 +1,260 @@
+{
+  "timestamp": "2026-03-19T23:18:14.906Z",
+  "request": {
+    "prompt": "Cree un empleado con nombre Empleado222261 García, email empleado222261@empresa.es y número de teléfono +4722226100.",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "agent": {
+    "callCount": 2,
+    "errorCount": 0,
+    "messages": [
+      {
+        "role": "user",
+        "parts": [
+          {
+            "text": "Cree un empleado con nombre Empleado222261 García, email empleado222261@empresa.es y número de teléfono +4722226100."
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "path": "/department",
+                "params": "{\"count\": 1}",
+                "method": "GET"
+              }
+            },
+            "thoughtSignature": "Cp0HAb4+9vu4jfP7uJ0QaIFM//VmG9/cApDFlpUYpWnUdxds3K+JRbQap+IfHpgOohU5AecJIJBiihCx3agQWP+Ms9OcTIsQ7hvX3n8+6FgQX1v1A8z+KCIFnUttuUINNMk3Y+ow/yaec8gwpF8/Yo5WIAkVb4YTpEPnfsLD7j5/qR8GafSGBBqHVgMOMdKY2468onVJhj+NsgdHQN8hFkMHR+rUPlVv5Zm7xT3lrloCxxFxHCa9hbqFuThk06R3pMyD4yZOGGd9KxrEjCu1sJnCh4DT1Q9sR5wwgUQMemfGX2hq1RzUw0kWvzV+EJ2c8CEWLdQDJ8lPQWPNN60FxQ/T1A4qCS/w4QwsxOmqy0kw8XtdwaRkv4/shnG1k1PEsVI19ZYCi/XER7GBFhywwpUvxeSt9d8fHlCNvYGnQC5yH5fpn7ryScKAy2x+vQ9fPW65nYXQ+iWx9vnstcxj1uRDCBIPkEE8rEHbBrA2W6McxKYN9sp+dijqVzpdi4MMY2QaZnx2OkYRCF8EbDuYm2J70tp+JHiWrGPUB4ToWu4CrREq2HXKuyWtmxJR9ds3vtj75vLxxTKFbeGxUNG2XojvlE1Vxjnsxs3saS6lKsqRw32W/bxKRLMIvfYYhDwb00HsitLmKb6ft4fhNOs5LdY7qDGHCVTejh8VTDtHUFBdfhrMlH0SXjdIFoxtZ7iWG1XU0c1dduAmMX/Xvjr5xXXVzQHDd4zA0L+5z8Pz9dw5HiEjFL97j55kGkMp/v/tWkDR3in1SZ8DXMr6esj95rYkOxYVwejTkMN7NpKqT2944WjJgk00JEDsnMvAsmfRFDVbqknDvPaRAKKfA+8KrqENI/rWn7gGi9APjUfrF74bh21Ew4grWMM+vfRxiP8aPOjqzscNLOYw26ecaK8XdTOqMJ2BBkPzrAicIQUCQntlwhLAtKDiBdrEmFrvUEb6rxhZ1DJhSXg0JtUVQmnOX9agcAqXZPGuMT8WnmbTPMcCe5xm3jljqOfhW65fvc7r2bbKguLwxiwPtHRPAh7T5FLK5ZkUf+tBxK7yZOo2gnDaDLWqVCzaJA38qGsqIFdZXxgO2oPMZfUBvqVlLFpWM9qDsb1ppcpEcDIS9uNnj0w2TZJiaYScoLkx0yjyzL51f06TvyYWI7gjb7869iRZdm3vqgr2tgD7YdntwMWD61nVK2k56CfzVgQLLEqyOqjjyI33Pd6iRbFwmlOTVfiIXw=="
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "fullResultSize": 2,
+                "from": 0,
+                "count": 1,
+                "versionDigest": "'If-None-Match' header not specified",
+                "values": [
+                  {
+                    "id": 839940,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/department/839940",
+                    "name": "Avdeling",
+                    "departmentNumber": "",
+                    "departmentManager": null,
+                    "displayName": "Avdeling",
+                    "isInactive": false,
+                    "businessActivityTypeId": 0
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "method": "POST",
+                "path": "/employee",
+                "body": "{\"firstName\": \"Empleado222261\", \"lastName\": \"García\", \"email\": \"empleado222261@empresa.es\", \"phoneNumberMobile\": \"+4722226100\", \"userType\": \"STANDARD\", \"department\": {\"id\": 839940}}"
+              }
+            },
+            "thoughtSignature": "CpIDAb4+9vv8q0BF6/szSkrBGWyMeQL8xK2NCNf9gzWXLG+i04fiHWWXgyQ0xPB4IfvYlNGY8V+7yJ0yo9DK1UAuXNS6zn7zl8/1wXnbAH28pIE1vRx3a8uXE9MNRc6k2PtgAYhXkVMcpnZtuCVIxDLKJiLF9SIo9aXUvL2Jy7egviVD4ZvxGjE5y2rJNoTJ9+GLSXbggEXcF8KjcDhzsLZtfIRtjunuV2qIY+Hxxu6w9wqPvn+EFXorjVjtqzZ5mck/+NXQXvpks6TdPFf6Vpfv9KXYbRsEUa+64nsIL6ouxDA8FvyXkajnkF4vvHraSNQMl72Eit8jlGUL4TKD1iaXQxjNkIK9pdYxf3Nev/2TPUPhxjHfYXpiSTs8TU/mSz4AlX4DOYBP6+b7HaJfOlorgHQQ4aviFE50Z78Y0RFrV/xnEHPf+11XHwuVtCOJIORCcjovslyYt5mVp4m+sI4JfQkBL6uzV9DVuY+gzmcs240W2G9PUNoOWsq+amJRLo2W4/YG+qeGtisacVjad5eR7rU6"
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "value": {
+                  "id": 18491346,
+                  "version": 1,
+                  "url": "kkpqfuj-amager.tripletex.dev/v2/employee/18491346",
+                  "firstName": "Empleado222261",
+                  "lastName": "García",
+                  "displayName": "Empleado222261 García",
+                  "employeeNumber": "",
+                  "dateOfBirth": null,
+                  "email": "empleado222261@empresa.es",
+                  "phoneNumberMobileCountry": {
+                    "id": 161,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/country/161"
+                  },
+                  "phoneNumberMobile": "22226100",
+                  "phoneNumberHome": "",
+                  "phoneNumberWork": "",
+                  "nationalIdentityNumber": "",
+                  "dnumber": "",
+                  "internationalId": {
+                    "intAmeldingType": null,
+                    "country": null,
+                    "number": ""
+                  },
+                  "bankAccountNumber": "",
+                  "iban": "",
+                  "bic": "",
+                  "creditorBankCountryId": 0,
+                  "usesAbroadPayment": false,
+                  "userType": null,
+                  "allowInformationRegistration": true,
+                  "isContact": false,
+                  "isProxy": false,
+                  "comments": "",
+                  "address": null,
+                  "department": {
+                    "id": 839940,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/department/839940"
+                  },
+                  "employments": [],
+                  "holidayAllowanceEarned": {
+                    "year": 0,
+                    "amount": 0,
+                    "basis": 0,
+                    "amountExtraHolidayWeek": 0
+                  },
+                  "employeeCategory": null,
+                  "isAuthProjectOverviewURL": true,
+                  "pictureId": 0,
+                  "companyId": 108118447,
+                  "vismaConnect2FAactive": false
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "text": "DONE",
+            "thoughtSignature": "Cr8BAb4+9vuLRdLhZ48KaKuDpmrSPZgpMh0t8STn37Ns2CSrHnikkD0+sMQjfCwQP2dh9n9dhDzllgPFg2hhg0P7UZTShNpNCCWGUYvNfXuMt9O7JtwObG/flbtHMLn6PcMmp4Tz9qJgIu3x0FjJgs/86SbRBb//MTJd21yo+28vszbbxnG7PXP8V1uuiCe6XMYRqKj6Ru2Fom7AzFzC/eN3YDBjlIsFr19DYNK8rW4GeZxEEk0lxwbH8jCK82nv8fU="
+          }
+        ]
+      }
+    ]
+  },
+  "apiCalls": [
+    {
+      "timestamp": "2026-03-19T23:18:16.708Z",
+      "method": "GET",
+      "path": "/department",
+      "params": {
+        "count": 1
+      },
+      "status": 200,
+      "durationMs": 193,
+      "response": {
+        "fullResultSize": 2,
+        "from": 0,
+        "count": 1,
+        "versionDigest": "'If-None-Match' header not specified",
+        "values": [
+          {
+            "id": 839940,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/department/839940",
+            "name": "Avdeling",
+            "departmentNumber": "",
+            "departmentManager": null,
+            "displayName": "Avdeling",
+            "isInactive": false,
+            "businessActivityTypeId": 0
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-03-19T23:18:18.536Z",
+      "method": "POST",
+      "path": "/employee",
+      "body": {
+        "firstName": "Empleado222261",
+        "lastName": "García",
+        "email": "empleado222261@empresa.es",
+        "phoneNumberMobile": "+4722226100",
+        "userType": "STANDARD",
+        "department": {
+          "id": 839940
+        }
+      },
+      "status": 201,
+      "durationMs": 487,
+      "response": {
+        "value": {
+          "id": 18491346,
+          "version": 1,
+          "url": "kkpqfuj-amager.tripletex.dev/v2/employee/18491346",
+          "firstName": "Empleado222261",
+          "lastName": "García",
+          "displayName": "Empleado222261 García",
+          "employeeNumber": "",
+          "dateOfBirth": null,
+          "email": "empleado222261@empresa.es",
+          "phoneNumberMobileCountry": {
+            "id": 161,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/country/161"
+          },
+          "phoneNumberMobile": "22226100",
+          "phoneNumberHome": "",
+          "phoneNumberWork": "",
+          "nationalIdentityNumber": "",
+          "dnumber": "",
+          "internationalId": {
+            "intAmeldingType": null,
+            "country": null,
+            "number": ""
+          },
+          "bankAccountNumber": "",
+          "iban": "",
+          "bic": "",
+          "creditorBankCountryId": 0,
+          "usesAbroadPayment": false,
+          "userType": null,
+          "allowInformationRegistration": true,
+          "isContact": false,
+          "isProxy": false,
+          "comments": "",
+          "address": null,
+          "department": {
+            "id": 839940,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/department/839940"
+          },
+          "employments": [],
+          "holidayAllowanceEarned": {
+            "year": 0,
+            "amount": 0,
+            "basis": 0,
+            "amountExtraHolidayWeek": 0
+          },
+          "employeeCategory": null,
+          "isAuthProjectOverviewURL": true,
+          "pictureId": 0,
+          "companyId": 108118447,
+          "vismaConnect2FAactive": false
+        }
+      }
+    }
+  ]
+}

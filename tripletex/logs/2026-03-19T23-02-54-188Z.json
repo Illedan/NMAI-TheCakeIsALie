@@ -1,0 +1,260 @@
+{
+  "timestamp": "2026-03-19T23:02:54.188Z",
+  "request": {
+    "prompt": "Opprett en ansatt med navn Admin365227 Nordmann, admin365227@example.org. Vedkommende skal være kontoadministrator.",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "agent": {
+    "callCount": 2,
+    "errorCount": 0,
+    "messages": [
+      {
+        "role": "user",
+        "parts": [
+          {
+            "text": "Opprett en ansatt med navn Admin365227 Nordmann, admin365227@example.org. Vedkommende skal være kontoadministrator."
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "method": "GET",
+                "path": "/department",
+                "params": "{\"fields\": \"*\", \"count\": 1}"
+              }
+            },
+            "thoughtSignature": "Cp8FAb4+9vuUQVM3SgFZZXqjfhV92b3yY/DI5EI9p+Qs7Y7m0I9Uz48p6TLTtR7PPVkHrmBkVQt+aVSg4/Yq+bxjnGXjjS0BKqVz41Zgogm2vgCImkW3uWrSTsHiNE+cqOsEcJlhRtpTEprRnQOr8BtIGCbp5n+DL036G5xnlQTPKsHjD6FNnPK4BskWCfc5hFDIEBDtZWW05O8XDm9haNkSBTM3xjC5Fn7HMjWn6TausqBXfUoTMbnvCxhfgotmXL4y7d7Hp9FXsR8xQnOQk6zaC9tYUPBPZvhRNlpf5T7kAvPAEGyZeJ5b5QPKWSpMsv7dJQ5D5yhTJOF3Xz7n77MA+CCIjxcznBJ4lXao++diUAWqLSERlRGOrTfhRkuUcdb8KggaOFgspIa4FbAXK7kK/LqSs7qxRXqEDys9JFSTz2zV/TC1d0BNAc8pyBGvqFLJ8NJ2A3tuwHo1q10MoxO12qXLk7G+e5Ac6JfKwP/+yKpYdXAbxqEdiKEwF7qsd85eQR7OPsj0s/eGaEty5unboPmyvEJWQt4z64QJrzdqxOLqjfopplDPsM1fNxELgIcMcFhFA8kq9jKDd9kCe0qFKfx2zj2wZukoDzT9KnlL9clOAXUV2IERFyOQPV1b27VEP97CeSE2s4X+5KxcBXIBxYrveBGiUM4ec7/vA9GgmpqdBwJdbjRJt/RrS9L4lkHAyhOCgsC1l7eEFMGgdIEtnauiVAsjueC7NPQs02C840GWrB8wdnoZjGsdyMKHmF2kUeQp0bIm0CuBLDZrkKI1mz1fPjeJV6tVSR6PaDrx40nWkq3wUPiPvxsluPvRtfh5QWYAKi3pE8m+lKLkr46NlCbCkzImjyFu3xN/LYzOAMgGBmvZaGw+CUWIx7w05Q4="
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "fullResultSize": 2,
+                "from": 0,
+                "count": 1,
+                "versionDigest": "'If-None-Match' header not specified",
+                "values": [
+                  {
+                    "id": 839940,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/department/839940",
+                    "name": "Avdeling",
+                    "departmentNumber": "",
+                    "departmentManager": null,
+                    "displayName": "Avdeling",
+                    "isInactive": false,
+                    "businessActivityTypeId": 0
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "path": "/employee",
+                "method": "POST",
+                "body": "{\"firstName\": \"Admin365227\", \"lastName\": \"Nordmann\", \"email\": \"admin365227@example.org\", \"userType\": \"EXTENDED\", \"department\": {\"id\": 839940}}"
+              }
+            },
+            "thoughtSignature": "CssCAb4+9vuxYNtfdUkI2paPWATdTyXvE6jDk0+11CJjxYgw4rbt92j8emYgpdXyT9NnPRPmVNz1KcCuVhkMyAG2TibssB7o8qKPMcBf+qf/w9QfNyR0aOQF2Bfz/CVU3MJ51ER7TkC/PjJZs3kZ+P5PTxSKu0Rn1RL7+WqPCepwgXN+HqDyM/CTTQU+JGr2OUh3qmViF8Tev2T68ozIWJf7Y9Clc0CiqAh+ElHnTjhV/6XdZU213V+cLyTUHfC6FYJVEz+FoE8+JePmQJkErRwIbjIOX84aF70JYf2d8aR0SZDelyBf+hAyTPPe1zK6EqIxth3dbszN0X4mGJ/2ANrMcmK9q77v9DNUh0bxcoQvaBvvxzD6iHrK5fKRonB2UqRMUtkqlK1GennUlpa+d5351PaWKtx1eg9PlEtXQBTwak1az4U4E6xoyR5IoAoiAb4+9vvmCgk3u+5+irHcKFmYW/xeXBqFWTVHQizvubcDYw=="
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "value": {
+                  "id": 18488695,
+                  "version": 1,
+                  "url": "kkpqfuj-amager.tripletex.dev/v2/employee/18488695",
+                  "firstName": "Admin365227",
+                  "lastName": "Nordmann",
+                  "displayName": "Admin365227 Nordmann",
+                  "employeeNumber": "",
+                  "dateOfBirth": null,
+                  "email": "admin365227@example.org",
+                  "phoneNumberMobileCountry": {
+                    "id": 161,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/country/161"
+                  },
+                  "phoneNumberMobile": "",
+                  "phoneNumberHome": "",
+                  "phoneNumberWork": "",
+                  "nationalIdentityNumber": "",
+                  "dnumber": "",
+                  "internationalId": {
+                    "intAmeldingType": null,
+                    "country": null,
+                    "number": ""
+                  },
+                  "bankAccountNumber": "",
+                  "iban": "",
+                  "bic": "",
+                  "creditorBankCountryId": 0,
+                  "usesAbroadPayment": false,
+                  "userType": null,
+                  "allowInformationRegistration": true,
+                  "isContact": false,
+                  "isProxy": false,
+                  "comments": "",
+                  "address": null,
+                  "department": {
+                    "id": 839940,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/department/839940"
+                  },
+                  "employments": [],
+                  "holidayAllowanceEarned": {
+                    "year": 0,
+                    "amount": 0,
+                    "basis": 0,
+                    "amountExtraHolidayWeek": 0
+                  },
+                  "employeeCategory": null,
+                  "isAuthProjectOverviewURL": true,
+                  "pictureId": 0,
+                  "companyId": 108118447,
+                  "vismaConnect2FAactive": false
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "text": "DONE",
+            "thoughtSignature": "Cu8BAb4+9vufD1gt2a5ueSrbTwblyXEhCxDBXc/2EvqD44bYYirG5ihI6AMI+Winl+fGprwWb0jW9KyXIoqH5OGxYZ6DVo2/eR9gy8z9bVW+nvtCyX6mzXHfJ6/hbiPtd2EUKtaOKcI3EZnXjl9QmYZlIhv26VBDrmU8w/BGBhPO7NlXw7EQQOP6F4ZF5lM5ElkptMv1ltlweOWh+2x7pb2gao09w0EXkYEn3NA4bIGiOojx+v7AlpEv4czAPZw0HpVdLSbvCgLedD8Ng+35GJvpofKkva2NEmWr80pO9qRZlxIfd7qiw3MfQi3xiC66h+k="
+          }
+        ]
+      }
+    ]
+  },
+  "apiCalls": [
+    {
+      "timestamp": "2026-03-19T23:02:55.744Z",
+      "method": "GET",
+      "path": "/department",
+      "params": {
+        "fields": "*",
+        "count": 1
+      },
+      "status": 200,
+      "durationMs": 98,
+      "response": {
+        "fullResultSize": 2,
+        "from": 0,
+        "count": 1,
+        "versionDigest": "'If-None-Match' header not specified",
+        "values": [
+          {
+            "id": 839940,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/department/839940",
+            "name": "Avdeling",
+            "departmentNumber": "",
+            "departmentManager": null,
+            "displayName": "Avdeling",
+            "isInactive": false,
+            "businessActivityTypeId": 0
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-03-19T23:02:57.379Z",
+      "method": "POST",
+      "path": "/employee",
+      "body": {
+        "firstName": "Admin365227",
+        "lastName": "Nordmann",
+        "email": "admin365227@example.org",
+        "userType": "EXTENDED",
+        "department": {
+          "id": 839940
+        }
+      },
+      "status": 201,
+      "durationMs": 492,
+      "response": {
+        "value": {
+          "id": 18488695,
+          "version": 1,
+          "url": "kkpqfuj-amager.tripletex.dev/v2/employee/18488695",
+          "firstName": "Admin365227",
+          "lastName": "Nordmann",
+          "displayName": "Admin365227 Nordmann",
+          "employeeNumber": "",
+          "dateOfBirth": null,
+          "email": "admin365227@example.org",
+          "phoneNumberMobileCountry": {
+            "id": 161,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/country/161"
+          },
+          "phoneNumberMobile": "",
+          "phoneNumberHome": "",
+          "phoneNumberWork": "",
+          "nationalIdentityNumber": "",
+          "dnumber": "",
+          "internationalId": {
+            "intAmeldingType": null,
+            "country": null,
+            "number": ""
+          },
+          "bankAccountNumber": "",
+          "iban": "",
+          "bic": "",
+          "creditorBankCountryId": 0,
+          "usesAbroadPayment": false,
+          "userType": null,
+          "allowInformationRegistration": true,
+          "isContact": false,
+          "isProxy": false,
+          "comments": "",
+          "address": null,
+          "department": {
+            "id": 839940,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/department/839940"
+          },
+          "employments": [],
+          "holidayAllowanceEarned": {
+            "year": 0,
+            "amount": 0,
+            "basis": 0,
+            "amountExtraHolidayWeek": 0
+          },
+          "employeeCategory": null,
+          "isAuthProjectOverviewURL": true,
+          "pictureId": 0,
+          "companyId": 108118447,
+          "vismaConnect2FAactive": false
+        }
+      }
+    }
+  ]
+}

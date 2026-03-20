@@ -1,0 +1,720 @@
+{
+  "timestamp": "2026-03-19T23:10:16.560Z",
+  "request": {
+    "prompt": "Créez un client 'Société666541 SARL' avec l'email contact666541@societe.fr. Créez un produit 'Service666541' avec le numéro 666541 au prix de 3000 NOK HT. Créez ensuite une commande pour ce client avec ce produit.",
+    "files": []
+  },
+  "response": {
+    "status": "completed"
+  },
+  "agent": {
+    "callCount": 6,
+    "errorCount": 1,
+    "messages": [
+      {
+        "role": "user",
+        "parts": [
+          {
+            "text": "Créez un client 'Société666541 SARL' avec l'email contact666541@societe.fr. Créez un produit 'Service666541' avec le numéro 666541 au prix de 3000 NOK HT. Créez ensuite une commande pour ce client avec ce produit."
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "path": "/ledger/vatType",
+                "method": "GET",
+                "params": "{\"typeOfVat\": \"OUTGOING\", \"name\": \"Salg, høy sats\"}"
+              }
+            },
+            "thoughtSignature": "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"
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "fullResultSize": 0,
+                "from": 0,
+                "count": 1,
+                "versionDigest": null,
+                "values": [
+                  {
+                    "id": 6,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/6",
+                    "name": "Ingen utgående avgift (utenfor mva-loven)",
+                    "number": "6",
+                    "displayName": "6: (0%) Ingen utgående avgift (utenfor mva-loven)",
+                    "percentage": 0,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "method": "GET",
+                "path": "/ledger/vatType",
+                "params": "{\"typeOfVat\": \"OUTGOING\"}"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "fullResultSize": 0,
+                "from": 0,
+                "count": 1,
+                "versionDigest": null,
+                "values": [
+                  {
+                    "id": 6,
+                    "version": 0,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/6",
+                    "name": "Ingen utgående avgift (utenfor mva-loven)",
+                    "number": "6",
+                    "displayName": "6: (0%) Ingen utgående avgift (utenfor mva-loven)",
+                    "percentage": 0,
+                    "deductionPercentage": 100,
+                    "parentType": {
+                      "id": 0,
+                      "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "method": "POST",
+                "path": "/customer",
+                "body": "{\"name\": \"Société666541 SARL\", \"email\": \"contact666541@societe.fr\", \"isCustomer\": true}"
+              }
+            },
+            "thoughtSignature": "Cp0HAb4+9vt9CtSkwqxqSGtOKX8dcP8biY4MkiqLCf8nxotgRH/tx+dE3qHHtRc7RzqI/kFoN4/PdZ67l5osoXF1SgwU2rdhPc4CIAufpUNwUelrvjpZl9G9cqYCvxFoqq9PlIe6ZYw5ItNev9ZyZR1NVRksPuTnEtNDHVLkSFCbAJDjao+VquTtsVmRXnot+M3aytBwg9+1nwGd+tEj1xU7H2gU7TMlcKQtbpnagjAqXT4LhVDLAr6oPrP89wIzO1RGgJEN524oaG2B8bQW1mqzGz5+6rLoG6LHSe+11U7st/eLztb1tnoFGisp+rnmdV72VdIrJ9IWCgc+2VXZg7keqmGRjRbKm37qt0ht8ND7K2gO7HVpq73wT8QF/x2TMRtMxqJ9eDkwwmSE7cYt6T9HGexrgdubgBArzpUl3wAeaDdO1PuSo1UFLi/eiUSF89U6dhrBygP7a/bELdcbwxEUP6aZ7OIBXVF/XD1DduqoPeUXnKGaXNsLM60Tb/nTByfWAikWDk/yP8OGgehXYrShHg4oOO+txAlJ3EaBgIdsHSpbaL58y6c2BfwOWIMgqWs7tja3uc5i3Sw5425JPe0UhkvqmwcFSMTdSWmgSQ9BXYv+3K/4ZyqYoXbyUy8Oh0oH9SDFKFkWXIJZybwIhYFA2n8263FrbPa60IV8i8Ds0qp+hGHcH2pB3TnES49NB6lyR0xLlsj8sQCni1HWpQC5KHZpL1xTZz+cRLGFKD393Q1kgikNuy0K5q4qzF7otr0oDloLuj65biynaiV2f9MWtF4ERK/1XrerNShAbix7PEIzA3goYuXCIguEudURcTK5WQqhSqxskLgWpH173Af9qbx40FpUnvXcL6C5y0H1f16IPul/2ueCfcdmKKwCprMxp9bm/jf6BQ2eC0MbiRfKMepcOyC/0x6RplHM+8rg4/6HJBx31gH0Pxk30/GcaELAQED32bvZagQcFjEgusXJvq4LLgYtJlMynLTOZo11S4ewinN4Y2k+3zf11Q3rJapvy5MZAtSYYcMJQFjyD2baXYI7heu0H7qj3xCJ2bkDLAkgXYQdbFoutKvuZWe0lPc717FLn045gO4810VfUCgL9EUdRvLc/sbfvJTM1aiTHFTa9P5O85hoo8RRDIUrlcYGmFClcoIoU9V1yuJcPbmpP9y1OlVS6wHNKcfgpnszGnGbelaUvvmJADEgjuiqfXIXmy0D9YXtZWe/aUWqiQ=="
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "value": {
+                  "id": 108165493,
+                  "version": 1,
+                  "url": "kkpqfuj-amager.tripletex.dev/v2/customer/108165493",
+                  "name": "Société666541 SARL",
+                  "organizationNumber": "",
+                  "globalLocationNumber": 0,
+                  "supplierNumber": 0,
+                  "customerNumber": 10028,
+                  "isSupplier": false,
+                  "isCustomer": true,
+                  "isInactive": false,
+                  "accountManager": null,
+                  "department": null,
+                  "email": "contact666541@societe.fr",
+                  "invoiceEmail": "",
+                  "overdueNoticeEmail": "",
+                  "phoneNumber": "",
+                  "phoneNumberMobile": "",
+                  "description": "",
+                  "language": "NO",
+                  "displayName": "Société666541 SARL (10028)",
+                  "isPrivateIndividual": false,
+                  "singleCustomerInvoice": false,
+                  "invoiceSendMethod": "EMAIL",
+                  "emailAttachmentType": "ATTACHMENT",
+                  "postalAddress": {
+                    "id": 405182462,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/address/405182462"
+                  },
+                  "physicalAddress": {
+                    "id": 405182461,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/address/405182461"
+                  },
+                  "deliveryAddress": null,
+                  "category1": null,
+                  "category2": null,
+                  "category3": null,
+                  "invoicesDueIn": 14,
+                  "invoicesDueInType": "DAYS",
+                  "currency": {
+                    "id": 1,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/currency/1"
+                  },
+                  "bankAccountPresentation": [],
+                  "ledgerAccount": {
+                    "id": 425217066,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/account/425217066"
+                  },
+                  "isFactoring": false,
+                  "invoiceSendSMSNotification": false,
+                  "invoiceSMSNotificationNumber": "",
+                  "isAutomaticSoftReminderEnabled": false,
+                  "isAutomaticReminderEnabled": false,
+                  "isAutomaticNoticeOfDebtCollectionEnabled": false,
+                  "discountPercentage": 0,
+                  "website": ""
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "body": "{\"name\": \"Service666541\", \"number\": \"666541\", \"priceExcludingVatCurrency\": 3000, \"priceIncludingVatCurrency\": 3000, \"vatType\": {\"id\": 6}}",
+                "path": "/product",
+                "method": "POST"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "error": true,
+                "status": 422,
+                "message": "Validering feilet.",
+                "developerMessage": "VALIDATION_ERROR",
+                "validationMessages": [
+                  {
+                    "field": "number",
+                    "message": "Produktnummeret 666541 er i bruk.",
+                    "path": null,
+                    "rootId": null
+                  }
+                ]
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "body": "{\"name\": \"Service666541\", \"priceExcludingVatCurrency\": 3000, \"priceIncludingVatCurrency\": 3000, \"vatType\": {\"id\": 6}}",
+                "method": "POST",
+                "path": "/product"
+              }
+            },
+            "thoughtSignature": "CvUDAb4+9vtmM9tIyjCfYwyGm9Oq6TFZhje+6T9fDvbIe4mZITM/38YMfkc0pNC6HSAimk+Cczn45NcRBsJZ+ykuc+l1pG1kBxygXB3sDDw3iBvE3OAoDBsLGSYSqZHvteqr5BuYzup4DTyWnJEzEu81ajs9agZVEhfA4Z7fNty/1k5MxeWQ14ou0NNpME2V/R8uBw55kYGLvptVhkOymHP/sKBVixOmHqM7YaSYtfqUSqT/IwEMvQzr3Yy4flYSOYqK4bb7Fs3HRqfHnIeO4yp0LIFc7KuKmJ3XPYvn7PIgJaQf7mz6Mzb+BPA9FVrqKIH9ujX6MyqFM7BYriOcQnSz9S2TUHvC5O7UyM0uIow0BDc8zrj8REw2TAtpiodRxrBwa7ipy06kKdK3EQkCOeQdqpAX4cl6h5GKG9OMX5L6MdBHIy8kq5JFZQ/EJFGw5BWIvOnFhgROvN1sXF6ZyQNBdc3/1rqbcdp2lHJ0Zh38cmyDdK3lOXEgn8keDNuuHmndzcgihHX7qpAuZPQe+X3X1Rh2gH4iiLiPalp6lrPlrKaAgeUeoyucic8B6BKnzILFTlPRPVZ4jWU2N5MYqkwOURYSp12PgXsYkOXiM/761GwNyx69M3vFJ5wwh95FLF/d8/H/lJhCygxI8NmZZAXjq6dwVeSP"
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "value": {
+                  "id": 84381926,
+                  "version": 0,
+                  "url": "kkpqfuj-amager.tripletex.dev/v2/product/84381926",
+                  "name": "Service666541",
+                  "number": "",
+                  "displayNumber": "",
+                  "description": "",
+                  "orderLineDescription": "",
+                  "costExcludingVatCurrency": 0,
+                  "costPrice": 0,
+                  "priceExcludingVatCurrency": 3000,
+                  "priceIncludingVatCurrency": 3000,
+                  "isInactive": false,
+                  "productUnit": null,
+                  "incomingStock": 0,
+                  "outgoingStock": 0,
+                  "vatType": {
+                    "id": 6,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/6"
+                  },
+                  "currency": {
+                    "id": 1,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/currency/1"
+                  },
+                  "department": null,
+                  "account": null,
+                  "supplier": null,
+                  "resaleProduct": null,
+                  "isDeletable": false,
+                  "hasSupplierProductConnected": false,
+                  "image": null,
+                  "displayName": "Service666541",
+                  "mainSupplierProduct": null,
+                  "isRoundPriceIncVat": false,
+                  "priceInTargetCurrency": 0,
+                  "purchasePriceCurrency": 0
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "functionCall": {
+              "name": "tripletex_api",
+              "args": {
+                "body": "{\"customer\": {\"id\": 108165493}, \"orderDate\": \"2024-07-31\", \"deliveryDate\": \"2024-07-31\", \"orderLines\": [{\"product\": {\"id\": 84381926}, \"description\": \"Service666541\", \"count\": 1, \"unitPriceExcludingVatCurrency\": 3000, \"vatType\": {\"id\": 6}}]}",
+                "method": "POST",
+                "path": "/order"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "function",
+        "parts": [
+          {
+            "functionResponse": {
+              "name": "tripletex_api",
+              "response": {
+                "value": {
+                  "id": 401950505,
+                  "version": 0,
+                  "url": "kkpqfuj-amager.tripletex.dev/v2/order/401950505",
+                  "customer": {
+                    "id": 108165493,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/customer/108165493"
+                  },
+                  "contact": null,
+                  "attn": null,
+                  "displayName": "680671 Ordre",
+                  "receiverEmail": "",
+                  "overdueNoticeEmail": "",
+                  "number": "680671",
+                  "reference": "",
+                  "department": null,
+                  "orderDate": "2024-07-31",
+                  "project": null,
+                  "invoiceComment": "",
+                  "currency": {
+                    "id": 1,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/currency/1"
+                  },
+                  "invoicesDueIn": 14,
+                  "invoicesDueInType": "DAYS",
+                  "isShowOpenPostsOnInvoices": false,
+                  "isClosed": false,
+                  "deliveryDate": "2024-07-31",
+                  "deliveryAddress": null,
+                  "deliveryComment": "",
+                  "isPrioritizeAmountsIncludingVat": true,
+                  "orderLineSorting": "PRODUCT",
+                  "orderGroups": [],
+                  "orderLines": [],
+                  "isSubscription": false,
+                  "subscriptionDuration": 0,
+                  "subscriptionDurationType": "MONTHS",
+                  "subscriptionPeriodsOnInvoice": 0,
+                  "subscriptionPeriodsOnInvoiceType": "MONTHS",
+                  "subscriptionInvoicingTimeInAdvanceOrArrears": "ADVANCE",
+                  "subscriptionInvoicingTime": 0,
+                  "subscriptionInvoicingTimeType": "MONTHS",
+                  "isSubscriptionAutoInvoicing": false,
+                  "preliminaryInvoice": {
+                    "id": 2147518331,
+                    "url": "kkpqfuj-amager.tripletex.dev/v2/invoice/2147518331"
+                  },
+                  "attachment": [],
+                  "sendMethodDescription": "Faktura må sendes manuelt.",
+                  "invoiceOnAccountVatHigh": false,
+                  "totalInvoicedOnAccountAmountAbsoluteCurrency": 0,
+                  "invoiceSendSMSNotification": false,
+                  "invoiceSMSNotificationNumber": "",
+                  "markUpOrderLines": 0,
+                  "discountPercentage": 0,
+                  "customerName": "Société666541 SARL",
+                  "projectManagerNameAndNumber": "",
+                  "travelReports": [],
+                  "accountingDimensionValues": []
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "role": "model",
+        "parts": [
+          {
+            "text": "DONE"
+          }
+        ]
+      }
+    ]
+  },
+  "apiCalls": [
+    {
+      "timestamp": "2026-03-19T23:10:33.331Z",
+      "method": "GET",
+      "path": "/ledger/vatType",
+      "params": {
+        "typeOfVat": "OUTGOING",
+        "name": "Salg, høy sats"
+      },
+      "status": 200,
+      "durationMs": 201,
+      "response": {
+        "fullResultSize": 0,
+        "from": 0,
+        "count": 1,
+        "versionDigest": null,
+        "values": [
+          {
+            "id": 6,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/6",
+            "name": "Ingen utgående avgift (utenfor mva-loven)",
+            "number": "6",
+            "displayName": "6: (0%) Ingen utgående avgift (utenfor mva-loven)",
+            "percentage": 0,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-03-19T23:10:35.209Z",
+      "method": "GET",
+      "path": "/ledger/vatType",
+      "params": {
+        "typeOfVat": "OUTGOING"
+      },
+      "status": 200,
+      "durationMs": 87,
+      "response": {
+        "fullResultSize": 0,
+        "from": 0,
+        "count": 1,
+        "versionDigest": null,
+        "values": [
+          {
+            "id": 6,
+            "version": 0,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/6",
+            "name": "Ingen utgående avgift (utenfor mva-loven)",
+            "number": "6",
+            "displayName": "6: (0%) Ingen utgående avgift (utenfor mva-loven)",
+            "percentage": 0,
+            "deductionPercentage": 100,
+            "parentType": {
+              "id": 0,
+              "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/0"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-03-19T23:10:39.497Z",
+      "method": "POST",
+      "path": "/customer",
+      "body": {
+        "name": "Société666541 SARL",
+        "email": "contact666541@societe.fr",
+        "isCustomer": true
+      },
+      "status": 201,
+      "durationMs": 224,
+      "response": {
+        "value": {
+          "id": 108165493,
+          "version": 1,
+          "url": "kkpqfuj-amager.tripletex.dev/v2/customer/108165493",
+          "name": "Société666541 SARL",
+          "organizationNumber": "",
+          "globalLocationNumber": 0,
+          "supplierNumber": 0,
+          "customerNumber": 10028,
+          "isSupplier": false,
+          "isCustomer": true,
+          "isInactive": false,
+          "accountManager": null,
+          "department": null,
+          "email": "contact666541@societe.fr",
+          "invoiceEmail": "",
+          "overdueNoticeEmail": "",
+          "phoneNumber": "",
+          "phoneNumberMobile": "",
+          "description": "",
+          "language": "NO",
+          "displayName": "Société666541 SARL (10028)",
+          "isPrivateIndividual": false,
+          "singleCustomerInvoice": false,
+          "invoiceSendMethod": "EMAIL",
+          "emailAttachmentType": "ATTACHMENT",
+          "postalAddress": {
+            "id": 405182462,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/address/405182462"
+          },
+          "physicalAddress": {
+            "id": 405182461,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/address/405182461"
+          },
+          "deliveryAddress": null,
+          "category1": null,
+          "category2": null,
+          "category3": null,
+          "invoicesDueIn": 14,
+          "invoicesDueInType": "DAYS",
+          "currency": {
+            "id": 1,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/currency/1"
+          },
+          "bankAccountPresentation": [],
+          "ledgerAccount": {
+            "id": 425217066,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/account/425217066"
+          },
+          "isFactoring": false,
+          "invoiceSendSMSNotification": false,
+          "invoiceSMSNotificationNumber": "",
+          "isAutomaticSoftReminderEnabled": false,
+          "isAutomaticReminderEnabled": false,
+          "isAutomaticNoticeOfDebtCollectionEnabled": false,
+          "discountPercentage": 0,
+          "website": ""
+        }
+      }
+    },
+    {
+      "timestamp": "2026-03-19T23:10:41.223Z",
+      "method": "POST",
+      "path": "/product",
+      "body": {
+        "name": "Service666541",
+        "number": "666541",
+        "priceExcludingVatCurrency": 3000,
+        "priceIncludingVatCurrency": 3000,
+        "vatType": {
+          "id": 6
+        }
+      },
+      "status": 422,
+      "durationMs": 94,
+      "error": {
+        "status": 422,
+        "code": 18000,
+        "message": "Validering feilet.",
+        "link": "https://tripletex.no/v2-docs/",
+        "developerMessage": "VALIDATION_ERROR",
+        "validationMessages": [
+          {
+            "field": "number",
+            "message": "Produktnummeret 666541 er i bruk.",
+            "path": null,
+            "rootId": null
+          }
+        ],
+        "requestId": "74170888-6741-4997-97f3-788470dbb8d6"
+      }
+    },
+    {
+      "timestamp": "2026-03-19T23:10:43.666Z",
+      "method": "POST",
+      "path": "/product",
+      "body": {
+        "name": "Service666541",
+        "priceExcludingVatCurrency": 3000,
+        "priceIncludingVatCurrency": 3000,
+        "vatType": {
+          "id": 6
+        }
+      },
+      "status": 201,
+      "durationMs": 139,
+      "response": {
+        "value": {
+          "id": 84381926,
+          "version": 0,
+          "url": "kkpqfuj-amager.tripletex.dev/v2/product/84381926",
+          "name": "Service666541",
+          "number": "",
+          "displayNumber": "",
+          "description": "",
+          "orderLineDescription": "",
+          "costExcludingVatCurrency": 0,
+          "costPrice": 0,
+          "priceExcludingVatCurrency": 3000,
+          "priceIncludingVatCurrency": 3000,
+          "isInactive": false,
+          "productUnit": null,
+          "incomingStock": 0,
+          "outgoingStock": 0,
+          "vatType": {
+            "id": 6,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/ledger/vatType/6"
+          },
+          "currency": {
+            "id": 1,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/currency/1"
+          },
+          "department": null,
+          "account": null,
+          "supplier": null,
+          "resaleProduct": null,
+          "isDeletable": false,
+          "hasSupplierProductConnected": false,
+          "image": null,
+          "displayName": "Service666541",
+          "mainSupplierProduct": null,
+          "isRoundPriceIncVat": false,
+          "priceInTargetCurrency": 0,
+          "purchasePriceCurrency": 0
+        }
+      }
+    },
+    {
+      "timestamp": "2026-03-19T23:10:46.372Z",
+      "method": "POST",
+      "path": "/order",
+      "body": {
+        "customer": {
+          "id": 108165493
+        },
+        "orderDate": "2024-07-31",
+        "deliveryDate": "2024-07-31",
+        "orderLines": [
+          {
+            "product": {
+              "id": 84381926
+            },
+            "description": "Service666541",
+            "count": 1,
+            "unitPriceExcludingVatCurrency": 3000,
+            "vatType": {
+              "id": 6
+            }
+          }
+        ]
+      },
+      "status": 201,
+      "durationMs": 251,
+      "response": {
+        "value": {
+          "id": 401950505,
+          "version": 0,
+          "url": "kkpqfuj-amager.tripletex.dev/v2/order/401950505",
+          "customer": {
+            "id": 108165493,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/customer/108165493"
+          },
+          "contact": null,
+          "attn": null,
+          "displayName": "680671 Ordre",
+          "receiverEmail": "",
+          "overdueNoticeEmail": "",
+          "number": "680671",
+          "reference": "",
+          "department": null,
+          "orderDate": "2024-07-31",
+          "project": null,
+          "invoiceComment": "",
+          "currency": {
+            "id": 1,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/currency/1"
+          },
+          "invoicesDueIn": 14,
+          "invoicesDueInType": "DAYS",
+          "isShowOpenPostsOnInvoices": false,
+          "isClosed": false,
+          "deliveryDate": "2024-07-31",
+          "deliveryAddress": null,
+          "deliveryComment": "",
+          "isPrioritizeAmountsIncludingVat": true,
+          "orderLineSorting": "PRODUCT",
+          "orderGroups": [],
+          "orderLines": [],
+          "isSubscription": false,
+          "subscriptionDuration": 0,
+          "subscriptionDurationType": "MONTHS",
+          "subscriptionPeriodsOnInvoice": 0,
+          "subscriptionPeriodsOnInvoiceType": "MONTHS",
+          "subscriptionInvoicingTimeInAdvanceOrArrears": "ADVANCE",
+          "subscriptionInvoicingTime": 0,
+          "subscriptionInvoicingTimeType": "MONTHS",
+          "isSubscriptionAutoInvoicing": false,
+          "preliminaryInvoice": {
+            "id": 2147518331,
+            "url": "kkpqfuj-amager.tripletex.dev/v2/invoice/2147518331"
+          },
+          "attachment": [],
+          "sendMethodDescription": "Faktura må sendes manuelt.",
+          "invoiceOnAccountVatHigh": false,
+          "totalInvoicedOnAccountAmountAbsoluteCurrency": 0,
+          "invoiceSendSMSNotification": false,
+          "invoiceSMSNotificationNumber": "",
+          "markUpOrderLines": 0,
+          "discountPercentage": 0,
+          "customerName": "Société666541 SARL",
+          "projectManagerNameAndNumber": "",
+          "travelReports": [],
+          "accountingDimensionValues": []
+        }
+      }
+    }
+  ]
+}

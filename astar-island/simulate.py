@@ -187,7 +187,7 @@ class Statistic:
 #Run simulations covering all seeds
 ROUND_ID = "71451d74-be9f-471f-aacd-a41f3b68a9cd"
 datestr = "03_19_22"
-number_of_simulations = 500
+number_of_simulations = 1000
 
 scores = []
 maxlikes = []

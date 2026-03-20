@@ -116,8 +116,8 @@ def calibrate_params(replay, ocean_mask):
         obs['ruin_to_empty'] = 0.33
         obs['ruin_to_forest'] = 0.18
 
-    # Blend with priors (weight: 0.7 replay, 0.3 prior)
-    w = 0.7
+    # Blend with priors (weight: 0.5 replay, 0.5 prior)
+    w = 0.5
     priors = dict(collapse=0.055, port_collapse=0.025, expand=0.005,
                   forest_clear=0.007, port_per_ocean=0.03,
                   ruin_rebuild=0.48, ruin_to_empty=0.33, ruin_to_forest=0.18)

@@ -165,12 +165,12 @@ def calibrate_params(replay, ocean_mask):
         obs['ruin_to_forest'] = 0.18
 
     # Blend with priors — higher weight for well-estimated params
-    priors = dict(collapse=0.055, port_collapse=0.025, expand=0.005,
+    priors = dict(collapse=0.088, port_collapse=0.082, expand=0.006,
                   expand_base=0.003, expand_per_n=0.005,
-                  forest_clear=0.007, forest_base=0.004, forest_per_n=0.005,
-                  port_per_ocean=0.03,
-                  empty_to_ruin=0.0004, forest_to_ruin=0.0005,
-                  ruin_rebuild=0.48, ruin_to_empty=0.33, ruin_to_forest=0.18,
+                  forest_clear=0.006, forest_base=0.004, forest_per_n=0.005,
+                  port_per_ocean=0.024,
+                  empty_to_ruin=0.001, forest_to_ruin=0.001,
+                  ruin_rebuild=0.456, ruin_to_empty=0.361, ruin_to_forest=0.171,
                   ruin_port_per_ocean=0.05)
     # Weight per param: high-count params get more trust
     weights = dict(collapse=0.85, port_collapse=0.75, expand=0.7,

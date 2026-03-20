@@ -60,7 +60,7 @@ def calibrate_params(replay, ocean_mask):
     e_total = 0; e_to_s = 0
     e_by_n = np.zeros(9); e_total_by_n = np.zeros(9)
     r_to = np.zeros(5)  # settl, empty, forest, port, other
-    f_total = 0; f_to_s = 0
+    f_total = 0; f_to_s = 0; f_to_r = 0; e_to_r = 0
     f_by_n = np.zeros(9); f_total_by_n = np.zeros(9)
 
     def _cn(grid, mask):
@@ -104,6 +104,9 @@ def calibrate_params(replay, ocean_mask):
             f_total_by_n[n] += mask.sum()
             f_by_n[n] += (mask & (curr == 1)).sum()
 
+        e_to_r += (is_e & (curr == 3)).sum()
+        f_to_r += (is_f & (curr == 3)).sum()
+
         is_r = (prev == 3)
         r_to[0] += (is_r & (curr == 1)).sum()
         r_to[1] += (is_r & (curr == 0)).sum()
@@ -116,6 +119,8 @@ def calibrate_params(replay, ocean_mask):
     obs['port_collapse'] = p_to_r / max(p_total, 1)
     obs['expand'] = e_to_s / max(e_total, 1)
     obs['forest_clear'] = f_to_s / max(f_total, 1)
+    obs['empty_to_ruin'] = e_to_r / max(e_total, 1)
+    obs['forest_to_ruin'] = f_to_r / max(f_total, 1)
     # Fit forest base and per_n
     f_rates = []
     for n in range(9):
@@ -160,12 +165,14 @@ def calibrate_params(replay, ocean_mask):
                   expand_base=0.003, expand_per_n=0.005,
                   forest_clear=0.007, forest_base=0.004, forest_per_n=0.005,
                   port_per_ocean=0.03,
+                  empty_to_ruin=0.0004, forest_to_ruin=0.0005,
                   ruin_rebuild=0.48, ruin_to_empty=0.33, ruin_to_forest=0.18)
     # Weight per param: high-count params get more trust
     weights = dict(collapse=0.85, port_collapse=0.75, expand=0.7,
                    expand_base=0.6, expand_per_n=0.6,
                    forest_clear=0.7, forest_base=0.6, forest_per_n=0.6,
                    port_per_ocean=0.6,
+                   empty_to_ruin=0.7, forest_to_ruin=0.7,
                    ruin_rebuild=0.85, ruin_to_empty=0.85, ruin_to_forest=0.85)
     blended = {k: weights[k] * obs[k] + (1-weights[k]) * priors[k] for k in priors}
     return blended
@@ -211,6 +218,8 @@ class State:
             self.p_port_per_ocean = params['port_per_ocean']
             self.p_forest_base = params['forest_base']
             self.p_forest_per_n = params['forest_per_n']
+            self.p_empty_to_ruin = params['empty_to_ruin']
+            self.p_forest_to_ruin = params['forest_to_ruin']
             self.p_ruin_rebuild = params['ruin_rebuild']
             self.p_ruin_to_empty = params['ruin_to_empty']
             self.p_ruin_to_forest = params['ruin_to_forest']

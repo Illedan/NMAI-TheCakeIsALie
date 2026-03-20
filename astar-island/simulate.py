@@ -57,6 +57,8 @@ class State:
     p_ruin_to_port = 0.01     # ruin -> port (coastal)
     p_forest_base = 0.004     # forest -> settlement (spontaneous)
     p_forest_per_n = 0.005    # forest -> settlement (per adjacent alive)
+    p_empty_to_ruin = 0.0004  # empty -> ruin (rare)
+    p_forest_to_ruin = 0.0005 # forest -> ruin (rare)
 
     #Based on the first state in replay 0 set the initial state.
     def __init__(self, initial_state, ocean_mask):
@@ -108,6 +110,10 @@ class State:
         expand = is_land & (rand < p_expand)
         new_state[expand] = 1
 
+        # Plains -> Ruin (rare, ~0.04%)
+        empty_to_ruin = is_land & ~expand & (rand < p_expand + self.p_empty_to_ruin)
+        new_state[empty_to_ruin] = 3
+
         # Ruin (3) transitions: ruins always transition immediately (categorical draw)
         is_ruin = (self.state == 3)
         rand2 = _rand(self.H, self.W)
@@ -129,6 +135,10 @@ class State:
         p_forest = np.minimum(self.p_forest_base + self.p_forest_per_n * n_alive, 1.0)
         clear = is_forest & (rand < p_forest)
         new_state[clear] = 1
+
+        # Forest -> Ruin (rare, ~0.05%)
+        forest_ruin = is_forest & ~clear & (rand < p_forest + self.p_forest_to_ruin)
+        new_state[forest_ruin] = 3
 
         # Static cells (ocean, mountain) never change
         new_state[self.static_mask] = self.state[self.static_mask]

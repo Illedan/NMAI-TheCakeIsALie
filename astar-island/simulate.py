@@ -209,7 +209,7 @@ ROUNDS = [
 _r2 = "76909e29-f664-4b2f-b16b-61b7507277e9"
 if os.path.exists(os.path.join(ANALYSIS_DIR, f"03_20_01_analysis_seed_0_{_r2}.json")):
     ROUNDS.append((_r2, "03_20_01"))
-number_of_simulations = 1500
+number_of_simulations = 2000
 
 all_scores = []
 all_maxlikes = []

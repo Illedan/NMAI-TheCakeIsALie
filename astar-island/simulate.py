@@ -48,10 +48,10 @@ class State:
     # Stochastic transition parameters (calibrated from replay data)
     p_collapse_base = 0.035   # settlement -> ruin (early game)
     p_collapse_growth = 0.0006 # increase per timestep
-    p_port_collapse = 0.025   # port -> ruin
+    p_port_collapse = 0.020   # port -> ruin
     p_expand_base = 0.003     # empty land -> settlement (spontaneous)
     p_expand_per_n = 0.005    # empty land -> settlement (per adjacent alive)
-    p_port_per_ocean = 0.03   # settlement -> port (per adjacent ocean cell)
+    p_port_per_ocean = 0.035  # settlement -> port (per adjacent ocean cell)
     p_ruin_rebuild = 0.48     # ruin -> settlement
     p_ruin_to_empty = 0.33    # ruin -> empty/plains
     p_ruin_to_forest = 0.18   # ruin -> forest

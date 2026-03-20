@@ -351,7 +351,7 @@ for path in sorted(_glob.glob(os.path.join(ANALYSIS_DIR, "*_analysis_seed_0_*.js
     parts = fname.replace("_analysis_seed_0_", "|").replace(".json", "").split("|")
     if len(parts) == 2:
         ROUNDS.append((parts[1], parts[0]))
-number_of_simulations = 1000
+number_of_simulations = 1200
 
 all_scores = []
 all_maxlikes = []

@@ -2,13 +2,11 @@
 
 import json
 import os
-import numpy as np
-import requests
-from secrets import ACCESS_TOKEN
 from datetime import datetime
 from time import sleep
 
-BASE_URL = "https://api.ainm.no/astar-island"
+import api
+
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 SIMULATIONS_DIR = os.path.join(SCRIPT_DIR, "simulations")
 
@@ -34,7 +32,6 @@ ROUND_ID = get_latest_round_id()
 PREFIX = datetime.now().strftime("%m_%d_%H")
 REPLAY_DIR = os.path.join(SCRIPT_DIR, "replays")
 ANALYSIS_DIR = os.path.join(SCRIPT_DIR, "analysis")
-HEADERS = {"Authorization": f"Bearer {ACCESS_TOKEN}"}
 
 
 def get_ground_truth():
@@ -42,13 +39,11 @@ def get_ground_truth():
 
     for idx in range(0, 5):
         out_path = os.path.join(ANALYSIS_DIR, f"{PREFIX}_analysis_seed_{idx}_{ROUND_ID}.json")
-        url = f"{BASE_URL}/analysis/{ROUND_ID}/{idx}"
 
         print(f"Fetching ground truth seed_index={idx} ...")
-        resp = requests.get(url, headers=HEADERS)
-        resp.raise_for_status()
+        data = api.get_analysis(ROUND_ID, idx)
         with open(out_path, "w") as f:
-            json.dump(resp.json(), f)
+            json.dump(data, f)
         print(f"  Saved to {out_path}")
         sleep(1)
 
@@ -56,11 +51,10 @@ def get_replays():
     os.makedirs(REPLAY_DIR, exist_ok=True)
 
     for idx in range(0, 5):
-        payload = {"round_id": ROUND_ID, "seed_index": idx}
         out_path = os.path.join(REPLAY_DIR, f"{PREFIX}_replay_seed_{idx}_{ROUND_ID}.json")
 
         print(f"Downloading replay seed_index={idx} ...")
-        resp = requests.post(f"{BASE_URL}/replay", json=payload, headers=HEADERS)
+        resp = api.SESSION.post(f"{api.BASE}/replay", json={"round_id": ROUND_ID, "seed_index": idx})
         resp.raise_for_status()
         with open(out_path, "w") as f:
             json.dump(resp.json(), f)

@@ -14,7 +14,9 @@ from datetime import datetime, timezone
 import numpy as np
 import requests
 
-BASE = "https://api.ainm.no/astar-island"
+import api
+
+BASE = api.BASE
 
 # ── Run log ──────────────────────────────────────────────────────────────────
 
@@ -77,34 +79,17 @@ TERRAIN_TO_CLASS = {
 NUM_CLASSES = 6
 
 
-def make_session(token: str) -> requests.Session:
-    s = requests.Session()
-    s.headers["Authorization"] = f"Bearer {token}"
-    return s
-
-
-def _logged_get(session: requests.Session, url: str) -> dict:
+def _logged_api(func, *args, _method="GET", _url="", _payload=None, **kwargs):
+    """Wrap an api.py call with run-log capture."""
     t0 = time.perf_counter()
-    resp = session.get(url)
+    data = func(*args, **kwargs)
     elapsed = (time.perf_counter() - t0) * 1000
-    resp.raise_for_status()
-    data = resp.json()
-    RUN_LOG.api_call("GET", url, None, data, resp.status_code, elapsed)
+    RUN_LOG.api_call(_method, _url, _payload, data, 200, elapsed)
     return data
 
 
-def _logged_post(session: requests.Session, url: str, payload: dict) -> dict:
-    t0 = time.perf_counter()
-    resp = session.post(url, json=payload)
-    elapsed = (time.perf_counter() - t0) * 1000
-    resp.raise_for_status()
-    data = resp.json()
-    RUN_LOG.api_call("POST", url, payload, data, resp.status_code, elapsed)
-    return data
-
-
-def get_active_round(session: requests.Session) -> dict | None:
-    rounds = _logged_get(session, f"{BASE}/rounds")
+def get_active_round() -> dict | None:
+    rounds = _logged_api(api.get_rounds, _method="GET", _url=f"{BASE}/rounds")
     active = next((r for r in rounds if r["status"] == "active"), None)
     if active:
         return active
@@ -115,35 +100,33 @@ def get_active_round(session: requests.Session) -> dict | None:
     return None
 
 
-def get_round_detail(session: requests.Session, round_id: str) -> dict:
-    return _logged_get(session, f"{BASE}/rounds/{round_id}")
+def get_round_detail(round_id: str) -> dict:
+    return _logged_api(api.get_round_detail, round_id,
+                       _method="GET", _url=f"{BASE}/rounds/{round_id}")
 
 
-def get_budget(session: requests.Session) -> dict:
-    return _logged_get(session, f"{BASE}/budget")
+def get_budget() -> dict:
+    return _logged_api(api.get_budget, _method="GET", _url=f"{BASE}/budget")
 
 
-def simulate(session: requests.Session, round_id: str, seed_index: int,
+def simulate(round_id: str, seed_index: int,
              vx: int, vy: int, vw: int = 15, vh: int = 15) -> dict:
     payload = {
-        "round_id": round_id,
-        "seed_index": seed_index,
-        "viewport_x": vx,
-        "viewport_y": vy,
-        "viewport_w": vw,
-        "viewport_h": vh,
+        "round_id": round_id, "seed_index": seed_index,
+        "viewport_x": vx, "viewport_y": vy,
+        "viewport_w": vw, "viewport_h": vh,
     }
-    return _logged_post(session, f"{BASE}/simulate", payload)
+    return _logged_api(api.simulate, round_id, seed_index, vx, vy, vw, vh,
+                       _method="POST", _url=f"{BASE}/simulate", _payload=payload)
 
 
-def submit_prediction(session: requests.Session, round_id: str,
-                      seed_index: int, prediction: np.ndarray) -> dict:
+def submit_prediction(round_id: str, seed_index: int, prediction: np.ndarray) -> dict:
     payload = {
-        "round_id": round_id,
-        "seed_index": seed_index,
-        "prediction": prediction.tolist(),
+        "round_id": round_id, "seed_index": seed_index,
+        "prediction": "...(tensor)...",
     }
-    return _logged_post(session, f"{BASE}/submit", payload)
+    return _logged_api(api.submit, round_id, seed_index, prediction.tolist(),
+                       _method="POST", _url=f"{BASE}/submit", _payload=payload)
 
 
 def initial_grid_to_class(grid: list[list[int]]) -> np.ndarray:
@@ -244,7 +227,7 @@ def plan_viewports(width: int, height: int, num_queries: int,
     return viewports[:num_queries]
 
 
-def observe_seed(session: requests.Session, round_id: str, seed_index: int,
+def observe_seed(round_id: str, seed_index: int,
                  viewports: list[tuple[int, int, int, int]],
                  width: int, height: int) -> np.ndarray:
     """Run simulation queries for a seed, return observation counts [H, W, NUM_CLASSES]."""
@@ -254,7 +237,7 @@ def observe_seed(session: requests.Session, round_id: str, seed_index: int,
         RUN_LOG.log(f"  Seed {seed_index}, query {i+1}/{len(viewports)}: "
                     f"viewport ({vx},{vy}) {vw}x{vh}")
 
-        result = simulate(session, round_id, seed_index, vx, vy, vw, vh)
+        result = simulate(round_id, seed_index, vx, vy, vw, vh)
         grid = result["grid"]
         vp = result["viewport"]
         actual_vx, actual_vy = vp["x"], vp["y"]
@@ -302,25 +285,22 @@ def build_prediction(counts: np.ndarray, prior: np.ndarray,
 
 def main():
     parser = argparse.ArgumentParser(description="Astar Island solver")
-    parser.add_argument("--token", required=True, help="JWT token from app.ainm.no")
     parser.add_argument("--round-id", help="Specific round ID (default: active round)")
     parser.add_argument("--queries-per-seed", type=int, default=10,
                         help="Queries to allocate per seed (default: 10, total 50)")
     args = parser.parse_args()
 
-    session = make_session(args.token)
-
     # 1. Find the round
     RUN_LOG.header("Round Discovery")
     if args.round_id:
-        round_info = _logged_get(session, f"{BASE}/rounds/{args.round_id}")
+        round_info = get_round_detail(args.round_id)
     else:
-        round_info = get_active_round(session)
+        round_info = get_active_round()
         if not round_info:
             RUN_LOG.log("No active round found!")
             return
         round_id = round_info["id"]
-        round_info = get_round_detail(session, round_id)
+        round_info = get_round_detail(round_id)
 
     round_id = round_info["id"]
     width = round_info["map_width"]
@@ -335,7 +315,7 @@ def main():
     # 2. Check budget
     RUN_LOG.header("Budget")
     try:
-        budget = get_budget(session)
+        budget = get_budget()
         remaining = budget["queries_max"] - budget["queries_used"]
         RUN_LOG.log(f"Budget: {budget['queries_used']}/{budget['queries_max']} used, {remaining} remaining")
     except Exception as e:
@@ -371,7 +351,7 @@ def main():
         # Plan and execute observations
         if queries_per_seed > 0:
             viewports = plan_viewports(width, height, queries_per_seed, initial_class)
-            counts = observe_seed(session, round_id, seed_idx, viewports, width, height)
+            counts = observe_seed(round_id, seed_idx, viewports, width, height)
             observed_cells = (counts.sum(axis=-1) > 0).sum()
             RUN_LOG.log(f"  Observed {observed_cells}/{width*height} cells")
         else:
@@ -383,13 +363,13 @@ def main():
         RUN_LOG.log(f"  Prob range: [{prediction.min():.4f}, {prediction.max():.4f}]")
         RUN_LOG.log(f"  Sum check (should be 1.0): {prediction[0,0].sum():.4f}")
 
-        result = submit_prediction(session, round_id, seed_idx, prediction)
+        result = submit_prediction(round_id, seed_idx, prediction)
         RUN_LOG.log(f"  Submitted seed {seed_idx}: {result}")
 
     # 5. Check scores
     RUN_LOG.header("Scores")
     try:
-        my_rounds = _logged_get(session, f"{BASE}/my-rounds")
+        my_rounds = _logged_api(api.get_my_rounds, _method="GET", _url=f"{BASE}/my-rounds")
         for r in my_rounds:
             if r["id"] == round_id:
                 RUN_LOG.log(f"  Round score: {r.get('round_score')}")

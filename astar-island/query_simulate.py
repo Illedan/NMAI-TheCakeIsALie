@@ -16,54 +16,9 @@ from datetime import datetime, timezone
 
 import requests
 
-from secrets import ACCESS_TOKEN
+import api
 
-BASE = "https://api.ainm.no/astar-island"
 SIMULATIONS_DIR = os.path.join(os.path.dirname(__file__), "simulations")
-
-
-def make_session() -> requests.Session:
-    s = requests.Session()
-    s.headers["Authorization"] = f"Bearer {ACCESS_TOKEN}"
-    return s
-
-
-def get_active_round(session: requests.Session) -> dict:
-    resp = session.get(f"{BASE}/rounds")
-    resp.raise_for_status()
-    rounds = resp.json()
-    active = [r for r in rounds if r["status"] == "active"]
-    if not active:
-        raise RuntimeError("No active round found. Available statuses: "
-                           + ", ".join(set(r["status"] for r in rounds)))
-    return active[0]
-
-
-def get_round_detail(session: requests.Session, round_id: str) -> dict:
-    resp = session.get(f"{BASE}/rounds/{round_id}")
-    resp.raise_for_status()
-    return resp.json()
-
-
-def get_budget(session: requests.Session) -> dict:
-    resp = session.get(f"{BASE}/budget")
-    resp.raise_for_status()
-    return resp.json()
-
-
-def simulate(session: requests.Session, round_id: str, seed_index: int,
-             vx: int, vy: int, vw: int = 15, vh: int = 15) -> dict:
-    payload = {
-        "round_id": round_id,
-        "seed_index": seed_index,
-        "viewport_x": vx,
-        "viewport_y": vy,
-        "viewport_w": vw,
-        "viewport_h": vh,
-    }
-    resp = session.post(f"{BASE}/simulate", json=payload)
-    resp.raise_for_status()
-    return resp.json()
 
 
 def plan_viewports(budget: int, n_seeds: int,
@@ -108,19 +63,22 @@ def main():
     args = parser.parse_args()
 
     os.makedirs(SIMULATIONS_DIR, exist_ok=True)
-    session = make_session()
 
     # Resolve round
     if args.round_id:
         round_id = args.round_id
         print(f"Using provided round: {round_id}")
     else:
-        active = get_active_round(session)
-        round_id = active["id"]
-        print(f"Active round: {round_id} (round #{active['round_number']})")
+        rounds = api.get_rounds()
+        active = [r for r in rounds if r["status"] == "active"]
+        if not active:
+            raise RuntimeError("No active round found. Available statuses: "
+                               + ", ".join(set(r["status"] for r in rounds)))
+        round_id = active[0]["id"]
+        print(f"Active round: {round_id} (round #{active[0]['round_number']})")
 
     # Check budget
-    budget = get_budget(session)
+    budget = api.get_budget()
     remaining = budget["queries_max"] - budget["queries_used"]
     print(f"Budget: {budget['queries_used']}/{budget['queries_max']} used, {remaining} remaining")
 
@@ -146,7 +104,7 @@ def main():
 
         for vx, vy, vw, vh in viewports:
             try:
-                result = simulate(session, round_id, seed_idx, vx, vy, vw, vh)
+                result = api.simulate(round_id, seed_idx, vx, vy, vw, vh)
                 query_count += 1
                 seed_results.append({
                     "viewport": {"x": vx, "y": vy, "w": vw, "h": vh},

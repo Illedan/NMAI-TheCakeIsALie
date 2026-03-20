@@ -9,6 +9,13 @@ def _rand(H, W):
     buf = os.urandom(H * W * 4)
     return np.frombuffer(buf, dtype=np.uint32).astype(np.float64).reshape(H, W) / 0xFFFFFFFF
 
+
+def _rand2(H, W):
+    """Generate two random arrays at once for efficiency."""
+    buf = os.urandom(H * W * 8)
+    arr = np.frombuffer(buf, dtype=np.uint32).astype(np.float64) / 0xFFFFFFFF
+    return arr[:H*W].reshape(H, W), arr[H*W:].reshape(H, W)
+
 NSTEPS = 50
 NUM_CLASSES = 6
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -90,7 +97,7 @@ class State:
     #and that given 200 runs produce the distributions seen in the /analysis folder for the five different seeds that dictate some of the hidden, but stationary process parameters.
     def evolve(self):
         new_state = self.state.copy()
-        rand = _rand(self.H, self.W)
+        rand, rand2 = _rand2(self.H, self.W)
 
         n_alive = self._count_neighbors((self.state == 1) | (self.state == 2))
         n_ocean = self.n_ocean
@@ -125,7 +132,7 @@ class State:
         # Ruin (3) transitions: ruins always transition immediately (categorical draw)
         # Port probability scales with ocean neighbors; remaining probability split among others
         is_ruin = (self.state == 3)
-        rand2 = _rand(self.H, self.W)
+        # rand2 already generated above
         p_port = np.minimum(self.p_ruin_port_per_ocean * n_ocean, 0.5)
         remaining = 1.0 - p_port
         # Scale base rates by remaining probability
@@ -210,7 +217,7 @@ ROUNDS = [
 _r2 = "76909e29-f664-4b2f-b16b-61b7507277e9"
 if os.path.exists(os.path.join(ANALYSIS_DIR, f"03_20_01_analysis_seed_0_{_r2}.json")):
     ROUNDS.append((_r2, "03_20_01"))
-number_of_simulations = 2000
+number_of_simulations = 2500
 
 all_scores = []
 all_maxlikes = []

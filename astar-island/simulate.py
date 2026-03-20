@@ -116,8 +116,8 @@ def calibrate_params(replay, ocean_mask):
         obs['ruin_to_empty'] = 0.33
         obs['ruin_to_forest'] = 0.18
 
-    # Blend with priors (weight: 0.5 replay, 0.5 prior)
-    w = 0.5
+    # Blend with priors (weight: 0.6 replay, 0.4 prior)
+    w = 0.6
     priors = dict(collapse=0.055, port_collapse=0.025, expand=0.005,
                   forest_clear=0.007, port_per_ocean=0.03,
                   ruin_rebuild=0.48, ruin_to_empty=0.33, ruin_to_forest=0.18)
@@ -309,7 +309,7 @@ for path in sorted(_glob.glob(os.path.join(ANALYSIS_DIR, "*_analysis_seed_0_*.js
     parts = fname.replace("_analysis_seed_0_", "|").replace(".json", "").split("|")
     if len(parts) == 2:
         ROUNDS.append((parts[1], parts[0]))
-number_of_simulations = 1200
+number_of_simulations = 800
 
 all_scores = []
 all_maxlikes = []

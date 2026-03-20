@@ -151,6 +151,10 @@ def calibrate_params(replay, ocean_mask):
         obs['expand_per_n'] = obs['expand'] * 1.2
     obs['port_per_ocean'] = s_to_p_ocean / max(s_ocean_total, 1)
     r_sum = r_to.sum()
+    # Scale ruin_port_per_ocean relative to observed ruin->port rate
+    # Default assumes ~1.2% of ruins become ports with 0.05 per ocean neighbor
+    ruin_port_frac = r_to[3] / max(r_sum, 1) if r_sum > 0 else 0.012
+    obs['ruin_port_per_ocean'] = 0.05 * (ruin_port_frac / 0.012)
     if r_sum > 0:
         obs['ruin_rebuild'] = r_to[0] / r_sum
         obs['ruin_to_empty'] = r_to[1] / r_sum
@@ -166,14 +170,16 @@ def calibrate_params(replay, ocean_mask):
                   forest_clear=0.007, forest_base=0.004, forest_per_n=0.005,
                   port_per_ocean=0.03,
                   empty_to_ruin=0.0004, forest_to_ruin=0.0005,
-                  ruin_rebuild=0.48, ruin_to_empty=0.33, ruin_to_forest=0.18)
+                  ruin_rebuild=0.48, ruin_to_empty=0.33, ruin_to_forest=0.18,
+                  ruin_port_per_ocean=0.05)
     # Weight per param: high-count params get more trust
     weights = dict(collapse=0.85, port_collapse=0.75, expand=0.7,
                    expand_base=0.6, expand_per_n=0.6,
                    forest_clear=0.7, forest_base=0.6, forest_per_n=0.6,
                    port_per_ocean=0.6,
                    empty_to_ruin=0.7, forest_to_ruin=0.7,
-                   ruin_rebuild=0.85, ruin_to_empty=0.85, ruin_to_forest=0.85)
+                   ruin_rebuild=0.85, ruin_to_empty=0.85, ruin_to_forest=0.85,
+                   ruin_port_per_ocean=0.7)
     blended = {k: weights[k] * obs[k] + (1-weights[k]) * priors[k] for k in priors}
     return blended
 
@@ -220,6 +226,7 @@ class State:
             self.p_forest_per_n = params['forest_per_n']
             self.p_empty_to_ruin = params['empty_to_ruin']
             self.p_forest_to_ruin = params['forest_to_ruin']
+            self.p_ruin_port_per_ocean = params['ruin_port_per_ocean']
             self.p_ruin_rebuild = params['ruin_rebuild']
             self.p_ruin_to_empty = params['ruin_to_empty']
             self.p_ruin_to_forest = params['ruin_to_forest']

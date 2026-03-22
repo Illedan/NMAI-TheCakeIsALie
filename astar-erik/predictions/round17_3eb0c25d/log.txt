@@ -1,0 +1,75 @@
+[20:40:33] Submit run: Round #17 (3eb0c25d)
+[20:40:33] Round ID: 3eb0c25d-28fa-48ca-b8e1-fc249e3918e9
+[20:40:33] Map: 40x40, 5 seeds
+[20:40:33] Budget: 0/50 used, 50 remaining
+[20:40:34]   Seed 0: Phase 1 (4,5) score=323.8
+[20:40:34]   Seed 1: Phase 1 (14,15) score=308.6
+[20:40:34]   Seed 2: Phase 1 (1,22) score=295.6
+[20:40:34]   Seed 3: Phase 1 (2,21) score=325.3
+[20:40:34]   Seed 4: Phase 1 (23,5) score=309.1
+[20:40:34] >>> CHOSEN: Seed 0 (always seed 0; best tile was score=325.3)
+[20:40:34]   HC (all queries): (4,5) 15x15 — 50q
+[20:40:34] 
+[20:40:34] === Querying seed 0 (50 queries, all on best tile) ===
+[20:40:34]   HC (all queries): (4,5) 15x15 — 50 queries
+[20:40:35]     Query 1/50 [API: 1/50]
+[20:40:46]     Query 11/50 [API: 11/50]
+[20:41:09]     Query 21/50 [API: 21/50]
+[20:41:24]     Query 31/50 [API: 31/50]
+[20:41:43]     Query 41/50 [API: 41/50]
+[20:41:59]     Query 50/50 [API: 50/50]
+[20:42:00]   Total: 50 queries saved
+[20:42:00] HC will run inside C++ solver (8 parametric coefficients)
+[20:42:00] 
+[20:42:00] === Phase 2: Running solver for all seeds ===
+[20:42:00] 
+[20:42:00] --- Seed 0 (QUERY SEED) ---
+[20:42:00]   Running solver (50 queries)...
+[20:42:00]   Solver: Prediction written to /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_204033_3eb0c25d/seed_0_prediction.json
+[20:42:00]   Solver info: Grid: 40x40
+Queries: 50
+HC: es=0.004 ns=0.35 sr=0.1 sp=0.0794852 fs=0.005 rs=0.549035 re=0.233403 vb=0.061893 dd=0 gr=5.58889 fit=83.2422 d3d1=0.785846
+MF gr=5.58889 d3d1=0.785846
+Saved correction to /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_204033_3eb0c25d/shared_correction.txt
+[20:42:00]   Submitting prediction...
+[20:42:01]   Submit: {"status": "accepted", "round_id": "3eb0c25d-28fa-48ca-b8e1-fc249e3918e9", "seed_index": 0}
+[20:42:02] 
+[20:42:02] --- Seed 1 (shared correction) ---
+[20:42:02]   Running solver (0 queries)...
+[20:42:02]   Solver: Prediction written to /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_204033_3eb0c25d/seed_1_prediction.json
+[20:42:02]   Solver info: Grid: 40x40
+Queries: 0
+Loaded correction from /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_204033_3eb0c25d/seed_1_prediction.json.correction fit=83.2422 d3d1=0.785846
+MF gr=1 d3d1=0.785846
+[20:42:02]   Submitting prediction...
+[20:42:05]   Submit: {"status": "accepted", "round_id": "3eb0c25d-28fa-48ca-b8e1-fc249e3918e9", "seed_index": 1}
+[20:42:06] 
+[20:42:06] --- Seed 2 (shared correction) ---
+[20:42:06]   Running solver (0 queries)...
+[20:42:06]   Solver: Prediction written to /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_204033_3eb0c25d/seed_2_prediction.json
+[20:42:06]   Solver info: Grid: 40x40
+Queries: 0
+Loaded correction from /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_204033_3eb0c25d/seed_2_prediction.json.correction fit=83.2422 d3d1=0.785846
+MF gr=1 d3d1=0.785846
+[20:42:06]   Submitting prediction...
+[20:42:06]   Submit: {"status": "accepted", "round_id": "3eb0c25d-28fa-48ca-b8e1-fc249e3918e9", "seed_index": 2}
+[20:42:07] 
+[20:42:07] --- Seed 3 (shared correction) ---
+[20:42:07]   Running solver (0 queries)...
+[20:42:07]   Solver: Prediction written to /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_204033_3eb0c25d/seed_3_prediction.json
+[20:42:07]   Solver info: Grid: 40x40
+Queries: 0
+Loaded correction from /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_204033_3eb0c25d/seed_3_prediction.json.correction fit=83.2422 d3d1=0.785846
+MF gr=1 d3d1=0.785846
+[20:42:07]   Submitting prediction...
+[20:42:08]   Submit: {"status": "accepted", "round_id": "3eb0c25d-28fa-48ca-b8e1-fc249e3918e9", "seed_index": 3}
+[20:42:09] 
+[20:42:09] --- Seed 4 (shared correction) ---
+[20:42:09]   Running solver (0 queries)...
+[20:42:09]   Solver: Prediction written to /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_204033_3eb0c25d/seed_4_prediction.json
+[20:42:09]   Solver info: Grid: 40x40
+Queries: 0
+Loaded correction from /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_204033_3eb0c25d/seed_4_prediction.json.correction fit=83.2422 d3d1=0.785846
+MF gr=1 d3d1=0.785846
+[20:42:09]   Submitting prediction...
+[20:42:09]   Submit: {"status": "accepted", "round_id": "3eb0c25d-28fa-48ca-b8e1-fc249e3918e9", "seed_index": 4}

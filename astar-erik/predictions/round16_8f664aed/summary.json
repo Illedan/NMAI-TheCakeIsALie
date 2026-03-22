@@ -1,0 +1,24 @@
+{
+  "round_id": "8f664aed-8839-4c85-bed0-77a2cac7c6f5",
+  "round_number": 16,
+  "timestamp": "20260321_173358",
+  "mode": "submit",
+  "seeds": [
+    2
+  ],
+  "query_seed": 2,
+  "total_queries": 0,
+  "plan": [
+    {
+      "x": 7,
+      "y": 16,
+      "w": 15,
+      "h": 15,
+      "queries": 0,
+      "label": "HC (all queries)"
+    }
+  ],
+  "map_width": 40,
+  "map_height": 40,
+  "completed_at": "20260321_173358"
+}

@@ -1,0 +1,10 @@
+commit	validation_score	target_maxlike	validation_maxlike	status	description
+fe79053	73.3701	-1524.1289	-972.4077	keep	baseline: default params no viewport calibration
+70ecf18	83.6136	-1409.0494	-914.3261	keep	viewport grid search (collapse + expansion scaling)
+d58e296	84.5658	-0.6237	-0.4077	keep	baseline with viewport grid search (updated metrics)
+3434cb5	84.3407	-0.6284	-0.4108	keep	calibrate once per round; 500 sims; 60 search sims; 3min
+e0deeb6	85.3900	-0.6225	-0.4100	keep	calibrate with all 5 seeds viewports; 30 search sims; 4.8min
+f2f8dee	83.5660	-0.6226	-0.4128	discard	finer grid (8x5) but too noisy with 30 search sims
+529aa35	85.3310	-0.6225	-0.4104	discard	50 search sims (no improvement; slower)
+1f91f49	85.2806	-0.6227	-0.4103	discard	learned port_collapse ratio from training replays
+c7f73ec	85.5438	-0.6216	-0.4103	keep	two-phase search: collapse×expansion then ruin rebuild refinement

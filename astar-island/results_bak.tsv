@@ -1,0 +1,45 @@
+commit	score	maxlike	status	description
+2388121	23.0142	-2031.6312	keep	baseline
+9fc91c3	37.9275	-2200.9587	keep	calibrate transitions from replay data; add ruin->empty
+e006ca0	72.5888	-1281.7035	keep	base rate + per-neighbor expansion scaling from replay data
+bbe71a7	78.0901	-1081.9157	keep	port formation scales with ocean neighbor count
+309d179	79.1254	-1051.8485	keep	5x faster RNG via os.urandom; 500 sims
+5355d5a	79.1041	-1057.1287	discard	neighbor-dependent settlement collapse
+050ec80	79.4444	-1048.6236	keep	increase simulations to 1000
+4205165	74.5532	-1066.5068	discard	per-seed calibration from single replay (overfits)
+5f38102	79.4971	-1045.9834	keep	skip intermediate storage; 1200 sims
+48107bf	80.0672	-1044.7249	keep	add rare Empty->Ruin and Forest->Ruin transitions
+62bf389	80.9094	-1039.7830	keep	time-dependent collapse rate (0.035 + 0.0006*t)
+c25bfeb	82.7267	-1127.0456	keep	evaluate on both rounds (10 seeds); R1=80.9 R2=84.6
+2ccc354	81.9662	-1129.4334	discard	time-dependent expansion rate
+5bbb5a2	83.4448	-1122.8820	keep	increase port formation 0.03->0.035; reduce port collapse 0.025->0.020
+df6874b	83.5493	-1124.0609	keep	port formation 0.04; collapse 0.018
+6fc65a2	83.5034	-1127.1415	discard	increase expansion rate
+05cf9ef	83.4638	-1124.0505	discard	explicit ruin leftover handling
+d166847	86.8675	-1128.0613	discard	retune density collapse
+96b4907	86.9914	-1126.3843	keep	density-dependent port collapse
+36d8b14	72.5781	-897.5722	keep	auto-discover rounds (R3 scores 43.7!)
+ed473d7	84.5139	-798.5117	keep	per-seed calibration with Bayesian shrinkage (w=0.7)
+71caf35	84.6192	-808.5813	keep	blend weight 0.5
+99557e8	84.5463	-804.2228	keep	blend weight 0.6; 800 sims
+7f720af	85.6891	-798.8946	keep	flat collapse rate in calibration; adjusted base/per_n split
+51f819a	84.9766	-797.5537	discard	expansion split 0.3/1.4
+e8e1291	85.7899	-797.3382	keep	1000 sims
+a84e2f6	86.3305	-804.4703	keep	calibrate expand_base/per_n via linear fit
+42e7535	86.5206	-807.2839	keep	calibrate forest_base/per_n via linear fit
+4f7bce9	85.7332	-801.0019	discard	blend weight 0.75 (too aggressive)
+62ffc99	87.5168	-813.9104	keep	per-round calibration (all 5 replays averaged)
+7155967	87.2521	-807.6471	discard	blend weight 0.8
+003208b	87.5400	-809.5766	keep	blend weight 0.7
+b02e2eb	87.6777	-808.7433	keep	increase to 1200 simulations
+a2fc4bb	87.6695	-809.0222	discard	Laplace alpha 0.01 (no improvement)
+c99cb50	87.7438	-808.4902	keep	increase to 1500 simulations
+7ddf455	86.6292	-837.8967	keep	revert to flat collapse (5 rounds baseline)
+6a898ab	81.9740	-849.4732	discard	density damping at 300 (too aggressive)
+904e064	85.8364	-836.0845	discard	density damping at 1000 (still hurts)
+8123fca	86.7903	-839.1689	keep	per-parameter blend weights
+4f93011	86.7204	-838.2246	discard	collapse/ruin weights at 0.9 (overfit)
+b0f39d6	86.5984	-838.9005	discard	port_per_ocean weight 0.75
+83ed5c0	86.8349	-841.9034	keep	calibrate empty_to_ruin and forest_to_ruin per round
+3f547b0	86.9527	-841.6196	keep	calibrate ruin_port_per_ocean from replay data
+3ce10b5	86.9945	-841.7660	keep	Laplace alpha 0.015

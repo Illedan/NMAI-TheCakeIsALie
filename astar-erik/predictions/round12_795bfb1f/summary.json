@@ -1,0 +1,44 @@
+{
+  "round_id": "795bfb1f-54bd-4f39-a526-9868b36f7ebd",
+  "round_number": 12,
+  "timestamp": "20260321_054923",
+  "mode": "submit",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "query_seed": 2,
+  "total_queries": 50,
+  "plan": [
+    {
+      "x": 17,
+      "y": 11,
+      "w": 15,
+      "h": 15,
+      "queries": 20,
+      "label": "Phase 1 (HC)"
+    },
+    {
+      "x": 21,
+      "y": 21,
+      "w": 15,
+      "h": 15,
+      "queries": 20,
+      "label": "Phase 2 (entropy)"
+    },
+    {
+      "x": 17,
+      "y": 10,
+      "w": 15,
+      "h": 15,
+      "queries": 10,
+      "label": "Phase 3 (entropy)"
+    }
+  ],
+  "map_width": 40,
+  "map_height": 40,
+  "completed_at": "20260321_055047"
+}

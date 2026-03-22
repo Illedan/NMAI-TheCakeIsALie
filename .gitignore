@@ -182,9 +182,9 @@ cython_debug/
 .abstra/
 
 # Visual Studio Code
-#  Visual Studio Code specific template is maintained in a separate VisualStudioCode.gitignore 
+#  Visual Studio Code specific template is maintained in a separate VisualStudioCode.gitignore
 #  that can be found at https://github.com/github/gitignore/blob/main/Global/VisualStudioCode.gitignore
-#  and can be added to the global gitignore or merged into this file. However, if you prefer, 
+#  and can be added to the global gitignore or merged into this file. However, if you prefer,
 #  you could uncomment the following to ignore the entire vscode folder
 # .vscode/
 
@@ -201,7 +201,31 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 
+#Secrets
+astar-island/*secrets.py
+
+
 # Marimo
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+/norgesgruppen/data
+/norgesgruppen/checkpoints
+*.pt
+/norgesgruppen/data
+norgesgruppen/.DS_Store
+.DS_Store
+/norgesgruppen/yolo_single_class
+/norgesgruppen/runs
+/tripletex/node_modules
+/astar-erik/view
+/astar-erik/simulations
+/astar-erik/online_data
+/astar-erik/ml/data
+/tripletex/test-logs
+norgesgruppen/johan/v2/submission_expC.zip
+astar-erik/transitions_settlement.bin
+astar-erik/transitions_ruin.bin
+astar-erik/transitions_port.bin
+astar-erik/transitions_forest.bin
+astar-erik/transitions_empty.bin

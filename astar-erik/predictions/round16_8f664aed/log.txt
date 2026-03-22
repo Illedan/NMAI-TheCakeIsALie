@@ -1,0 +1,22 @@
+[17:33:58] Submit run: Round #16 (8f664aed)
+[17:33:58] Round ID: 8f664aed-8839-4c85-bed0-77a2cac7c6f5
+[17:33:58] Map: 40x40, 5 seeds
+[17:33:58] Budget: 50/50 used, 0 remaining
+[17:33:58]   Seed 2: Phase 1 (7,16) score=295.6
+[17:33:58] >>> CHOSEN: Seed 2 (always seed 0; best tile was score=295.6)
+[17:33:58]   HC (all queries): (7,16) 15x15 — 0q
+[17:33:58] 
+[17:33:58] === Querying seed 2 (0 queries, all on best tile) ===
+[17:33:58]   Total: 0 queries saved
+[17:33:58] HC will run inside C++ solver (8 parametric coefficients)
+[17:33:58] 
+[17:33:58] === Phase 2: Running solver for all seeds ===
+[17:33:58] 
+[17:33:58] --- Seed 2 (QUERY SEED) ---
+[17:33:58]   Running solver (0 queries)...
+[17:33:58]   Solver: Prediction written to /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_173358_8f664aed/seed_2_prediction.json
+[17:33:58]   Solver info: Grid: 40x40
+Queries: 0
+MF gr=1
+[17:33:58]   Submitting prediction...
+[17:33:58]   Submit: {"status": "accepted", "round_id": "8f664aed-8839-4c85-bed0-77a2cac7c6f5", "seed_index": 2}

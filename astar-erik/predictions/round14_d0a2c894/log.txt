@@ -1,0 +1,69 @@
+[11:53:22] Submit run: Round #14 (d0a2c894)
+[11:53:22] Round ID: d0a2c894-2162-4d49-86cf-435b9013f3b8
+[11:53:22] Map: 40x40, 5 seeds
+[11:53:22] Budget: 0/50 used, 50 remaining
+[11:53:23]   Seed 0: Phase 1 (23,16) score=309.7
+[11:53:23]   Seed 1: Phase 1 (24,10) score=303.4
+[11:53:23]   Seed 2: Phase 1 (4,1) score=296.4
+[11:53:24]   Seed 3: Phase 1 (4,6) score=325.3
+[11:53:24]   Seed 4: Phase 1 (15,24) score=321.5
+[11:53:24] >>> CHOSEN: Seed 3 (tile score=325.3)
+[11:53:24]   HC (all queries): (4,6) 15x15 — 50q
+[11:53:24] 
+[11:53:24] === Querying seed 3 (50 queries, all on best tile) ===
+[11:53:24]   HC (all queries): (4,6) 15x15 — 50 queries
+[11:53:25]     Query 1/50 [API: 1/50]
+[11:53:42]     Query 11/50 [API: 11/50]
+[11:54:04]     Query 21/50 [API: 21/50]
+[11:54:22]     Query 31/50 [API: 31/50]
+[11:54:38]     Query 41/50 [API: 41/50]
+[11:54:56]     Query 50/50 [API: 50/50]
+[11:54:56]   Total: 50 queries saved
+[11:54:56] HC will run inside C++ solver (8 parametric coefficients)
+[11:54:56] 
+[11:54:56] === Phase 2: Running solver for all seeds ===
+[11:54:56] 
+[11:54:56] --- Seed 3 (QUERY SEED) ---
+[11:54:56]   Running solver (50 queries)...
+[11:55:19]   Solver: Prediction written to /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_115322_d0a2c894/seed_3_prediction.json
+[11:55:19]   Solver info: Grid: 40x40
+Queries: 50
+Saved correction to /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_115322_d0a2c894/shared_correction.txt
+[11:55:19]   Submitting prediction...
+[11:55:20]   Submit: {"status": "accepted", "round_id": "d0a2c894-2162-4d49-86cf-435b9013f3b8", "seed_index": 3}
+[11:55:20] 
+[11:55:20] --- Seed 0 (shared correction) ---
+[11:55:20]   Running solver (0 queries)...
+[11:55:24]   Solver: Prediction written to /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_115322_d0a2c894/seed_0_prediction.json
+[11:55:24]   Solver info: Grid: 40x40
+Queries: 0
+Loaded correction from /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_115322_d0a2c894/seed_0_prediction.json.correction
+[11:55:24]   Submitting prediction...
+[11:55:26]   Submit: {"status": "accepted", "round_id": "d0a2c894-2162-4d49-86cf-435b9013f3b8", "seed_index": 0}
+[11:55:26] 
+[11:55:26] --- Seed 1 (shared correction) ---
+[11:55:26]   Running solver (0 queries)...
+[11:55:30]   Solver: Prediction written to /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_115322_d0a2c894/seed_1_prediction.json
+[11:55:30]   Solver info: Grid: 40x40
+Queries: 0
+Loaded correction from /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_115322_d0a2c894/seed_1_prediction.json.correction
+[11:55:30]   Submitting prediction...
+[11:55:30]   Submit: {"status": "accepted", "round_id": "d0a2c894-2162-4d49-86cf-435b9013f3b8", "seed_index": 1}
+[11:55:30] 
+[11:55:30] --- Seed 2 (shared correction) ---
+[11:55:30]   Running solver (0 queries)...
+[11:55:33]   Solver: Prediction written to /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_115322_d0a2c894/seed_2_prediction.json
+[11:55:33]   Solver info: Grid: 40x40
+Queries: 0
+Loaded correction from /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_115322_d0a2c894/seed_2_prediction.json.correction
+[11:55:33]   Submitting prediction...
+[11:55:34]   Submit: {"status": "accepted", "round_id": "d0a2c894-2162-4d49-86cf-435b9013f3b8", "seed_index": 2}
+[11:55:34] 
+[11:55:34] --- Seed 4 (shared correction) ---
+[11:55:34]   Running solver (0 queries)...
+[11:55:38]   Solver: Prediction written to /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_115322_d0a2c894/seed_4_prediction.json
+[11:55:38]   Solver info: Grid: 40x40
+Queries: 0
+Loaded correction from /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_115322_d0a2c894/seed_4_prediction.json.correction
+[11:55:38]   Submitting prediction...
+[11:55:38]   Submit: {"status": "accepted", "round_id": "d0a2c894-2162-4d49-86cf-435b9013f3b8", "seed_index": 4}

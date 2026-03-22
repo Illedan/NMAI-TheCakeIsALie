@@ -1,0 +1,4 @@
+{
+  "error": 429,
+  "body": "{\"detail\":\"Rate limit exceeded. Try again shortly.\"}"
+}

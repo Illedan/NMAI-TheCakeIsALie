@@ -1,0 +1,32 @@
+[
+  {
+    "name": "expA_mixup05",
+    "det": 0.9154,
+    "cls": 0.7437,
+    "combined": 0.8639,
+    "duration_min": 25.1,
+    "det_tta": 0.9154,
+    "cls_tta": 0.7437,
+    "combined_tta": 0.8639
+  },
+  {
+    "name": "expB_freeze10",
+    "det": 0.9002,
+    "cls": 0.7262,
+    "combined": 0.848,
+    "duration_min": 16.7,
+    "det_tta": 0.9002,
+    "cls_tta": 0.7262,
+    "combined_tta": 0.848
+  },
+  {
+    "name": "expC_200ep",
+    "det": 0.9159,
+    "cls": 0.7774,
+    "combined": 0.8743,
+    "duration_min": 33.0,
+    "det_tta": 0.9159,
+    "cls_tta": 0.7774,
+    "combined_tta": 0.8743
+  }
+]

@@ -1,0 +1,84 @@
+[
+  {
+    "name": "v8x_cp05",
+    "changes": {
+      "copy_paste": 0.5
+    },
+    "metrics": {
+      "mAP50": 0.7967,
+      "mAP50_95": 0.5214,
+      "precision": 0.7837,
+      "recall": 0.758
+    },
+    "duration_min": 59.0,
+    "model_size_mb": 137.6
+  },
+  {
+    "name": "v8x_cm30",
+    "changes": {
+      "close_mosaic": 30
+    },
+    "metrics": {
+      "mAP50": 0.8019,
+      "mAP50_95": 0.5243,
+      "precision": 0.784,
+      "recall": 0.7646
+    },
+    "duration_min": 58.7,
+    "model_size_mb": 137.6
+  },
+  {
+    "name": "v8x_finetune",
+    "changes": {
+      "epochs": 50,
+      "lr0": 0.001,
+      "close_mosaic": 10,
+      "mosaic": 0.5,
+      "copy_paste": 0.1,
+      "warmup_epochs": 2
+    },
+    "metrics": {
+      "mAP50": 0.8005,
+      "mAP50_95": 0.5098,
+      "precision": 0.7751,
+      "recall": 0.7799
+    },
+    "duration_min": 19.4,
+    "model_size_mb": 137.6
+  },
+  {
+    "name": "v8x_2048",
+    "changes": {
+      "imgsz": 2048,
+      "batch": 1,
+      "epochs": 100
+    },
+    "metrics": {
+      "mAP50": 0.7754,
+      "mAP50_95": 0.4908,
+      "precision": 0.7473,
+      "recall": 0.7546
+    },
+    "duration_min": 45.2,
+    "model_size_mb": 137.6
+  },
+  {
+    "name": "v8x_augplus",
+    "changes": {
+      "degrees": 10.0,
+      "shear": 5.0,
+      "perspective": 0.002,
+      "mixup": 0.2,
+      "copy_paste": 0.4,
+      "scale": 1.0
+    },
+    "metrics": {
+      "mAP50": 0.7857,
+      "mAP50_95": 0.5024,
+      "precision": 0.7601,
+      "recall": 0.7546
+    },
+    "duration_min": 59.8,
+    "model_size_mb": 137.6
+  }
+]

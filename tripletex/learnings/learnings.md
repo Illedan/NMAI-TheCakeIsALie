@@ -1,0 +1,12 @@
+=== LEARNINGS FROM PREVIOUS RUNS ===
+
+1.  **Voucher Precision & Cleanup**: Before creating a voucher, check if one already exists for the same transaction to avoid duplicates. If a mistake is made (e.g., wrong amount or missing VAT), use `PUT /ledger/voucher/{id}/:reverse` to undo the incorrect voucher before creating a new, correct one. Do not leave duplicate or incorrect vouchers in the system.
+2.  **VAT Handling**: For expenses with VAT, calculate the net amount and VAT separately. Post the net amount to the expense account and the VAT amount to the VAT account (e.g., 2710). Ensure the total of all postings in a voucher sums to zero. Do not attempt to "correct" VAT by creating a separate voucher for the VAT portion if it can be included in the original voucher.
+3.  **Voucher Row Requirement**: Every posting in a voucher MUST have a "row" field (sequential integers: 1, 2, 3...). Without "row", you get "systemgenererte" errors.
+4.  **Amount Fields**: Every posting in a voucher MUST include all four amount fields (`amount`, `amountCurrency`, `amountGross`, `amountGrossCurrency`) set to the exact same value.
+5.  **Efficiency**: Plan the entire workflow before making any API calls. Use `GET` to verify existence, then `POST` once. Avoid redundant `GET` calls after a successful `POST`.
+6.  **Error Handling**: If a request fails with a 422 error, read the `validationMessages` carefully. Do not retry the same request without modifying the body or parameters based on the error.
+7.  **VAT-Locked Accounts**: When posting to accounts that are VAT-locked (like 2710 or 1920), do not attempt to set a `vatType` on the posting itself; the system handles this automatically based on the account.
+8.  **Department Handling**: Always check if a department exists using `GET /department?name=...` before attempting to create a new one. If it doesn't exist, create it using `POST /department`.
+9.  **Verification**: Always perform a final verification using `GET` calls to confirm that the created entities (departments, vouchers, etc.) exist and contain the expected data, as requested by the user.
+10. **Avoid Redundant Attempts**: Do not create multiple vouchers for the same expense. If an initial attempt fails, reverse it completely before attempting a new, corrected voucher. Do not leave "partial" or "incorrect" vouchers in the system.

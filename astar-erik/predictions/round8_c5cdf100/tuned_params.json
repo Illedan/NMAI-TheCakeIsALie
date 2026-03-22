@@ -1,0 +1,15 @@
+{
+  "score": 91.78154730407698,
+  "params": {
+    "settle_ruin_mult": 1.57898277222096,
+    "empty_settle_mult": 0.8375534615121314,
+    "forest_settle_mult": 0.7286504517309398,
+    "ruin_rebuild_mult": 0.7855660925068876,
+    "settle_port_mult": 0.7825328650973817,
+    "port_ruin_mult": 1.2202344858000742,
+    "empty_ruin_mult": 0.5933643129673738,
+    "forest_ruin_mult": 1.0660279365231675,
+    "ruin_forest_mult": 1.2301627999689053,
+    "ruin_empty_mult": 1.1187729608237706
+  }
+}

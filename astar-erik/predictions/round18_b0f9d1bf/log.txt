@@ -1,0 +1,62 @@
+[23:42:12] Submit run: Round #18 (b0f9d1bf)
+[23:42:12] Round ID: b0f9d1bf-4b71-4e6e-816c-19c718d29056
+[23:42:12] Map: 40x40, 5 seeds
+[23:42:12] Budget: 50/50 used, 0 remaining
+[23:42:12]   Seed 0: Phase 1 (14,22) score=325.4
+[23:42:12]   Seed 1: Phase 1 (1,2) score=315.9
+[23:42:12]   Seed 2: Phase 1 (19,2) score=309.7
+[23:42:12]   Seed 3: Phase 1 (18,24) score=310.6
+[23:42:12]   Seed 4: Phase 1 (1,22) score=329.9
+[23:42:12] >>> CHOSEN: Seed 0 (always seed 0; best tile was score=329.9)
+[23:42:12]   HC (all queries): (14,22) 15x15 — 0q
+[23:42:12] 
+[23:42:12] === Querying seed 0 (0 queries, all on best tile) ===
+[23:42:12]   Total: 0 queries saved
+[23:42:12] HC will run inside C++ solver (8 parametric coefficients)
+[23:42:12] 
+[23:42:12] === Phase 2: Running solver for all seeds ===
+[23:42:12] 
+[23:42:12] --- Seed 0 (QUERY SEED) ---
+[23:42:12]   Running solver (0 queries)...
+[23:42:12]   Solver: Prediction written to /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_234212_b0f9d1bf/seed_0_prediction.json
+[23:42:12]   Solver info: Grid: 40x40
+Queries: 0
+MF gr=1 d3d1=1
+[23:42:12]   Submitting prediction...
+[23:42:12]   Submit: {"status": "accepted", "round_id": "b0f9d1bf-4b71-4e6e-816c-19c718d29056", "seed_index": 0}
+[23:42:13] 
+[23:42:13] --- Seed 1 (shared correction) ---
+[23:42:13]   Running solver (0 queries)...
+[23:42:13]   Solver: Prediction written to /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_234212_b0f9d1bf/seed_1_prediction.json
+[23:42:13]   Solver info: Grid: 40x40
+Queries: 0
+MF gr=1 d3d1=1
+[23:42:13]   Submitting prediction...
+[23:42:13]   Submit: {"status": "accepted", "round_id": "b0f9d1bf-4b71-4e6e-816c-19c718d29056", "seed_index": 1}
+[23:42:14] 
+[23:42:14] --- Seed 2 (shared correction) ---
+[23:42:14]   Running solver (0 queries)...
+[23:42:14]   Solver: Prediction written to /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_234212_b0f9d1bf/seed_2_prediction.json
+[23:42:14]   Solver info: Grid: 40x40
+Queries: 0
+MF gr=1 d3d1=1
+[23:42:14]   Submitting prediction...
+[23:42:15]   Submit: {"status": "accepted", "round_id": "b0f9d1bf-4b71-4e6e-816c-19c718d29056", "seed_index": 2}
+[23:42:16] 
+[23:42:16] --- Seed 3 (shared correction) ---
+[23:42:16]   Running solver (0 queries)...
+[23:42:16]   Solver: Prediction written to /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_234212_b0f9d1bf/seed_3_prediction.json
+[23:42:16]   Solver info: Grid: 40x40
+Queries: 0
+MF gr=1 d3d1=1
+[23:42:16]   Submitting prediction...
+[23:42:16]   Submit: {"status": "accepted", "round_id": "b0f9d1bf-4b71-4e6e-816c-19c718d29056", "seed_index": 3}
+[23:42:17] 
+[23:42:17] --- Seed 4 (shared correction) ---
+[23:42:17]   Running solver (0 queries)...
+[23:42:17]   Solver: Prediction written to /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_234212_b0f9d1bf/seed_4_prediction.json
+[23:42:17]   Solver info: Grid: 40x40
+Queries: 0
+MF gr=1 d3d1=1
+[23:42:17]   Submitting prediction...
+[23:42:17]   Submit: {"status": "accepted", "round_id": "b0f9d1bf-4b71-4e6e-816c-19c718d29056", "seed_index": 4}

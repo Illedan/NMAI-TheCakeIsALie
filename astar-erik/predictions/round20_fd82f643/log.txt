@@ -1,0 +1,157 @@
+[05:20:43] Submit: Round #20 (fd82f643)
+[05:20:43] Budget: 0/50 used, 50 remaining
+[05:20:43] Launching C++ interactive solver...
+[05:20:43]   C++ > Loaded seed 0 initial state
+[05:20:43]   C++ > Loaded seed 1 initial state
+[05:20:43]   C++ > Loaded seed 2 initial state
+[05:20:43]   C++ > Loaded seed 3 initial state
+[05:20:43]   C++ > Loaded seed 4 initial state
+[05:20:43]   C++ > Grid: 40x40, 5 seeds
+[05:20:43]   C++ > === Seed 0 (query seed) ===
+[05:20:45]   Query 1/50: (11,4) 15x15 [API: 1/50]
+[05:20:45]   C++ > Query 1: (11,4) 15x15 -> 15x15
+[05:20:45]   Query 2/50: (11,4) 15x15 [API: 2/50]
+[05:20:45]   C++ > Query 2: (11,4) 15x15 -> 15x15
+[05:20:46]   Query 3/50: (11,4) 15x15 [API: 3/50]
+[05:20:46]   C++ > Query 3: (11,4) 15x15 -> 15x15
+[05:20:47]   Query 4/50: (11,4) 15x15 [API: 4/50]
+[05:20:47]   C++ > Query 4: (11,4) 15x15 -> 15x15
+[05:20:47]   Query 5/50: (11,4) 15x15 [API: 5/50]
+[05:20:47]   C++ > Query 5: (11,4) 15x15 -> 15x15
+[05:20:47]   Query 6/50: (11,4) 15x15 [API: 6/50]
+[05:20:47]   C++ > Query 6: (11,4) 15x15 -> 15x15
+[05:20:48]   Query 7/50: (11,4) 15x15 [API: 7/50]
+[05:20:48]   C++ > Query 7: (11,4) 15x15 -> 15x15
+[05:20:50]   Query 8/50: (11,4) 15x15 [API: 8/50]
+[05:20:50]   C++ > Query 8: (11,4) 15x15 -> 15x15
+[05:20:50]   Query 9/50: (11,4) 15x15 [API: 9/50]
+[05:20:50]   C++ > Query 9: (11,4) 15x15 -> 15x15
+[05:20:51]   Query 10/50: (11,4) 15x15 [API: 10/50]
+[05:20:51]   C++ > Query 10: (11,4) 15x15 -> 15x15
+[05:20:52]   Query 11/50: (11,4) 15x15 [API: 11/50]
+[05:20:52]   C++ > Query 11: (11,4) 15x15 -> 15x15
+[05:20:54]   Query 12/50: (11,4) 15x15 [API: 12/50]
+[05:20:54]   C++ > Query 12: (11,4) 15x15 -> 15x15
+[05:20:55]   Query 13/50: (11,4) 15x15 [API: 13/50]
+[05:20:55]   C++ > Query 13: (11,4) 15x15 -> 15x15
+[05:20:57]   Query 14/50: (11,4) 15x15 [API: 14/50]
+[05:20:57]   C++ > Query 14: (11,4) 15x15 -> 15x15
+[05:20:59]   Query 15/50: (11,4) 15x15 [API: 15/50]
+[05:20:59]   C++ > Query 15: (11,4) 15x15 -> 15x15
+[05:21:00]   Query 16/50: (11,4) 15x15 [API: 16/50]
+[05:21:00]   C++ > Query 16: (11,4) 15x15 -> 15x15
+[05:21:00]   Query 17/50: (11,4) 15x15 [API: 17/50]
+[05:21:00]   C++ > Query 17: (11,4) 15x15 -> 15x15
+[05:21:01]   Query 18/50: (11,4) 15x15 [API: 18/50]
+[05:21:01]   C++ > Query 18: (11,4) 15x15 -> 15x15
+[05:21:01]   Query 19/50: (11,4) 15x15 [API: 19/50]
+[05:21:01]   C++ > Query 19: (11,4) 15x15 -> 15x15
+[05:21:03]   Query 20/50: (11,4) 15x15 [API: 20/50]
+[05:21:03]   C++ > Query 20: (11,4) 15x15 -> 15x15
+[05:21:04]   Query 21/50: (11,4) 15x15 [API: 21/50]
+[05:21:04]   C++ > Query 21: (11,4) 15x15 -> 15x15
+[05:21:04]   Query 22/50: (11,4) 15x15 [API: 22/50]
+[05:21:04]   C++ > Query 22: (11,4) 15x15 -> 15x15
+[05:21:05]   Query 23/50: (11,4) 15x15 [API: 23/50]
+[05:21:05]   C++ > Query 23: (11,4) 15x15 -> 15x15
+[05:21:05]   Query 24/50: (11,4) 15x15 [API: 24/50]
+[05:21:05]   C++ > Query 24: (11,4) 15x15 -> 15x15
+[05:21:10]   Query 25/50: (11,4) 15x15 [API: 25/50]
+[05:21:10]   C++ > Query 25: (11,4) 15x15 -> 15x15
+[05:21:12]   C++ > EDA: best=80.2049 pop=48 gen=25
+[05:21:12]   C++ > HC: es=0.002311 ns=0.818441 sr=0.12711 sp=0.0595047 fs=0.00296985 rs=0.619845 re=0.357038 vb=0.254763 dd=0.0339394 gr=1.28364 fit=80.2051 d3d1=0.172727
+[05:21:13]   Query 26/50: (0,25) 15x15 [API: 26/50]
+[05:21:13]   C++ > Query 26: (0,25) 15x15 -> 15x15
+[05:21:13]   Query 27/50: (0,25) 15x15 [API: 27/50]
+[05:21:13]   C++ > Query 27: (0,25) 15x15 -> 15x15
+[05:21:13]   Query 28/50: (0,25) 15x15 [API: 28/50]
+[05:21:13]   C++ > Query 28: (0,25) 15x15 -> 15x15
+[05:21:15]   Query 29/50: (0,25) 15x15 [API: 29/50]
+[05:21:15]   C++ > Query 29: (0,25) 15x15 -> 15x15
+[05:21:16]   Query 30/50: (0,25) 15x15 [API: 30/50]
+[05:21:16]   C++ > Query 30: (0,25) 15x15 -> 15x15
+[05:21:18]   Query 31/50: (0,24) 15x15 [API: 31/50]
+[05:21:18]   C++ > Query 31: (0,24) 15x15 -> 15x15
+[05:21:18]   Query 32/50: (0,24) 15x15 [API: 32/50]
+[05:21:18]   C++ > Query 32: (0,24) 15x15 -> 15x15
+[05:21:20]   Query 33/50: (0,24) 15x15 [API: 33/50]
+[05:21:20]   C++ > Query 33: (0,24) 15x15 -> 15x15
+[05:21:21]   Query 34/50: (0,24) 15x15 [API: 34/50]
+[05:21:21]   C++ > Query 34: (0,24) 15x15 -> 15x15
+[05:21:23]   Query 35/50: (0,24) 15x15 [API: 35/50]
+[05:21:23]   C++ > Query 35: (0,24) 15x15 -> 15x15
+[05:21:24]   Query 36/50: (15,14) 15x15 [API: 36/50]
+[05:21:24]   C++ > Query 36: (15,14) 15x15 -> 15x15
+[05:21:25]   Query 37/50: (15,14) 15x15 [API: 37/50]
+[05:21:25]   C++ > Query 37: (15,14) 15x15 -> 15x15
+[05:21:25]   Query 38/50: (15,14) 15x15 [API: 38/50]
+[05:21:25]   C++ > Query 38: (15,14) 15x15 -> 15x15
+[05:21:26]   Query 39/50: (15,14) 15x15 [API: 39/50]
+[05:21:26]   C++ > Query 39: (15,14) 15x15 -> 15x15
+[05:21:26]   Query 40/50: (15,14) 15x15 [API: 40/50]
+[05:21:26]   C++ > Query 40: (15,14) 15x15 -> 15x15
+[05:21:27]   Query 41/50: (12,4) 15x15 [API: 41/50]
+[05:21:27]   C++ > Query 41: (12,4) 15x15 -> 15x15
+[05:21:29]   Query 42/50: (12,4) 15x15 [API: 42/50]
+[05:21:29]   C++ > Query 42: (12,4) 15x15 -> 15x15
+[05:21:30]   Query 43/50: (12,4) 15x15 [API: 43/50]
+[05:21:30]   C++ > Query 43: (12,4) 15x15 -> 15x15
+[05:21:30]   Query 44/50: (12,4) 15x15 [API: 44/50]
+[05:21:30]   C++ > Query 44: (12,4) 15x15 -> 15x15
+[05:21:33]   Query 45/50: (12,4) 15x15 [API: 45/50]
+[05:21:33]   C++ > Query 45: (12,4) 15x15 -> 15x15
+[05:21:33]   Query 46/50: (8,2) 15x15 [API: 46/50]
+[05:21:33]   C++ > Query 46: (8,2) 15x15 -> 15x15
+[05:21:34]   Query 47/50: (8,2) 15x15 [API: 47/50]
+[05:21:34]   C++ > Query 47: (8,2) 15x15 -> 15x15
+[05:21:35]   Query 48/50: (8,2) 15x15 [API: 48/50]
+[05:21:35]   C++ > Query 48: (8,2) 15x15 -> 15x15
+[05:21:37]   Query 49/50: (8,2) 15x15 [API: 49/50]
+[05:21:37]   C++ > Query 49: (8,2) 15x15 -> 15x15
+[05:21:37]   Query 50/50: (8,2) 15x15 [API: 50/50]
+[05:21:37]   C++ > Query 50: (8,2) 15x15 -> 15x15
+[05:21:37]   C++ > MLP: loss=0.381004 n=11220
+[05:21:37]   C++ > MF gr=1.28364 d3d1=0.172727
+[05:21:37]   C++ > Seed 0: 50 queries used, hc_fit=80.2051
+[05:21:37]   C++ > Wrote /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260322_052043_fd82f643/seed_0_prediction.json
+[05:21:37]   C++ > Saved shared state to /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260322_052043_fd82f643/shared_correction.txt
+[05:21:37]   C++ > === Seed 1 (shared state) ===
+[05:21:37]   C++ > MF gr=1.28364 d3d1=0.172727
+[05:21:37]   C++ > Wrote /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260322_052043_fd82f643/seed_1_prediction.json
+[05:21:37]   C++ > === Seed 2 (shared state) ===
+[05:21:37]   Prediction ready for seed 0
+[05:21:37]   Prediction ready for seed 1
+[05:21:37]   C++ > MF gr=1.28364 d3d1=0.172727
+[05:21:37]   C++ > Wrote /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260322_052043_fd82f643/seed_2_prediction.json
+[05:21:37]   Prediction ready for seed 2
+[05:21:37]   C++ > === Seed 3 (shared state) ===
+[05:21:37]   C++ > MF gr=1.28364 d3d1=0.172727
+[05:21:37]   C++ > Wrote /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260322_052043_fd82f643/seed_3_prediction.json
+[05:21:37]   Prediction ready for seed 3
+[05:21:37]   C++ > === Seed 4 (shared state) ===
+[05:21:37]   C++ > MF gr=1.28364 d3d1=0.172727
+[05:21:37]   C++ > Wrote /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260322_052043_fd82f643/seed_4_prediction.json
+[05:21:37]   Prediction ready for seed 4
+[05:21:37]   C++ solver finished
+[05:21:37] Total queries: 50
+[05:21:37] Predictions: [0, 1, 2, 3, 4]
+[05:21:37] 
+[05:21:37] === Submitting 5 predictions ===
+[05:21:37]   Submitting seed 0...
+[05:21:38]   Seed 0: accepted
+[05:21:39]   Submitting seed 1...
+[05:21:39]   Seed 1: accepted
+[05:21:40]   Submitting seed 2...
+[05:21:40]   Seed 2: accepted
+[05:21:40]   Submitting seed 3...
+[05:21:40]   Seed 3: accepted
+[05:21:41]   Submitting seed 4...
+[05:21:41]   Seed 4: accepted
+[05:21:42] 
+[05:21:42] === Verification ===
+[05:21:42]   Seed 0: OK
+[05:21:42]   Seed 1: OK
+[05:21:42]   Seed 2: OK
+[05:21:42]   Seed 3: OK
+[05:21:42]   Seed 4: OK
+[05:21:42] ALL 5 SEEDS ACCEPTED

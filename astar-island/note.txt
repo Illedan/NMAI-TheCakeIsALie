@@ -1,0 +1,10 @@
+Can you implement a function that uses get_active_round() to check the active round, checks if
+  the active round_id has been seen before by checking the summaries in
+  initial_states/*/summary.json, and then calls store_initial_states() if the initial_states for
+  the round_id does not exist.
+
+TODO:
+claude --resume c0396f29-9854-4122-b32c-e4956b84e28c
+  Nice, please set up a cron job that runs .venv/bin/python get_replays.py and git add replays/
+    analysis/ && git commit -m "data: Updated replays and analysis" && git
+          sync every three hours at 19:15

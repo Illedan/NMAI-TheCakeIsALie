@@ -1,0 +1,75 @@
+[14:39:24] Submit run: Round #15 (cc5442dd)
+[14:39:24] Round ID: cc5442dd-bc5d-418b-911b-7eb960cb0390
+[14:39:24] Map: 40x40, 5 seeds
+[14:39:24] Budget: 0/50 used, 50 remaining
+[14:39:25]   Seed 0: Phase 1 (15,17) score=319.8
+[14:39:25]   Seed 1: Phase 1 (5,17) score=318.2
+[14:39:25]   Seed 2: Phase 1 (2,16) score=315.3
+[14:39:25]   Seed 3: Phase 1 (23,6) score=289.4
+[14:39:25]   Seed 4: Phase 1 (17,3) score=332.3
+[14:39:25] >>> CHOSEN: Seed 4 (tile score=332.3)
+[14:39:25]   HC (all queries): (17,3) 15x15 — 50q
+[14:39:25] 
+[14:39:25] === Querying seed 4 (50 queries, all on best tile) ===
+[14:39:25]   HC (all queries): (17,3) 15x15 — 50 queries
+[14:39:25]     Query 1/50 [API: 1/50]
+[14:39:44]     Query 11/50 [API: 11/50]
+[14:40:00]     Query 21/50 [API: 21/50]
+[14:40:28]     Query 31/50 [API: 31/50]
+[14:41:01]     Query 41/50 [API: 41/50]
+[14:41:16]     Query 50/50 [API: 50/50]
+[14:41:16]   Total: 50 queries saved
+[14:41:16] HC will run inside C++ solver (8 parametric coefficients)
+[14:41:16] 
+[14:41:16] === Phase 2: Running solver for all seeds ===
+[14:41:16] 
+[14:41:16] --- Seed 4 (QUERY SEED) ---
+[14:41:16]   Running solver (50 queries)...
+[14:41:16]   Solver: Prediction written to /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_143924_cc5442dd/seed_4_prediction.json
+[14:41:16]   Solver info: Grid: 40x40
+Queries: 50
+HC: es=0.004 ns=0.35 sr=0.1 sp=0.0765713 fs=0.005 rs=0.48 re=0.262632 vb=0.061893 gr=4.33846
+MF gr=4.33846
+Saved correction to /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_143924_cc5442dd/shared_correction.txt
+[14:41:16]   Submitting prediction...
+[14:41:17]   Submit: {"status": "accepted", "round_id": "cc5442dd-bc5d-418b-911b-7eb960cb0390", "seed_index": 4}
+[14:41:17] 
+[14:41:17] --- Seed 0 (shared correction) ---
+[14:41:17]   Running solver (0 queries)...
+[14:41:17]   Solver: Prediction written to /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_143924_cc5442dd/seed_0_prediction.json
+[14:41:17]   Solver info: Grid: 40x40
+Queries: 0
+Loaded correction from /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_143924_cc5442dd/seed_0_prediction.json.correction
+MF gr=1
+[14:41:17]   Submitting prediction...
+[14:41:17]   Submit: {"status": "accepted", "round_id": "cc5442dd-bc5d-418b-911b-7eb960cb0390", "seed_index": 0}
+[14:41:17] 
+[14:41:17] --- Seed 1 (shared correction) ---
+[14:41:17]   Running solver (0 queries)...
+[14:41:17]   Solver: Prediction written to /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_143924_cc5442dd/seed_1_prediction.json
+[14:41:17]   Solver info: Grid: 40x40
+Queries: 0
+Loaded correction from /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_143924_cc5442dd/seed_1_prediction.json.correction
+MF gr=1
+[14:41:17]   Submitting prediction...
+[14:41:21]   Submit: {"status": "accepted", "round_id": "cc5442dd-bc5d-418b-911b-7eb960cb0390", "seed_index": 1}
+[14:41:21] 
+[14:41:21] --- Seed 2 (shared correction) ---
+[14:41:21]   Running solver (0 queries)...
+[14:41:21]   Solver: Prediction written to /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_143924_cc5442dd/seed_2_prediction.json
+[14:41:21]   Solver info: Grid: 40x40
+Queries: 0
+Loaded correction from /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_143924_cc5442dd/seed_2_prediction.json.correction
+MF gr=1
+[14:41:21]   Submitting prediction...
+[14:41:22]   Submit: {"status": "accepted", "round_id": "cc5442dd-bc5d-418b-911b-7eb960cb0390", "seed_index": 2}
+[14:41:22] 
+[14:41:22] --- Seed 3 (shared correction) ---
+[14:41:22]   Running solver (0 queries)...
+[14:41:22]   Solver: Prediction written to /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_143924_cc5442dd/seed_3_prediction.json
+[14:41:22]   Solver info: Grid: 40x40
+Queries: 0
+Loaded correction from /Users/erikkvanli/Repos/NMAI-TheCakeIsALie/astar-erik/simulations/20260321_143924_cc5442dd/seed_3_prediction.json.correction
+MF gr=1
+[14:41:22]   Submitting prediction...
+[14:41:22]   Submit: {"status": "accepted", "round_id": "cc5442dd-bc5d-418b-911b-7eb960cb0390", "seed_index": 3}

@@ -1,0 +1,18 @@
+{
+  "round_id": "2a341ace-0f57-4309-9b89-e59fe0f09179",
+  "round_number": 9,
+  "timestamp": "20260320_204043",
+  "mode": "submit",
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "query_seed": 2,
+  "total_queries": 50,
+  "map_width": 40,
+  "map_height": 40,
+  "completed_at": "20260320_204229"
+}

@@ -6,7 +6,7 @@ const AGENT_API_KEY = process.env.API_KEY || "";
 
 const SANDBOX_CREDENTIALS = {
   base_url: process.env.TRIPLETEX_BASE_URL || "https://kkpqfuj-amager.tripletex.dev/v2",
-  session_token: process.env.TRIPLETEX_SESSION_TOKEN || "REDACTED",
+  session_token: process.env.TRIPLETEX_SESSION_TOKEN || "",
 };
 
 const TS = Date.now().toString().slice(-6);

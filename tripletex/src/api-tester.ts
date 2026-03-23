@@ -1,7 +1,7 @@
 import "dotenv/config";
 
 const BASE_URL = process.env.TRIPLETEX_BASE_URL || "https://kkpqfuj-amager.tripletex.dev/v2";
-const SESSION_TOKEN = process.env.TRIPLETEX_SESSION_TOKEN || "REDACTED";
+const SESSION_TOKEN = process.env.TRIPLETEX_SESSION_TOKEN || "";
 const AUTH = "Basic " + Buffer.from(`0:${SESSION_TOKEN}`).toString("base64");
 const TS = Date.now().toString().slice(-6);
 const today = new Date().toISOString().split("T")[0];

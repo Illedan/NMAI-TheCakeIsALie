@@ -10,7 +10,7 @@ const AGENT_URL = process.env.AGENT_URL || "http://localhost:3000";
 const API_KEY = process.env.API_KEY || "";
 const SANDBOX = {
   base_url: process.env.TRIPLETEX_BASE_URL || "https://kkpqfuj-amager.tripletex.dev/v2",
-  session_token: process.env.TRIPLETEX_SESSION_TOKEN || "REDACTED",
+  session_token: process.env.TRIPLETEX_SESSION_TOKEN || "",
 };
 
 interface TestCase {
